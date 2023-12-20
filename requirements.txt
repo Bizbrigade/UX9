@@ -46,3 +46,4 @@ sqlparse==0.2.4
 static3==0.7.0
 tzdata==2022.5
 urllib3==1.26.12
+psycopg2-binary

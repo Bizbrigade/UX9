@@ -88,14 +88,18 @@ WSGI_APPLICATION = 'FB.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME':'fmsweb',
-        'CLIENT':{
-            'host': 'mongodb+srv://Shivatech:TnR2HvEYDHIUXnhq@cluster0.qwe1r1j.mongodb.net/?retryWrites=true&w=majority'
+     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'ux9_site',
+        'HOST':'ux9-new-dev.ce4hgbmsodad.us-east-1.rds.amazonaws.com',
+        'PORT':5432,
+        'USER':'postgres',
+        'PASSWORD':'UX9postgres',
         }
-    }
 }
+
+
+
 
 # cache configuration
 CACHES = {
