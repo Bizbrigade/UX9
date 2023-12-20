@@ -1,0 +1,118 @@
+{% extends 'admin-panel/base.html' %}
+{% load static %}
+{% block content %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Upcoming Events</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Events</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <!-- First -->
+                                        {% for i in up_event_data %}
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div class="brands-card p-0 h-100">
+                                                <div class="brands-box h-100">
+                                                    <img src="{{i.event_image}}" class="card-img-top" alt="News Image">
+                                                    <hr class="m-0">
+                                                    <div class="card-body d-flex flex-column justify-content-between">
+                                                        <h3 class="fs-16 text-center">{{i.event_title}}</h3>
+                                                        <h4>{{i.event_date}}</h4>
+                                                        <div class="text-center">
+                                                            <a href="{% url 'update-single-event' pk=i.id %}" class="read-more-btn">Update</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                        {% endfor %}                                   
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Previous Events</h1>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <!-- First -->
+                                        {% for i in pre_event_data %}
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div class="brands-card p-0 h-100">
+                                                <div class="brands-box h-100">
+                                                    <img src="{{i.event_image}}" class="card-img-top" alt="News Image">
+                                                    <hr class="m-0">
+                                                    <div class="card-body d-flex flex-column justify-content-between">
+                                                        <h3 class="fs-16 text-center">{{i.event_title}}</h3>
+                                                        <h4>{{i.event_date}}</h4>
+                                                        <div class="text-center">
+                                                            <a href="{% url 'update_single_pre_event' ppk=i.id %}" class="read-more-btn">Update</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                        {% endfor %}     
+                                </div>
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!-- /. container-fluid -->
+            </section> 
+            
+        </div>
+        <!-- /.content-wrapper -->
+{% endblock %}

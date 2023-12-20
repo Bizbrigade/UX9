@@ -1,0 +1,81 @@
+{% extends "admin-panel/base.html" %}
+{% block content %}
+{% load static %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Update Logo</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                        <li class="breadcrumb-item active">Update Logo</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Info boxes -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <!-- form start -->
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% if msg %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{msg}}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endif %}
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="logo">Logo :</label>
+                                    <!-- <div class="input-group">
+                                        <input type="file" name="logo" value="add logo here"> -->
+                                        <!-- <div class="custom-file">
+                                                    <input type="file" name="logo" value="Upload File Here" class="custom-file-input" id="logo" accept="image/*" required />
+                                                    <label class="custom-file-label" >Logo size should be 180x100 px</label>
+                                        </div> -->
+                                    <!-- </div> -->
+                                    <div class="input-group">
+                                        <div class="custom-file w-100">
+                                            <input type="file" name="logo" value="add logo here" id="up_logo">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                            <label class="custom-file-label" for="up_logo">Select File</label>
+                                        </div>
+                                        <p class="text-muted mb-0">Logo size should be 180x100 px</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary type-2">Upload</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock %}

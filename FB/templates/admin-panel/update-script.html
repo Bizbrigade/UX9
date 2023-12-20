@@ -1,0 +1,241 @@
+{% extends 'admin-panel/base.html' %}
+{% block content %}
+{% load static %}
+<head>
+    <style>
+        #multipleDropdown .dropdownTitle {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            padding: 5px 50px 5px 10px;
+            border: 1px solid #ccc;
+            font-weight: 400;
+        }
+
+        #multipleDropdown .dropdownTitle::after {
+            position: absolute;
+            content: "";
+            border-left: 2px solid rgb(96 94 94);
+            border-top: 2px solid rgb(96 94 94);
+            padding: 2px;        
+            right: 5px;
+            top: 40%;
+            -moz-transform: rotate(-135deg);
+            -ms-transform: rotate(-135deg);
+            -o-transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+            transform: rotate(-135deg);
+        }
+
+        #multipleDropdown .dropdownTitle:active::after {
+            right: 8px;
+            top: 21%;
+        }
+
+        #multipleDropdown ul.items {
+            display: none;
+            margin: 0;
+            border: 1px solid #ccc;
+            padding: 0.6rem 0.6rem 0;
+            border-radius: 6px;
+            background: white;
+        }
+
+        #multipleDropdown ul.items li {
+            list-style: none;
+        }
+        #multipleDropdown ul.items li label {
+            font-weight: 400;
+        }
+
+        #multipleDropdown.visible .anchor {
+            color: #0094ff;
+        }
+
+        #multipleDropdown.visible .items {
+            display: block;
+        }
+    </style>
+</head>
+
+    <div class="content-wrapper">
+        {% if thisbot %}
+        <form action="{% url 'update_bot' botslug=thisbot.bot_slug %}" method="post" >
+                {% csrf_token %}
+                {% if msg %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{msg}}</strong> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                {% endif %}
+                <div class="tab-pane fade active show" id="step-1" role="tabpanel"
+                    aria-labelledby="tab-first">
+                        
+                    <div class="card-body">
+                        <input type="hidden" name="bot_slug" value="{{thisbot.bot_slug}}">
+                            <div class="form-group">
+                                <label for="bname">Bot Name :</label>
+                                <input type="text" name="bot_name" class="form-control" id="bname"
+                                    placeholder="Write your bot name" value="{{ thisbot.bot_name }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="aboutBrand">Script :</label>
+                                <textarea class="form-control" name="bot_script" rows="8" id="aboutBrand"
+                                    placeholder="Paste your script here" required>{{ thisbot.bot_script }}</textarea>
+                            </div>
+
+                            <div class="form-group" id="multipleDropdown">
+                                <label class="dropdownTitle form-control">Show Bot On:</label>
+                                <ul class="items">
+                                    <li>
+                                        <input type="checkbox" id="select-all" value="all", name="bot_pages[]" {% if "all" in bot_pages %} checked  {% endif %}>
+                                        <label for="select-all">All Pages</label>
+                                    </li>
+                                    <hr class="mt-0">
+                                    {% for key, value in pages.items %}
+                                    <li>
+                                        <input type="checkbox" id="{{ key }}" name="bot_pages[]" value="{{ key }}" {% if key in bot_pages %} checked {% endif %}>
+                                        <label for="{{ key }}">{{ value }}</label>
+                                    </li>
+                                    {% endfor %}
+                                   
+                                </ul>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="territorialYes">Script position:</label>
+                                <div class="d-flex">
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input"  type="radio"
+                                            id="territorialYes" name="bot_position" value="body" {% if thisbot.bot_position == 2 %} checked {% endif %}>
+                                        <label for="territorialYes"
+                                            class="custom-control-label">on BODY</label>
+                                    </div>
+                                    <div class="custom-control custom-radio ml-4">
+                                        <input class="custom-control-input" type="radio"
+                                            id="territorialNo" name="bot_position" value="head"  {% if thisbot.bot_position == 1 %} checked {% endif %}>
+                                        <label for="territorialNo"
+                                            class="custom-control-label">on HEAD</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="territorialYes">Is active:</label>
+                                <div class="d-flex">
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input"  type="radio"
+                                            id="ActiveYes" name="is_bot_active" value="1"  {% if thisbot.is_bot_active == 1 %} checked {% endif %} required>
+                                        <label for="ActiveYes"
+                                            class="custom-control-label">Yes</label>
+                                    </div>
+                                    <div class="custom-control custom-radio ml-4">
+                                        <input class="custom-control-input" type="radio"
+                                            id="ActiveNo" name="is_bot_active" value="0" {% if thisbot.is_bot_active == 0 %} checked {% endif %}>
+                                        <label for="ActiveNo"
+                                            class="custom-control-label">No</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- delete button modal -->
+                        <!-- <div class="modal fade" id="modal-default" style="display: none;"
+                        aria-modal="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header border-0">
+                                    <h4 class="modal-title">Delete Bot</h4>
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body py-0">
+                                    <p>If you delete this bot all its data will be deleted  permanently.</p>
+                                    <small>To confirm this type "DELETE"</small>
+                                </div>
+                                <div class="modal-footer justify-content-between border-0">
+                                    <input type="text" class="form-control w-auto"
+                                        name="Delete_category" id="confirm-btn">
+                                     <a href="{%  url 'delete_bot' %}?id={{thisbot.bot_slug}}" class="btn btn-1 bg-red">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- /. delete button modal -->  
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-1 float-left bg-red"
+                                                        data-toggle="modal" data-target="#modal-default">Delete</button>
+                            <button type="submit" class="btn-1  float-right">Update</button>
+                        </div>
+                </div>
+            </form>
+    {% else %}
+    
+            <section class="content">
+                <div class="container-fluid">
+                    {% if bots %}
+                    <div class="row">
+                        {% for bot in bots %}
+                        <!-- First -->
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="brands-card p-0 h-100">
+                                <div class="brands-box h-100">
+                                    <img src="{{bot.bot_image}}" class="card-img-top" alt="Bot Image">
+                                    <hr class="m-0">
+                                    <div class="card-body d-flex flex-column justify-content-between">
+                                        <h3 class="fs-16 text-center">{{bot.bot_name}}</h3>
+                                        <div class="text-center">
+                                            <a href="{% url 'update_bot' botslug=bot.bot_slug %}" class="read-more-btn">Update</a>
+                                            <a href="{% url 'delete_bot' %}?id={{ bot.bot_slug }}" class="read-more-btn">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        {% endfor %}                      
+                    </div>
+                    {% else %}
+                        <p style="text-align:center;" > No Users Found </p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
+    </div>
+
+
+    
+    <script>
+        let checkList = document.getElementById('multipleDropdown');
+        checkList.getElementsByClassName('dropdownTitle')[0].onclick = function () {
+            if (checkList.classList.contains('visible'))
+                checkList.classList.remove('visible');
+            else
+                checkList.classList.add('visible');
+        }
+        let selectAllBtn = document.getElementById('select-all');
+        selectAllBtn.onclick = function () {
+            let checkboxes = document.getElementsByName('bot_pages[]');
+            for (let checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        }
+
+        const itemsInput = document.querySelectorAll('.items input')
+        itemsInput.forEach(element => {
+            element.addEventListener('click', (e) => {
+                if (element.checked === false) {
+                    selectAllBtn.checked = false;
+                }
+            })
+        });
+
+    </script>
+
+                             
+{% endblock content %}

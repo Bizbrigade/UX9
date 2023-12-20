@@ -1,0 +1,515 @@
+{% extends 'front-end/base.html' %}
+
+{% block page_meta_tags %}
+        <meta property="og:image" content="{{brand_data1.brand_logo}}" />
+        <meta name="title" content="{{ brand_data1.brand_seo_title }}" />
+        <meta name="description" content="{{ brand_data1.brand_seo_description}}" />
+        <meta name="keywords" itemprop="keyword" content="{{ brand_data1.brand_seo_keywords }}">
+        <meta property="og:title" content="{{ brand_data1.brand_seo_title }}" />
+        <meta property="og:description" content="{{ brand_data1.brand_seo_description}}" />
+        <meta property="og:keywords" content="{{ brand_data1.brand_seo_keywords }}" />
+        <meta property="og:image:secure_url" content="{{brand_data1.brand_logo}}" />
+        <meta property="og:image:url" content="{{brand_data1.brand_logo}}" />
+{% endblock page_meta_tags %}
+
+{% block title %}{{ brand_data1.brand_name }}{% endblock title %}
+
+
+{% block content %}
+{% load static %}
+        <!-- ===== Exclusive brands Heading Section ====== -->
+        <section class="pt-4rem exclusive-brand-h-sec">
+            <div class="container">
+                <div class="row">
+                    <!-- breadcrumb -->
+                    <div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'all_bussiness_opp' %}">Business Opportunity</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{brand_data1.category_id.category_name}}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Heading -->
+                    <div>
+                        <h1 class="heading-1 fs-48">{{brand_data1.brand_name}} - Franchise Opportunity</h1>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== Exclusive brands content Section ====== -->
+        <section class="pt-5 exclusive-brand-c-sec">
+            <div class="container">
+                <div class="row">
+                    <!-- Left Col -->
+                    <div class="col-lg-3 p-sticky-10 h-fit-content">
+                        <!-- Logo -->
+                        <div class="mb-4 exclusive-brand-logo">
+                            <img src="{{brand_data1.brand_logo}}" alt="">
+                        </div>
+                        <!-- Investment Details -->
+                        <div class="mb-4 shadow-light d-flex flex-column align-items-center justify-content-around py-3" id="business">
+                            <!-- box-1 -->
+                            <div class="brand-box text-center">
+                                <p class="mb-1">Outlets So Far</p>
+                                <span class="fs-24 fw-700">{{brand_data1.brand_outlets}}</span>
+                            </div>
+                            <div class="pseudo-border type-3 my-2"></div>
+                            <!-- box-2 -->
+                            <div class="brand-box text-center">
+                                <p class="mb-1">Investment Required</p>
+                                <span class="fs-24 fw-700">{{brand_data1.brand_inv_min}}{{brand_data1.brand_inv_min_type}}-{{brand_data1.brand_inv_max}}{{brand_data1.brand_inv_max_type}}</span>
+                            </div>
+                            <div class="pseudo-border type-3 my-2"></div>
+                            <!-- box-3 -->
+                            <div class="brand-box text-center">
+                                <p class="mb-1">Minimum Area Required</p>
+                                <span class="fs-24 fw-700">{{brand_data1.brand_floor_area_min}}- sq.ft</span>
+                            </div>
+                        </div>
+                        <!-- Form -->
+                        <div class="mb-4 shadow-light p-12">
+                            <form id="brand_aside_form" class="needs-validation" novalidate>
+                                {% csrf_token %}
+                                <!-- Franchise Brand aside FORM  -->
+                                <div class="row">
+                                        <div class="col-lg-6 mb-3">
+                                            <input type="text" class="form-control" name="firstName" id="firstName"
+                                                placeholder="First Name" required>
+                                                <div class="invalid-feedback">
+                                                    This feild is required.
+                                                </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <input type="text" class="form-control" name="lastName" id="lastName"
+                                                placeholder="Last Name" required>
+                                                <div class="invalid-feedback">
+                                                    This feild is required.
+                                                </div>
+                                        </div>
+                                        <!-- Country code -->
+                                        <div class="col-12 mb-3 d-flex flex-column">
+                                            <input type="tel" class="form-control" name="phone" id="phone"
+                                                placeholder="Enter Mobile Number" pattern="[0-9]{10}" required>
+                                                <div class="invalid-feedback">
+                                                    This feild is required.
+                                                </div>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <input type="email" class="form-control" name="fBrandEmail" id="fBrandEmail"
+                                                placeholder="Where can we mail you?" required>
+                                                <div class="invalid-feedback">
+                                                    This feild is required.
+                                                </div>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <select class="form-select" id="InvestmentAmount" autocomplete="off"
+                                                name="InvestmentAmount" required>
+                                                <option value="" selected hidden>Select your Investment Lavel</option>
+                                                <option value="3-10Lac" class="">3-10Lac</option>
+                                                <option value="10-20Lac">10-20Lac</option>
+                                                <option value="20-30Lac">20-30Lac</option>
+                                                <option value="30-50Lac">30-50Lac</option>
+                                                <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                                <option value="Above 1Cr">Above 1Cr</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <textarea class="w-100" name="completeAddress" id="completeAddress" cols="30"
+                                                rows="3" placeholder="Please share if you have any message for us."
+                                                required=""></textarea>
+                                                <div class="invalid-feedback">
+                                                    This feild is required.
+                                                </div>
+                                                <input type="text" name="brand_id" id="brand_id" value="{{brand_data1.id}}" hidden>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn type-2">Submit</button>
+                                        </div>
+                                </div>
+                                <script>
+                                    let brand_aside_form = document.getElementById('brand_aside_form'); // selecting the form
+                        
+                                    brand_aside_form.addEventListener('submit', function (event) {
+                                        event.preventDefault()
+                                        let data = new FormData(); // 2
+                                        data.append("firstName", document.getElementById('firstName').value)
+                                        data.append("lastName", document.getElementById('lastName').value)
+                                        data.append("phone", document.getElementById('phone').value)
+                                        data.append("fBrandEmail", document.getElementById('fBrandEmail').value)
+                                        data.append("InvestmentAmount", document.getElementById('InvestmentAmount').value)
+                                        data.append("brand_id", document.getElementById('brand_id').value)
+                                        data.append("completeAddress", document.getElementById('completeAddress').value)
+                                        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+                                        console.log(data)
+                        
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '{% url "front_brand" bk=brand_data1.brand_slug %}',
+                                            data: data,
+                                            cache: false,
+                                            processData: false,
+                                            contentType: false,
+                                            enctype: 'multipart/form-data',
+                                            success: function () {
+                                                alert('Form Submitted Successfully');
+                                                brand_aside_form.reset();
+                                                brand_aside_form.classList.remove('was-validated');
+                                            },
+                                            error: function (xhr, errmsg, err) {
+                                                console.log(xhr.status + ":" + xhr.responseText)
+                                            }
+                                        })
+                                    })
+                                </script>
+                            </form>
+                        </div>
+                        <!-- Blog -->
+                        <div class="shadow-light p-12">
+                            <h2 class="fs-24 fw-700 mb-3">Blogs</h3>
+                                {% for k in blogs %}
+                                <div class="mb-3">
+                                    <h3 class="fs-18 fw-600 mb-2 text-ellipsis">{{k.blog_title}}</h3>
+                                    <div class="mb-2 fs-14 lh-18 text-ellipsis type-2 blog-content-ellipsis">{{k.blog_content|safe}}</div>
+                                    <a href="{% url 'front_single_blog' k.blog_slug %}" target="_blank" class="read-more-btn">Read More</a>
+                                </div>
+                               {% endfor %}
+                        </div>
+
+                        <!-- End Right col -->
+                    </div>
+                    <!-- Right col -->
+                    <div class="col-lg-9 mt-5 mt-lg-0">
+                        <!-- About Brand -->
+                        <div class="shadow-light p-3" id="">
+                            <!-- First Box -->
+                            <div>
+                                <h2 class="heading-2 fw-300">ABOUT {{brand_data1.brand_name}}</h2>
+                                <div class="mt-3">
+                                    <div class="border-extra-light mt-2 p-12">
+                                        {{brand_data1.brand_about|safe}}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Second Box -->
+                            <div class="mt-4" id="">
+                                <h2 class="heading-2 fw-300">WHY US</h2>
+                                <div class="mt-3">
+                                    <div class="border-extra-light mt-2 p-12">
+                                        {{brand_data1.brand_whyus|safe}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Investment Details -->
+                        <div class="shadow-light mt-2rem p-3" id="investment">
+                            <h2 class="heading-2 fw-300">INVESTMENT DETAILS</h2>
+                            <!-- First Box -->
+                            <div class="mt-3">
+                                <h3 class="fs-22 fw-700">Commenced Operations</h3>
+                                <div class="border-extra-light mt-2 p-12">
+                                    <ul class="m-0 list-unstyled lh-28">
+                                        <li class="d-flex justify-content-between">Operations Commenced On <span class="fw-700 w-fit-content"> {{brand_data1.brand_op_cmd_yr}}</span></li>
+                                        <li class="d-flex justify-content-between">Franchise Commenced On <span class="fw-700 w-fit-content"> {{brand_data1.brand_fr_cmd_yr}}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Second Box -->
+                            <div class="mt-4">
+                                <h3 class="fs-22 fw-700">Franchise Details</h3>
+                                <div class="border-extra-light mt-2 p-12">
+                                    <h4 class="fs-18 fw-600 mb-2">UNITS</h4>
+                                    <ul class="m-0 list-unstyled lh-28">
+                                        <li class="d-flex justify-content-between">Investment <span class="fw-700 w-fit-content">INR {{brand_data1.brand_inv_min}} {{brand_data1.brand_inv_min_type}}-{{brand_data1.brand_inv_max}} {{brand_data1.brand_inv_max_type}}</span></li>
+                                        <li class="d-flex justify-content-between">Franchise/Brand Fee <span class="fw-700 w-fit-content">INR {{brand_data1.brand_fr_fee}} </span></li>
+                                        <li class="d-flex justify-content-between">Royalty/Commission <span class="fw-700 w-fit-content">%</span></li>
+                                        <ol class="m-0 ps-3 lh-28">
+                                            {% for i in royalty %}
+                                            <li class="d-flex justify-content-between">{{i.royalty_type}} <span class="fw-700 w-fit-content"> {{i.royalty_fee}}%</span></li>
+                                            {% endfor %}
+                                            <!-- <li class="d-flex justify-content-between">FICO <span class="fw-700 w-fit-content">{{brand_data1.brand_royalty_type}} % </span></li> -->
+                                        </ol>
+                                        <!-- <li class="d-flex justify-content-between">Master Franchise Fee <span class="fw-700 w-fit-content">INR {{brand_data1.brand_master_fr_fee}} </span></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Third Box -->
+                            <div class="mt-4">
+                                <h3 class="fs-22 fw-700">Details</h3>
+                                <div class="border-extra-light mt-2 p-12">
+                                    <ul class="m-0 list-unstyled lh-28">
+                                        <li class="d-flex justify-content-between">Exclusive territorial rights to a unit franchise<span class="fw-700 w-fit-content">{{brand_data1.brand_territorial_rights}}</span></li>
+                                        <li class="d-flex justify-content-between">Anticipated percentage return on Investment <span class="fw-700 w-fit-content">{{brand_data1.brand_anticipated_percent}} %</span></li>
+
+                                        <li class="d-flex justify-content-between">Likely pay back period of capital for a Unit Franchise <span class="fw-700 w-fit-content">{{brand_data1.brand_payback_min}}-{{brand_data1.brand_payback_max}} </span></li>
+                                        <li class="d-flex justify-content-between">Likely pay back period of capital for a Unit Franchise <span class="fw-700 w-fit-content">{{brand_data1.brand_payback_min}}-{{brand_data1.brand_payback_max}} {{brand_data1.brand_payback_max_type}}</span></li>
+                                        <li class="d-flex justify-content-between">Other investment requirments <span class="fw-700 w-fit-content">{{brand_data1.brand_investment_requir}} %</span></li>
+                                        <li class="d-flex justify-content-between">Franchise Term <span class="fw-700 w-fit-content">{{brand_data1.brand_fr_terms_yr}} Years</span></li>
+                                        <li class="d-flex justify-content-between">If Renewable <span class="fw-700 w-fit-content">{{brand_data1.brand_renewable}}</span></li>
+                                        <li class="d-flex justify-content-between">Franchising Models 
+                                            
+                                            <span class="fw-700 w-fit-content">{% for i in royalty %}{{i.royalty_type}},{% endfor %}</span>
+                                            
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Master Franchise Details -->
+                        {% if  brand_data1.brand_ismasterfranchaise == 'yes' %}
+                        <div class="shadow-light mt-2rem p-3" id="investment">
+                            <h2 class="heading-2 fw-300">MASTER FRANCHISE DETAILS</h2>
+                            <!-- First Box -->
+                            <div class="mt-3">
+                                <div class="border-extra-light mt-2 p-12">
+                                    <ul class="m-0 list-unstyled lh-28">
+                                        <li class="d-flex justify-content-between">Investment <span class="fw-700 w-fit-content">INR {{ brand_data1.brand_master_investment_min}} {{ brand_data1.brand_master_investment_min_type}} - {{ brand_data1.brand_master_investment_max}}{{ brand_data1.brand_master_investment_max_type}}</span></li>
+                                        <li class="d-flex justify-content-between">Exclusive city rights <span class="fw-700 w-fit-content">{{ brand_data1.brand_master_exclusive_city_rights}}</span></li>
+                                        <li class="d-flex justify-content-between">Exclusive region rights <span class="fw-700 w-fit-content">{{ brand_data1.brand_master_exclusive_region_rights}} </span></li>
+                                        <li class="d-flex justify-content-between">Exclusive state rights <span class="fw-700 w-fit-content">{{ brand_data1.brand_master_exclusive_state_rights}} </span></li>
+                                        <li class="d-flex justify-content-between">Royalty share <span class="fw-700 w-fit-content">{{ brand_data1.brand_master_royalty_share}}</span></li>
+                                        <li class="d-flex justify-content-between">Distribution margin <span class="fw-700 w-fit-content">{{ brand_data1.brand_master_distribution_margin}}</span></li>
+                                        <li class="d-flex justify-content-between">Franchise fee share <span class="fw-700 w-fit-content">{{ brand_data1.brand_master_franchise_fee_share}}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- Property Details -->
+                        <div class="shadow-light mt-2rem p-3" id="property">
+                            <!-- First Box -->
+                            <div>
+                                <h2 class="heading-2 fw-300">PROPERTY DETAILS</h2>
+                                <div class="mt-3">
+                                    <div class="border-extra-light mt-2 p-12">
+                                        <ul class="m-0 list-unstyled lh-28">
+                                            <li class="d-flex justify-content-between">Type of property required for this franchise opportunity <span class="fw-700 w-fit-content">{{brand_data1.brand_property_required}}</span></li>
+                                            <li class="d-flex justify-content-between">Floor area requirment <span class="fw-700 w-fit-content">{{brand_data1.brand_floor_area_min}}-{{brand_data1.brand_floor_area_max}} Sq.ft</span></li>
+                                            <li class="d-flex justify-content-between">Preferred location of unit franchise outlet <span class="fw-700 w-fit-content">{{brand_data1.brand_fre_location_outlets}}</span></li>
+                                            <li class="d-flex justify-content-between">Preferred location of master franchise <span class="fw-700 w-fit-content">{{brand_data1.brand_fre_location_masters}}</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Second Box -->
+                            <div class="mt-4" id="training">
+                                <h2 class="heading-2 fw-300">TRAINING DETAILS</h2>
+                                <div class="mt-3">
+                                    <div class="border-extra-light mt-2 p-12">
+                                        <ul class="m-0 list-unstyled lh-28">
+                                            <li class="d-flex justify-content-between">Detailed operating manuals for franchisees <span class="fw-700 w-fit-content">{{brand_data1.brand_operating_type}}</span></li>
+                                            <li class="d-flex justify-content-between">Franchise training location <span class="fw-700 w-fit-content">{{brand_data1.brand_fre_training_location}}</span></li>
+                                            <li class="d-flex justify-content-between">Is field assistance available for franchise ? <span class="fw-700 w-fit-content">{{brand_data1.brand_assistece_available_type}}</span></li>
+                                            <li class="d-flex justify-content-between">Expert guidance from Head Office to franchise in opening the franchise<span class="fw-700 w-fit-content">{{brand_data1.brand_head_office_gyd_type}}</span></li>
+                                            <li class="d-flex justify-content-between">Current IT systems will be included in franchise<span class="fw-700 w-fit-content">{{brand_data1.brand_it_system_type}}</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Expansion Locations -->
+                        <div class="shadow-light mt-2rem p-3" id="expansion-locations">
+                            <h2 class="heading-2 fw-300">EXPANSION LOCATIONS</h2>
+                            <div class="row mt-0 g-3">
+                                <div class="col-6 col-md-4">
+                                    <div class="border-extra-light h-100">
+                                        <h4 class="fs-22 fw-700">NORTH</h4>
+                                        <p class="mb-0 p-12">Delhi, Haryana, Himachal Pradesh, Jammu and Kashmir, Punjab, Uttarakhand, Uttar Pradesh</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="border-extra-light h-100">
+                                        <h4 class="fs-22 fw-700">SOUTH</h4>
+                                        <p class="mb-0 p-12">Kerala, Karnataka, Tamil Nadu, Andhra Pradesh, Telangana</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="border-extra-light h-100">
+                                        <h4 class="fs-22 fw-700">EAST</h4>
+                                        <p class="mb-0 p-12">Assam, Meghalaya, Mizoram, Tripura, Arunachal Pradesh, Manipur, Nagaland, West Bengal, Sikkim, Odisha</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="border-extra-light h-100">
+                                        <h4 class="fs-22 fw-700">WEST</h4>
+                                        <p class="mb-0 p-12">Gujarat, Rajasthan, Maharashtra, Goa</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="border-extra-light h-100">
+                                        <h4 class="fs-22 fw-700">CENTRAL</h4>
+                                        <p class="mb-0 p-12">Chhattisgarh, Madhya Pradesh, Bihar, Jharkhand</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="border-extra-light h-100">
+                                        <h4 class="fs-22 fw-700">UNION TERRITORIES</h4>
+                                        <p class="mb-0 p-12">Andaman and Nicobar, Puducherry, Chandigarh, Lakshadweep, Daman and Diu</p>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                        <!-- End Left col -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==== Brand Blog Images Section ==== -->
+        <section class="event-gallery-sec pt-4rem">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="slider img-slider">
+                            {% for image in gallery %}
+                            <div><img src="{{image}}" alt=""></div>
+                           {% endfor %}
+                        </div>
+                        <div class="slider img-single mt-2">
+                            {% for image in gallery %}
+                            <div><img src="{{image}}" alt=""></div>
+                           {% endfor %}
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== Top Business Opportunities Section ====== -->
+        <section class="pt-5rem">
+            <div class="container">
+                <!-- Heading -->
+                <div class="row align-items-baseline justify-content-between">
+                    <div class="col-9">
+                        <h2 class="heading-2 pseudo-border text-blue">Top Business Opportunities</h2>
+                        <!-- <p class="text-black mb-0">Browse our range of top business opportunities</p> -->
+                    </div>
+                    <div class="col-3 text-end">
+                        <a href="{% url 'all_bussiness_opp' %}" class="view-all-btn">View All <i
+                                class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Content -->
+                <div class="row mt-4">
+                    <!-- Exclusive Brands Slider Col -->
+                    <div class="col-12">
+                        <div class="brands-slider sm-height-parent">
+                            <!-- Card-1 -->
+                            {% for j in top_bussiness %}
+                            <div class="brands-card">
+                                <div class="brands-box sm-height">
+                                    <a href="{% url 'front_brand' bk=j.brand_slug %}"><img
+                                            src="{{j.brand_logo}}"
+                                            class="card-img-top" alt="News Image"></a>
+                                    <hr class="m-0">
+                                    <div class="card-body">
+                                        <p class="brand-category">{{j.category_id.category_name}}</p>
+                                        <h3 class="fs-20">{{j.brand_name}}</h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="card-info">Investment Range</div>
+                                            <div class="card-info-amt">{{j.brand_inv_min}}{{j.brand_inv_min_type}}-{{j.brand_inv_max}}{{j.brand_inv_max_type}}</div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="card-info">Area Range</div>
+                                            <div class="card-info-amt">{{j.brand_floor_area_min}}-{{j.brand_floor_area_max}} sq.ft</div>
+                                        </div>
+                                        <a href="{% url 'front_brand' bk=j.brand_slug %}" class="read-more-btn">Read
+                                            More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       {% include "front-end/footer.html" %}
+    </main>
+
+    <script src="{% static '/js/jquery.js' %}"></script>
+
+    <!-- SlickSlider JS -->
+    <script src="{% static '/js/slick.min.js' %}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{% static '/js/bootstrap.js' %}"></script>
+
+    <!-- Custom JS -->
+    <script src="{% static '/js/main.js' %}"></script>
+
+    <!-- For country code -->
+    <script src="{% static '/js/intlTelInput.js' %}"></script>
+    <script>
+        // First Input Field
+        var input = document.querySelector("#phone");
+        window.intlTelInput(input, {
+            separateDialCode: true,
+            initialCountry:"in",
+            // excludeCountries: ["us"],
+            utilsScript: "build/js/utils.js",
+        });
+
+        // Second Input Field (For free consultancy form)
+        var input = document.querySelector("#consultancyPhone");
+        window.intlTelInput(input, {
+            separateDialCode: true,
+            initialCountry:"in",
+            // excludeCountries: ["in"],
+            utilsScript: "build/js/utils.js",
+        });
+    </script>
+
+    <!-- For Checkbox hover content -->
+    <script>
+        function showContent() {
+            document.getElementById("toggleBrand").style.display = 'block';
+        }
+        function hideContent() {
+            document.getElementById("toggleBrand").style.display = 'none';
+        }
+    </script>
+
+
+<!-- Adding axios script tag here-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <!-- brand_aside_form Submit JS -->
+<!-- <script>
+    let b_aside_form = document.getElementById('brand_aside_form'); // selecting the form
+
+    b_aside_form.addEventListener('submit', function (event) { // 1
+        event.preventDefault()
+
+        let data = new FormData(); // 2
+
+        data.append("FirstName", document.getElementById('firstName').value)
+        data.append("LastName", document.getElementById('lastName').value)
+        data.append("phone", document.getElementById('phone').value)
+        data.append("email", document.getElementById('fBrandEmail').value)
+        data.append("InvestmentAmount", document.getElementById('InvestmentAmount').value)
+        data.append("address", document.getElementById('completeAddress').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+
+        axios.post('/create_note/', data) // 4
+            .then(res = () => {
+                alert("Form Submitted");
+                b_aside_form.reset();
+            }) // 5
+            .catch(errors => console.log(errors)) // 6
+    })
+
+</script> -->
+{% include "front-end/scripts.html" %}
+</body>
+
+</html>
+{% endblock %}

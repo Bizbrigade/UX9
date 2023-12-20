@@ -1,0 +1,75 @@
+
+{% extends 'front-end/base.html' %}
+{% block title %} Upcoming Events  {% endblock title %}
+
+{% block content %}
+{% load static %}
+
+
+<body>
+    <main>
+        <!-- ===== Event Page ====== -->
+        {% for i in events %}
+        <section class="pt-4rem single-event">
+            <div class="container">
+                <!-- Heading -->
+                <div class="text-center mb-2rem">
+                    <h2 class="">{{i.event_title}}</h2>
+                </div>
+                <!-- Franchise dirctory tabs -->
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-9">
+                        <div class="mb-2rem">
+                            <img src="{{i.event_image}}" alt="">
+                            <div class="mt-2">
+                                <strong class="text-dark-blue">{{i.event_date}}</strong>
+                            </div>
+                        </div>
+                        <div>
+                            {{i.event_content|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== Gallery section ===== -->
+        {% if event_gallery %}
+        <section class="event-gallery-sec pt-4rem">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="slider img-slider">
+                            {% for image in event_gallery %}
+                             <div><img src="{{image}}" alt=" "></div>
+                        {% endfor %}
+                        </div>
+                        <div class="slider img-single mt-2">
+                            {% for image in event_gallery %}
+                                <div><img src="{{image}}" alt=" "></div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+        {% endfor %}
+
+        {% include "front-end/footer.html" %}
+
+    </main>
+
+    <!-- jQuery JS -->
+    <script src="./js/jquery.js"></script>
+
+    <!-- SlickSlider JS -->
+    <script src="./js/slick.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="./js/bootstrap.js"></script>
+    <!-- Main JS -->
+    <script src="./js/main.js"></script>
+    {% include "front-end/scripts.html" %}
+</body>
+{% endblock %}

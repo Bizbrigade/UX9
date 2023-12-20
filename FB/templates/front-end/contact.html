@@ -1,0 +1,183 @@
+{% extends 'front-end/base.html' %}
+
+{% block title %} Contact {% endblock title %}
+
+{% block content %}
+{% load static %}
+<!-- ===== Banner Section ====== -->
+<section class="banner-sec overflow-x-hidden">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 banner-slider">
+                <img src="{{home_details.banner1}}" alt="Banner Image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Exclusive Brands Section ====== -->
+<section class="contact-page pt-4rem">
+    <div class="container">
+        <div class="row">
+            <!-- Map Col -->
+            <div class="col-md-6 mt-5 mt-lg-0 order-2 order-md-1">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.8771961878183!2d77.5967282646453!3d12.979705490850545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17ea1781a2e9%3A0xa7b51d6eff40e3d2!2sFranchise%20Brigade!5e0!3m2!1sen!2sin!4v1668512025750!5m2!1sen!2sin"
+                    width="100%" height="100%" style="border:0; min-height:300px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!-- Form Col -->
+            <div class="col-md-6 order-1 order-md-2">
+                <div class="mb-4">
+                    <h2 class="heading-2 text-dark-blue text-center">CONTACT US</h2>
+                </div>
+                <form method="post" name="cnf" id="contact_form" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <!-- <span id="dsa" >dData Ad</span> -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <input type="text" name="full_name" class="form-control" id="full_name"
+                                placeholder="Your Name" required>
+                            <div class="invalid-feedback">
+                                This feild is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <input type="tel" name="mobile" class="form-control" id="contact_phone" pattern="[0-9]{10}" placeholder="Phone" required>
+                            <div class="invalid-feedback">
+                                This feild is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <input type="email" name="email" class="form-control" id="contact_email"
+                                aria-describedby="emailHelp" placeholder="Email" required>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <select class="form-select" id="contact_InvestmentAmount" autocomplete="off"
+                                name="investment" required>
+                                <option value="" selected="" hidden="">Choose Investment Size</option>
+                                <option value="3-10Lac" class="">3-10Lac</option>
+                                <option value="10-20Lac">10-20Lac</option>
+                                <option value="20-30Lac">20-30Lac</option>
+                                <option value="30-50Lac">30-50Lac</option>
+                                <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                <option value="Above 1Cr">Above 1Cr</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                This feild is required.
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <select class="form-select" id="contact_industry" autocomplete="off" name="category_id" required>
+                                <option value="" selected="" hidden="">Choose Category</option>
+                                {% for i in category_data %}
+                                <option value="{{i.id}}">{{i.category_name}}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">
+                                This feild is required.
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <textarea class="w-100" name="details" id="contact_message" cols="30" rows="5"
+                                placeholder="Franchise which you are intrested in !" required></textarea>
+                            <div class="invalid-feedback">
+                                This feild is required.
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <button type="submit" class="btn type-2">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Newsletter Section ====== -->
+<section class="mt-5rem py-5 bg-extra-dark-blue">
+    <div class="container">
+        <div class="row justify-content-between">
+            <!-- First Col -->
+            <div class="col-lg-4">
+                <!-- <p class="text-white">Share your email address to get latest update from the industry</p>
+                        <h2 class="heading-2 text-white">Newsletter Signup</h2> -->
+                <ul class="list-unstyled mb-0">
+                    <li class="text-white mb-2">Mobile: <a href="tel:+91 {{home_details.Phone}}">+91
+                            {{home_details.Phone}}</a></li>
+                    <li class="text-white mb-2">Email: <a
+                            href="mailto:{{home_details.email}}">{{home_details.email}}</a></li>
+                    <li class="text-white"><a href="mailto:{{home_details.email}}">{{home_details.address}}</a></li>
+                </ul>
+            </div>
+            <!-- Second Col -->
+            <div class="col-lg-4 mt-4 mt-lg-0">
+                <p class="text-white">Share your email address to get latest update from the industry</p>
+                <h2 class="heading-2 text-white fs-20">Newsletter Signup</h2>
+                <!-- Newsletter Form -->
+                <div class="mt-3 newsletter-form">
+                    <form class="d-flex justify-content-between" id="newsletter_form">
+                        <div class="w-100">
+                            <input type="email" class="form-control" name="email" id="newsletter_email"
+                                aria-describedby="emailHelp" placeholder="Email" required>
+                        </div>
+                        <div class="">
+                            <button type="submit" class="btn">SignUp</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Third Col -->
+            <div class="col-lg-4 mt-4 mt-lg-0 text-lg-end">
+                <p class="text-white">Stay tuned &amp; get updates</p>
+                <h2 class="heading-2 text-white fs-20">Follow Franchise Brigade</h2>
+                <!-- Newsletter Form -->
+                <div class="mt-3 newsletter-icons">
+                    <ul class="list-unstyled d-flex justify-content-lg-end mb-0">
+                        <li><a href="{{social_data.facebook}}" target="_blank"><i
+                                    class="fa-brands fa-facebook px-2 fs-24"></i></a></li>
+                        <li><a href="{{social_data.instagram}}" target="_blank"><i
+                                    class="fa-brands fa-instagram px-2 fs-24"></i></a></li>
+                        <li><a href="{{social_data.linkedin}}" target="_blank"><i
+                                    class="fa-brands fa-linkedin px-2 fs-24"></i></a></li>
+                        <li><a href="{{social_data.whatsup}}&amp;" target="_blank"><i
+                                    class="fa-brands fa-whatsapp px-2 fs-24"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ===== Bottom Footer ====== -->
+<footer class="py-3 bg-extra-dark-blue footer-bottom">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4">
+                <p class="fs-14 mb-0 text-white">Copyright © 2022 Franchise Brigade </p>
+            </div>
+            <div class="col-lg-8">
+                <ul class="list-unstyled mt-2 mt-lg-0 mb-0 d-flex justify-content-lg-end flex-wrap">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'about-us' %}">About Us</a></li>
+                    <li><a href="{% url 'index' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                    <!-- <li><a href="{% url 'index' %}">Feedback</a></li> -->
+                    <li><a href="{% url 'terms-condition' %}">Terms</a></li>
+                    <li><a href="{% url 'privacy_policy' %}">Privacy</a></li>
+                    <li><a href="{% url 'refund-and-cancelletion' %}">Refund & Cancellation</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</main>
+{% include "front-end/scripts.html" %}
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,15 @@
+/* ======= Blog Page css ======== */
+
+.blog-page .blog-card .btn{
+    font-size: 20px;
+    color: red;
+    padding: 0%;
+}
+.blog-page .blog-card img{
+    height: 250px;
+    object-fit: cover;
+}
+.blog-event-slider .blog-card img{
+    height: 150px;
+    object-fit: cover;
+}

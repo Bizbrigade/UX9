@@ -1,0 +1,333 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | User Profile</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static '/plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static '/dist/css/adminlte.min.css' %}">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+              </li>
+              <li class="nav-item d-none d-sm-inline-block">
+                <a href="{% url 'home' %}" class="nav-link">Home</a>
+              </li> 
+            </ul>
+      
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Notifications Dropdown Menu -->
+              <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                  <i class="far fa-bell"></i>
+                  <span class="badge badge-warning navbar-badge">15</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                  <span class="dropdown-item dropdown-header">15 Notifications</span>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i> 4 new messages
+                    <span class="float-right text-muted text-sm">3 mins</span>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <i class="fas fa-users mr-2"></i> 8 friend requests
+                    <span class="float-right text-muted text-sm">12 hours</span>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <i class="fas fa-file mr-2"></i> 3 new reports
+                    <span class="float-right text-muted text-sm">2 days</span>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                  <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4 pb-5">
+            <!-- Brand Logo -->
+            <a href="{% url 'home' %}" class="brand-link">
+              <img src="{% static '/dist/img/logo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+              <span class="brand-text font-weight-light"> Baccha Party </span>
+            </a>
+      
+            <!-- Sidebar -->
+            <div class="sidebar">
+              <!-- Sidebar user panel (optional) -->
+              <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                  <img src="{% static '/dist/img/logo.png' %}" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                  <a href="#" class="d-block">Super Admin</a>
+                </div>
+              </div>
+      
+              <!-- Sidebar Menu -->
+              <nav class="mt-2 mb-5">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                  <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                  <li class="nav-item menu-open">
+                    <a href="{% url 'admin' %}" class="nav-link">
+                      <i class="nav-icon fas fa-tachometer-alt"></i>
+                      <p>
+                        BP Dashboard
+                      </p>
+                    </a>
+                  </li>
+                  <!-- <li class="nav-header">LOCATIONS</li> -->
+                  <!-- Home Page -->
+                  <li class="nav-item">
+                    <a href="{% url 'admin' %}" class="nav-link">
+                      <i class="nav-icon fas fa-book"></i>
+                      <p>
+                        Home Page
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                      <li class="nav-item">
+                        <a href="{% url 'update_logo' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Update Logo</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'update_banner' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Update Banner Image</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'update_video' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Update Banner Video</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'update_about' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Update About Section</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'update_contact' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Update Contact Details</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'update_socialLinks' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Update Social Links</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'offerings' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Update Offerings</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- Locations -->
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-book"></i>
+                      <p>
+                        Locations
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-book"></i>
+                          <p>
+                            Update Location
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+                          {%for i in location_data%}
+                          <li class="nav-item">
+                            <a href="{% url 'update_location' %}?id={{i.location_name}}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>{{i.location_name}}</p>
+                            </a>
+                          </li>
+                          {%endfor%}
+      
+                        </ul>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'add_location' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Add New Location</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'delete_location' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Delete Location</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- Events Page -->
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-book"></i>
+                      <p>
+                        Events
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                      <li class="nav-item">
+                        <a href="{% url 'newevent' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Add Events </p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'editevents' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Edit Events </p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'deleteevents' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Delete Events </p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'previousevents' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Add Previous Events</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- Rules of Play Page -->
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-book"></i>
+                      <p>
+                        Rules Of Play
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                      <li class="nav-item">
+                        <a href="{% url 'addrules' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Add Rules </p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'updaterules' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Edit Rules</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'deleterules' %}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Delete Rules</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Waiver Form</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+      
+                  <li class="nav-item mt-4">
+                    <a href="{% url 'logout' %}" class="nav-link">
+                      <i class="nav-icon fas fa-book"></i>
+                      <p>
+                        Logout
+                      </p>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+              <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+          </aside> 
+
+          <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content mb-5">
+                <div class="container-fluid">
+                    <div class="row justify-content-center h-100vh">
+                        <div class="col-10">
+                            <div class="d-flex flex-column justify-content-center align-items-center h-200">
+                                <h3>{{msg}}</h3>
+                                <div class="mt-3">
+                                    <a href="{%url 'home'%}" target="_blank" class="text-danger">Go to the Website</a>
+                                </div>
+                            </div>
+                            
+        
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{% static 'dist/js/demo.js' %}"></script>
+</body>
+
+</html>
+
+

@@ -1,0 +1,209 @@
+{% extends 'admin-panel/base.html' %}
+{% block content %}
+{% load static %}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Brand Registration Single Form</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'list_ur_brand_data' %}">Registration Form</a>
+                                </li>
+                                <li class="breadcrumb-item active">Details</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Brand Registation Table -->
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <table class="table table-bordered text-left">
+                                        <tbody>
+                                            <!-- Confidential Information -->
+                                            <tr>
+                                                <th class="fs-18" colspan="2">Confidential Information</th>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">First Name</th>
+                                                <td>{{user_data.f_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Last Name</th>
+                                                <td>{{user_data.l_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Email ID</th>
+                                                <td>{{user_data.email}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Mobile Number</th>
+                                                <td>{{user_data.mobile}}</td>
+                                            </tr>
+                                            <!-- Company Information -->
+                                            <tr>
+                                                <th class="fs-18" colspan="2">Company Information</th>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Company Name</th>
+                                                <td>{{user_data.compnay_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Corporate Number</th>
+                                                <td>{{user_data.corporate_number}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Company's Director / CEO</th>
+                                                <td>{{user_data.compnay_director_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Company's Franchise Head</th>
+                                                <td>{{user_data.franchise_head}}</td>
+                                            </tr>
+                                            <!-- Brand Information -->
+                                            <tr>
+                                                <th class="fs-18" colspan="2">Brand Information</th>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Brand Name</th>
+                                                <td>{{user_data.brand_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Showcase URL</th>
+                                                <td>{{user_data.url_name_on_fb}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Brand Website</th>
+                                                <td>{{user_data.brand_website}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Brand's Headquarters</th>
+                                                <td>{{user_data.headquarter_country_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">State</th>
+                                                <td>{{user_data.headquarter_state_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">City</th>
+                                                <td>{{user_data.headquarter_city_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Pin Code</th>
+                                                <td>{{user_data.headquarter_pincode}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Address</th>
+                                                <td>{{user_data.headquarter_address}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">About Brand</th>
+                                                <td>{{user_data.about_brand}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">When brand start Operations</th>
+                                                <td>{{user_data.brand_start_date}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">When brand start Franchising</th>
+                                                <td>{{user_data.franchise_strat_date}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">How many franchisees are operational in home country</th>
+                                                <td>{{user_data.franchise_operation_in_country}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">How many company owned outlets do you have</th>
+                                                <td>{{user_data.owned_outlets}}</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /. Brand Registation Table -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2022 <a href="https://www.techfnatic.com/">TechFnatic</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Franchise Brigade</b>
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="{% static 'admin/js/jquery.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'admin/js/bootstrap.bundle.js' %}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static 'admin/js/jquery.overlayScrollbars.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'admin/js/adminlte.js' %}"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'admin/js/main.js' %}"></script>
+
+    <!-- Summernote -->
+    <script src="{% static 'admin/js/summernote-bs4.js' %}"></script>
+
+
+    <!-- CodeMirror -->
+    <!-- <script src="{% static 'admin/js/codemirror.js' %}"></script> -->
+    <!-- <script src="{% static 'admin/js/css.js' %}"></script> -->
+    <!-- <script src="{% static 'admin/js/xml.js' %}"></script> -->
+    <!-- <script src="{% static 'admin/js/htmlmixed.js' %}"></script> -->
+
+
+
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            // Summernote
+            $('#home-about-content').summernote()
+            $('#about-content').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
+
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,323 @@
+{% load static %}
+<nav class="main-header navbar navbar-expand navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                    class="fa-solid fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{% url 'admin' %}" class="nav-link">Home</a>
+        </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-bell"></i>
+                <span class="badge badge-warning navbar-badge">15</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-item dropdown-header">15 Notifications</span>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i> 4 new messages
+                    <span class="float-right text-muted text-sm">3 mins</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-users mr-2"></i> 8 friend requests
+                    <span class="float-right text-muted text-sm">12 hours</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-file mr-2"></i> 3 new reports
+                    <span class="float-right text-muted text-sm">2 days</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" role="button" id="dark-button">
+                <i class="fa-solid fa-circle-half-stroke"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                <i class="fas fa-expand-arrows-alt"></i>
+            </a>
+        </li>   
+    </ul>
+</nav>
+<!-- /.navbar -->
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{% url 'admin' %}" class="brand-link">
+       
+    <img src="{{home_details.logo}}" alt="Franchise Brigade Logo" height="50px" width="50px" class="brand-image img-circle elevation-3"
+  style="opacity: .8">
+       
+        <span class="brand-text "><img src="{{home_details.logo}}" alt=""></span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 border-0 d-flex">
+            <div class="image">
+                <img src="{{home_details.logo}}" class="img-circle elevation-2" alt="">
+            </div>
+            <div class="info">
+                <p>Swaroop Kishan</p>
+                <!-- <a href="#" class="d-block">Swaroop Kishan</a> -->
+            </div>
+        </div>
+
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                    aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-4 pb-5">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <li class="nav-item menu-open">
+                    <a href="{% url 'admin' %}" class="nav-link active">
+                        <i class="nav-icon fa-solid fa-gauge"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                <!-- Home -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-people-roof"></i>
+                        <p>
+                            Home
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'update_logo' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Update Logo</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'update_banner' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Update Banner Image</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'update_about' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Update About Section</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'update_contact' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Update Contact Details</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'update_social' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Update Social Links</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'add_review' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add a Review</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- Category & Brand -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa-solid fa-sitemap"></i>
+                        <p>
+                            Category & Brand
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'add_category' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Category</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'add_brand' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Brand</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'add_non_exclusive_brand' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Non Exclusive Brand</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Update
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview" style="display: none;">
+                                {% for i in view_category %}
+                                <li class="nav-item">
+                                    <a href="{% url 'update_category' pk=i.pk %}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>{{i.category_name}}</p>
+                                    </a>
+                                </li>
+                                {% endfor %}                                        
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- Blog -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa-solid fa-blog"></i>
+                        <p>
+                            Blogs
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'add-blog' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Blog</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'update-blog' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Update Blog</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- Events -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa-solid fa-calendar-day"></i>
+                        <p>
+                            Events
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'add-event' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Event</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'update-event' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Update Event</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- P.P, T&C, R&C -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa-solid fa-file-contract"></i>
+                        <p>
+                            P.P, T&C, R&C
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'update_privecy_policy' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Update Privacy Policy</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'update_terms_condition' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Update Terms & Conditions</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'update_refund_cancellition' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Update Refund & Cancellation</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Client Data -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa-solid fa-circle-info"></i>
+                        <p>
+                            Client Data 
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'list_ur_brand_data' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Registration Forms</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'contact_us_data' %}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Contact Forms</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--  -->
+                <li class="nav-item menu-open">
+                    <a href="{% url 'logout' %}" class="nav-link">
+                        <i class="nav-icon fa-solid fa-gauge"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

@@ -1,0 +1,387 @@
+{% extends 'front-end/base.html' %}
+
+{% block page_meta_tags %}
+        <meta property="og:image" content="{{category_data1.category_home_image}}" />
+        <meta name="title" content="{{ category_data1.category_seo_title }}" />
+        <meta name="description" content="{{ category_data1.category_seo_description}}" />
+        <meta name="keywords" itemprop="keyword" content="{{ category_data1.category_seo_keywords }}">
+        <meta property="og:title" content="{{ category_data1.category_seo_title }}" />
+        <meta property="og:description" content="{{ category_data1.category_seo_description}}" />
+        <meta property="og:keywords" content="{{ category_data1.category_seo_keywords }}" />
+        <meta property="og:image:secure_url" content="{{category_data1.category_home_image}}" />
+        <meta property="og:image:url" content="{{category_data1.category_home_image}}" />
+        {{ category_data1.category_script|safe}}
+{% endblock page_meta_tags %}
+
+{% block title %}{{category_data1.category_name}} {% endblock title %}
+
+{% block content %}
+{% load static %}
+        <!-- ===== Banner Section ====== -->
+        <section class="banner-sec overflow-x-hidden">
+            <div class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-12">
+                        <img src="{{category_data1.category_banner_image}}" alt="Banner Image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Exclusive brands Heading Section ====== -->
+        <section class="pt-4rem exclusive-brand-h-sec">
+            <div class="container">
+                <div class="row">
+                    <!-- breadcrumb -->
+                    <div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'all_bussiness_opp' %}">Business
+                                        Opportunity</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{category_data1.category_name}}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Heading -->
+                    <div>
+                        <h1 class="heading-1 fs-48">{{category_data1.category_name}} - Franchise Opportunity</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Franchise Directory Section ====== -->
+        <section class="pt-4rem">
+            <div class="container">
+                <div class="row">
+                    <!-- Left Col -->
+                    <div class="col-lg-3 p-sticky-10 h-fit-content">
+                        <div class="shadow-light p-12 mb-4">
+                            <div class="text-center">
+                                <h4 class="fs-16 fw-300">Are you seeking opportunities in</h4>
+                                <h3 class="fs-24 fw-700 my-2">{{category_data1.category_name}} Franchise?</h3>
+                                <p>Fill this form and connect with <strong>{{category_data1.category_name}} Franchise Live
+                                        Opportunities</strong>
+                                    and other Live Opportunities among 20+ industries INSTANTLY</p>
+                            </div>
+                            <!-- Social icons -->
+                            <div>
+                                <ul class="list-unstyled d-flex justify-content-evenly mb-0 social-icons">
+                                    <li><a href="https://facebook.com/FranchiseBrigade" target="_blank"><i
+                                                class="fa-brands fa-facebook-square px-2 fs-40"
+                                                style="color: #4267B2 ;"></i></a></li>
+                                    <li><a href="https://instagram.com/franchisebrigade_official/" target="_blank"><i
+                                                class="fa-brands fa-instagram-square fs-40"
+                                                style="color: #bc2a8d;"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/company/franchise-brigade/" target="_blank"><i
+                                                class="fa-brands fa-linkedin px-2 fs-40"
+                                                style="color: #0072b1 ;"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Or container -->
+                        <!-- <div class="or-container">
+                            <span> OR </span>
+                        </div> -->
+                        <!-- Form -->
+                        <div class="mb-4 shadow-light p-12">
+                            <form id="category_aside_form" class="needs-validation" novalidate>
+                                {% csrf_token %}
+                                <!-- Franchise Category aside FORM -->
+                                <div class="row">
+                                    <div class="col-lg-6 mb-3">
+                                        <input type="text" class="form-control" name="firstName" id="firstName"
+                                            placeholder="First Name" required="">
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-3">
+                                        <input type="text" class="form-control" name="lastName" id="lastName"
+                                            placeholder="Last Name" required="">
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- Country code -->
+                                    <div class="col-12 mb-3 d-flex flex-column">
+                                        <input type="tel" class="form-control" name="phone" id="phone"
+                                            placeholder="Enter Mobile Number" pattern="[0-9]{10}" required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    
+                                    <div class="col-12 mb-3">
+                                        <input type="email" class="form-control"  name="fCategoryEmail" id="fCategoryEmail"
+                                            placeholder="Where can we mail you?" required="">
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <select class="form-select" id="InvestmentAmount" autocomplete="off"
+                                            name="InvestmentAmount" required="">
+                                            <option value="" selected="" hidden="">Select your Investment Lavel</option>
+                                            <option value="3-10Lac" class="">3-10Lac</option>
+                                            <option value="10-20Lac">10-20Lac</option>
+                                            <option value="20-30Lac">20-30Lac</option>
+                                            <option value="30-50Lac">30-50Lac</option>
+                                            <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                            <option value="Above 1Cr">Above 1Cr</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <textarea class="w-100" name="completeAddress" id="completeAddress" cols="30"
+                                            rows="3" placeholder="Please share if you have any message for us."
+                                            required=""></textarea>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                            <input type="text" name="category_id" id="category_id" value="{{category_data1.id}}" hidden>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn type-2">Submit</button>
+                                    </div>
+                                </div>
+                                <script>
+                                    let category_aside_form = document.getElementById('category_aside_form'); // selecting the form
+                        
+                                    category_aside_form.addEventListener('submit', function (event) {
+                                        event.preventDefault()
+                                        let data = new FormData(); // 2
+                                        data.append("firstName", document.getElementById('firstName').value)
+                                        data.append("lastName", document.getElementById('lastName').value)
+                                        data.append("phone", document.getElementById('phone').value)
+                                        data.append("fCategoryEmail", document.getElementById('fCategoryEmail').value)
+                                        data.append("InvestmentAmount", document.getElementById('InvestmentAmount').value)
+                                        data.append("category_id", document.getElementById('category_id').value)
+                                        data.append("completeAddress", document.getElementById('completeAddress').value)
+                                        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+                                        console.log(data)
+                        
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '{% url "front_category" pk=category_data1.category_slug %}',
+                                            data: data,
+                                            cache: false,
+                                            processData: false,
+                                            contentType: false,
+                                            enctype: 'multipart/form-data',
+                                            success: function () {
+                                                alert('Form Submitted Successfully');
+                                                category_aside_form.reset();
+                                                category_aside_form.classList.remove('was-validated');
+                                            },
+                                            error: function (xhr, errmsg, err) {
+                                                console.log(xhr.status + ":" + xhr.responseText)
+                                            }
+                                        })
+                                    })
+                                </script>
+                            </form>
+                        </div>
+                        <!-- Blog -->
+                        <div class="shadow-light p-12">
+                            <h2 class="fs-24 fw-700 mb-3">Blogs</h2>
+                            {% for n in blogssi %}
+                            <div class="mb-3">
+                                <h3 class="fs-18 fw-600 mb-2 text-ellipsis">{{n.blog_title}}</h3>
+                                <div class="mb-2 fs-14 lh-18 text-ellipsis type-2 blog-content-ellipsis">{{n.blog_content|safe}}</div>
+                                <a href="{% url 'front_single_blog' n.id %}" target="_blank" class="read-more-btn">Read More</a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- End Left col -->
+                    </div>
+                    <!-- Right col -->
+                    <div class="col-lg-9 mt-5 mt-lg-0">
+                        <!-- heading -->
+                        <!-- <div class="directory-h text-center px-3 mb-5">
+                            <h2 class="heading-2 fw-300">{{category_data1.category_name}} Franchise, {{category_data1.category_name}} Business Franchise, {{category_data1.category_name}}
+                                Franchise Opportunities</h2>
+                            <h3 class="fs-18 fw-700 my-3">13,825 Business Seekers seeking opportunities in</h3>
+                            <h1 class="heading-1 fs-48">{{category_data1.category_name}} franchise</h1>
+                            <p class="fs-18">Want to showcase your brand here?</p>
+                            <a href="#" class="btn btn-2 type-2">Register</a>
+                        </div>
+                        <hr class="light-hr"> -->
+                        <!-- Cards -->
+                        <div class="row g-3 sm-height-parent">
+                            <!-- Older Card -- Card-1 -->
+                            <!-- <div class="col-sm-6 col-lg-4">
+                                <div class="brands-card-t2">
+                                    <div class="brands-box sm-height">
+                                        <a href="" class="p-12">
+                                            <img src="./images/tall_blonde_french_franchise_sell_logo-.png"
+                                                class="card-img-top" alt="Card Image">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h4 class="text-light-black fs-14 fw-700">Tall Blonde French</h4>
+                                                <span class="text-light-black"><i class="fa-solid fa-location-dot"></i>
+                                                    Locations</span>
+                                            </div>
+                                        </a>
+                                        <hr class="m-0 light-hr">
+                                        <div class="card-body p-12">
+                                            <div class="mb-3 lh-16">
+                                                <small class="fs-12"><span class="fw-700">Industry:</span> Food and
+                                                    Beverages</small>
+                                                <br>
+                                                <small class="fs-12"><span class="fw-700">Segment:</span> Lorem ipsum
+                                                    dolor sit amet.</small>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="card-info">Investment Range</div>
+                                                <div class="card-info">20L</div>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="card-info">Area Range</div>
+                                                <div class="card-info">1000 sq.ft</div>
+                                            </div>
+                                            <div class="text-center">
+                                                <a href=""
+                                                    class="read-more-btn">View Business</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- Card-1 -->
+                            {% for i in brands %}
+                            <div class="col-sm-6 col-lg-4">
+                               <div class="brands-card p-0">
+                                <div class="brands-box sm-height">
+                                    <a href="{% url 'front_brand' bk=i.brand_slug %}"><img
+                                            src="{{i.brand_logo}}"
+                                            class="card-img-top" alt="News Image"></a>
+                                    <hr class="m-0">
+                                    <div class="card-body d-flex flex-column justify-content-between">
+                                        <h3 class="fs-20">{{i.brand_name}}</h3>
+                                        <div>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="card-info">Investment Range</div>
+                                                <div class="card-info-amt">{{i.brand_inv_min}}{{i.brand_inv_min_type}}-{{i.brand_inv_max}}{{i.brand_inv_max_type}}</div>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="card-info">Area Range</div>
+                                                <div class="card-info-amt">{{i.brand_floor_area_min}}-{{i.brand_floor_area_max}} sq.ft</div>
+                                            </div>
+                                            <a href="{% url 'front_brand' bk=i.brand_slug %}"
+                                                class="read-more-btn">View
+                                                Business</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        <!-- non exclusive brands -->
+                            <!-- Card-1 -->
+                            {% for neb in non_exclusive_brands %}
+                            <div class="col-sm-6 col-lg-4">
+                            <div class="brands-card p-0">
+                                <div class="brands-box sm-height">
+                                    <a href="#"><img
+                                            src="{{neb.brand_logo}}"
+                                            class="card-img-top" alt="News Image"></a>
+                                    <hr class="m-0">
+                                    <div class="card-body d-flex flex-column justify-content-between">
+                                        <h3 class="fs-20">{{neb.brand_name}}</h3>
+                                        <div>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="card-info">Investment Range</div>
+                                                <div class="card-info-amt">{{neb.brand_inv_min}}{{neb.brand_inv_min_type}}-{{neb.brand_inv_max}}{{neb.brand_inv_max_type}}</div>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="card-info">Area Range</div>
+                                                <div class="card-info-amt">{{neb.brand_floor_area_min}}-{{neb.brand_floor_area_max}} sq.ft</div>
+                                            </div>
+                                            <button type="button" class="read-more-btn" data-brand-type="neb" data-category-id="{{category_data1.id}}" data-brand-id="{{neb.id}}" data-bs-toggle="modal"
+                                                data-bs-target="#knowMoreModal">Know More
+                                            </button>
+                                            <!-- <a href="{% url 'front_brand' bk=neb.id %}?type=neb"
+                                                class="read-more-btn">View
+                                                Business</a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        </div>
+                        <div class="mt-5">
+                            <strong>
+                                <h4 class="mb-3">About {{category_data1.category_name}} Industry</h4>
+                            </strong>
+                            {{category_data1.about_category|safe}}
+                        </div>
+                        <!-- End Right col -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== Top Business Opportunities Section ====== -->
+        <section class="pt-5rem">
+            <div class="container">
+                <!-- Heading -->
+                <div class="row align-items-baseline justify-content-between">
+                    <div class="col-9">
+                        <h2 class="heading-2 pseudo-border text-blue">Top Business Opportunities</h2>
+                        <!-- <p class="text-black mb-0">Browse our range of top business opportunities</p> -->
+                    </div>
+                    <div class="col-3 text-end">
+                        <a href="{% url 'all_bussiness_opp' %}" class="view-all-btn">View All <i
+                                class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Content -->
+                <div class="row mt-4">
+                    <!-- Exclusive Brands Slider Col -->
+                    <div class="col-12">
+                        <div class="brands-slider sm-height-parent">
+                            <!-- Card-1 -->
+                            {% for j in top_bussiness %}
+                            <div class="brands-card">
+                                <div class="brands-box sm-height">
+                                    <a href="{% url 'front_brand' bk=j.brand_slug %}"><img
+                                            src="{{j.brand_logo}}"
+                                            class="card-img-top" alt="News Image"></a>
+                                    <hr class="m-0">
+                                    <div class="card-body">
+                                        <p class="brand-category">{{j.category_id.category_name}}</p>
+                                        <h3 class="fs-20">{{j.brand_name}}</h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="card-info">Investment Range</div>
+                                            <div class="card-info-amt">{{j.brand_inv_min}}{{j.brand_inv_min_type}}-{{j.brand_inv_max}}{{j.brand_inv_max_type}}</div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="card-info">Area Range</div>
+                                            <div class="card-info-amt">{{j.brand_floor_area_min}}-{{j.brand_floor_area_max}} sq.ft</div>
+                                        </div>
+                                        <a href="{% url 'front_brand' bk=j.brand_slug %}" class="read-more-btn">Read
+                                            More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+  
+
+
+{% include "front-end/brand-inquiry-form.html" %}
+{% include "front-end/footer.html" %}
+{% include "front-end/scripts.html" %}
+{% endblock %}

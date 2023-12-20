@@ -1,0 +1,1013 @@
+{% extends 'admin-panel/base.html' %}
+{% block content %}
+{% load static %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-12">
+                    <h1 class="m-0">{{ request.GET.for|title }} {{ req.task_type|title }} Request <small class="fw-500 fs-16">(by <b>{{ emp.firstname}} {{ emp.lastname}}</b> )</small></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- CATEGORY  -->
+            {% if request.GET.for == 'category' %}
+                <!-- Update Category -->
+                {% if req.task_type == 'update' %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-primary card-outline card-outline-tabs h-100">
+                            <div class="card-header p-0">
+                                <h3 class="h4 m-0 px-3 py-2">{{current_data.category_name}}</h3>
+                            </div>
+                            <div class="card-body">
+                                <!-- <h4 class="h5 fw-600 mb-3">Food and Beverages</h4> -->
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="{{current_data.category_home_image }}" class="w-100 mh-100px h-100px object-fit-contain"
+                                            alt="Category Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Category Image)
+                                        </p>
+                                    </div>
+                                    <div class="col-8">
+                                        <img src="{{current_data.category_banner_image }}" class="w-100 mh-100px h-100px object-fit-contain" alt="Banner Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Banner Image)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-3">
+                        <div class="card card-primary card-outline card-outline-tabs h-100">
+                            <div class="card-header p-0">
+                                <h3 class="h4 m-0 px-3 py-2">Current Data</h3>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="h5 fw-600 mb-3">{{current_data.category_name|title }}</h4>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="{{current_data.category_home_image }}" class="w-100 mh-100px h-100px object-fit-contain"
+                                            alt="Category Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Category Image)
+                                        </p>
+                                    </div>
+                                    <div class="col-8">
+                                        <img src="{{current_data.category_banner_image }}" class="w-100 mh-100px h-100px object-fit-contain" alt="Banner Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Banner Image)</p>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <strong>
+                                        <h4 class="mb-3">About Category</h4>
+                                    </strong>
+                                    <div>
+                                        {{current_data.about_category|safe }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-3">
+                        <div class="card card-primary card-outline card-outline-tabs h-100">
+                            <div class="card-header p-0">
+                                <h3 class="h4 m-0 px-3 py-2">Updated Data</h3>
+                            </div>
+                            <div class="card-body">
+                                    <h4 class="h5 fw-600 mb-3">{{req.category_name|title }}</h4>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="{{req.category_home_image }}" class="w-100 mh-100px h-100px object-fit-contain"
+                                            alt="Category Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Category Image)
+                                        </p>
+                                    </div>
+                                    <div class="col-8">
+                                        <img src="{{req.category_banner_image }}" class="w-100 mh-100px h-100px object-fit-contain" alt="Banner Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Banner Image)</p>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <strong>
+                                        <h4 class="mb-3">About Category </h4>
+                                    </strong>
+                                    <div>
+                                        {{req.about_category|safe }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="card card-primary card-outline card-outline-tabs">
+                            <div class="card-footer">
+                                <button type="button" class="btn btn-1 float-left bg-red" data-toggle="modal"
+                                    data-target="#reject-modal">Reject</button>
+                                <button type="submit" class="btn btn-1 float-right" data-toggle="modal"
+                                    data-target="#approve-modal">Approve</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Insert Category -->
+                {% elif req.task_type == 'insert' %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-primary card-outline card-outline-tabs">
+                            <div class="card-header p-0">
+                                <h3 class="h4 m-0 px-3 py-2">Category Data</h3>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="h5 fw-600 mb-3">{{ req.category_name}}</h4>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="{{ req.category_home_image }}" class="w-100 mh-100px h-100px object-fit-contain"
+                                            alt="Category Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Category Image)
+                                        </p>
+                                    </div>
+                                    <div class="col-8">
+                                        <img src="{{ req.category_banner_image }}" class="w-100 mh-100px h-100px object-fit-contain" alt="Banner Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Banner Image)</p>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <strong>
+                                        <h4 class="mb-3">About {{ req.category_name|title}} Categoty</h4>
+                                    </strong>
+                                    <div>{{ req.about_category|safe}}</div>
+                                    <!-- <div><br></div>
+                                    <div>A few benefits of franchising in the food and beverage industry:</div>
+                                    <div><br></div>
+                                    <div>1. The food and beverage industry has a lot of varieties to offer.&nbsp;
+                                    </div>
+                                    <div>2. Good reviews can spread like wildfire. People will always be willing to
+                                        try out good reviewed food.&nbsp;</div>
+                                    <div>3. Revenue generation is high.</div>
+                                    <div>4. Customer feedback is one of the unique characteristics of food industry.
+                                        Act upon the feedbacks positively helps in developing the business.</div> -->
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="button" class="btn btn-1 float-left bg-red" data-toggle="modal"
+                                    data-target="#reject-modal">Reject</button>
+                                <button type="submit" class="btn btn-1 float-right" data-toggle="modal"
+                                    data-target="#approve-modal">Approve</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delete Category -->
+                {% elif req.task_type == 'delete' %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-primary card-outline card-outline-tabs">
+                            <div class="card-header p-0">
+                                <h3 class="h4 m-0 px-3 py-2">Category Data </h3>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="h5 fw-600 mb-3">{{current_data.category_name}}</h4>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="{{ current_data.category_home_image }}" class="w-100 mh-100px h-100px object-fit-contain"
+                                            alt="Category Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Category Image)
+                                        </p>
+                                    </div>
+                                    <div class="col-8">
+                                        <img src="{{ current_data.category_banner_image }}" class="w-100 mh-100px h-100px object-fit-contain" alt="Banner Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Banner Image)</p>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <strong>
+                                        <h4 class="mb-3">About {{current_data.category_name|title}} Categoty</h4>
+                                    </strong>
+                                    <div>
+                                        {{current_data.about_category|safe}}
+                                    </div>
+                                    <!-- <div><br></div>
+                                    <div>A few benefits of franchising in the food and beverage industry:</div>
+                                    <div><br></div>
+                                    <div>1. The food and beverage industry has a lot of varieties to offer.&nbsp;
+                                    </div>
+                                    <div>2. Good reviews can spread like wildfire. People will always be willing to
+                                        try out good reviewed food.&nbsp;</div>
+                                    <div>3. Revenue generation is high.</div>
+                                    <div>4. Customer feedback is one of the unique characteristics of food industry.
+                                        Act upon the feedbacks positively helps in developing the business.</div> -->
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="button" class="btn btn-1 float-left bg-red" data-toggle="modal"
+                                    data-target="#reject-modal">Reject</button>
+                                <button type="submit" class="btn btn-1 float-right" data-toggle="modal"
+                                    data-target="#delete-modal">Approve</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endif %}
+            <!-- CATEGORY end -->
+            
+            <!-- BRAND  -->
+            {% if request.GET.for == 'brand' %}
+                {% if req.task_type == 'update' %}
+                    <!-- Update Brand -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline card-outline-tabs h-100">
+                                <div class="card-header p-0">
+                                    <h3 class="h4 m-0 px-3 py-2">{{current_data.brand_name|title}}
+                                        (under <b>{{current_data.category_id.category_name|title}}</b> )
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img src="{{current_data.brand_logo }}"
+                                                class="w-100 mh-100px h-100px object-fit-contain" alt="Brand Logo">
+                                            <p class="mt-1 text-center m-0 fs-12">(Brand Logo)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mt-3">
+                            <div class="card card-primary card-outline card-outline-tabs h-100">
+                                <div class="card-header p-0">
+                                    <h3 class="h4 m-0 px-3 py-2">Current Data</h3>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="h5 fw-600 mb-3">{{current_data.brand_name}}
+                                        (under <b>{{current_data.category_id.category_name|title}}</b> )
+                                    </h4>
+                                    <div class="text-center">
+                                        <img src="{{current_data.brand_logo }}"
+                                            class="w-100 mh-100px h-100px object-fit-contain" alt="Brand Logo">
+                                        <p class="mt-1 text-center m-0 fs-12">(Brand Logo)
+                                        </p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <strong>
+                                            <h4 class="h5 fw-600 mb-2">ABOUT {{current_data.brand_name}}</h4>
+                                        </strong>
+                                        <div>
+                                            {{current_data.brand_about|safe }}
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <strong>
+                                            <h4 class="h5 fw-600 mb-2">WHY US</h4>
+                                        </strong>
+                                        <div>
+                                            {{current_data.brand_whyus|safe }}
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="d-flex justify-content-between mb-1">Outlets So Far <span
+                                            class="fw-700 w-fit-content"> {{current_data.brand_outlets}} </span></p>  
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Commenced Operations</h4>
+                                        <p class="d-flex justify-content-between mb-1">Operations Commenced On <span
+                                                class="fw-700 w-fit-content"> {{current_data.brand_op_cmd_yr}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise Commenced On <span
+                                                class="fw-700 w-fit-content"> {{current_data.brand_fr_cmd_yr }}</span></p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Franchise Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">Investment <span
+                                                class="fw-700 w-fit-content">INR {{current_data.brand_inv_min}}{{current_data.brand_inv_min_type}} - {{current_data.brand_inv_max}}{{current_data.brand_inv_max_type}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise/Brand Fee <span
+                                                class="fw-700 w-fit-content"> INR {{current_data.brand_fr_fee}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Royalty/Commission
+                                            {% for i in current_data_royalty %}
+                                                <span class="fw-700 w-fit-content"> {{i.royalty_type}} - {{i.royalty_fee}}%;</span>
+                                            {% endfor %}
+                                        </p>
+                                        <!-- <p class="d-flex justify-content-between mb-1">{{current_data.brand_fr_cmd_yr }} <span
+                                                class="fw-700 w-fit-content">{{current_data.brand_fr_cmd_yr }}</span></p> -->
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">
+                                            Exclusive territorial rights to a unit franchise <span class="fw-700 w-fit-content">
+                                                {{current_data.brand_territorial_rights}}
+                                            </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Anticipated percentage return on
+                                            Investment <span class="fw-700 w-fit-content"> {{ current_data.brand_anticipated_percent}}% </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Likely pay back period of capital
+                                            for a Unit Franchise<span class="fw-700 w-fit-content">{{ current_data.brand_payback_min}} {{ current_data.brand_payback_min_type|title}} - {{ current_data.brand_payback_max}} {{ current_data.brand_payback_max_type|title}}</span></p>
+                                        <!-- <p class="d-flex justify-content-between mb-1">Likely pay back period of capital
+                                            for a Unit Franchise <span class="fw-700 w-fit-content">2-3 year</span></p> -->
+                                        <p class="d-flex justify-content-between mb-1">Other investment requirments
+                                            <span class="fw-700 w-fit-content"> {{ current_data.brand_investment_requir}} % </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise Term <span
+                                                class="fw-700 w-fit-content">{{ current_data.brand_fr_terms_yr}} Years</span></p>
+                                        <p class="d-flex justify-content-between mb-1">If Renewable <span
+                                                class="fw-700 w-fit-content">{{ current_data.brand_territorial_rights}}</span></p>
+                                        <!-- <p class="d-flex justify-content-between mb-1">Franchising Models <span
+                                                class="fw-700 w-fit-content">FOFO</span></p> -->
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Master Franchise Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">Is this brand offer master franchise?
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_ismasterfranchaise }}</span></p>
+                                        {% if current_data.brand_ismasterfranchaise == 'yes' %}
+                                        <p class="d-flex justify-content-between mb-1">Investment Range
+                                            <span class="fw-700 w-fit-content"> {{ current_data.brand_master_investment_min }}{{ current_data.brand_master_investment_min_type}}-{{ current_data.brand_master_investment_max}}{{ current_data.brand_master_investment_max_type}}</span>
+                                        </p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive city rights
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_exclusive_city_rights }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive region rights
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_exclusive_region_rights}}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive state rights
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_exclusive_state_rights }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Royalty share
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_royalty_share }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Distribution margin
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_distribution_margin }}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Royalty share
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_franchise_fee_share }}</span></p>
+                                            {% endif %}
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">PROPERTY DETAILS</h4>
+                                        <p class="d-flex justify-content-between mb-1">Type of property required for
+                                            this franchise opportunity<span class="fw-700 w-fit-content">{{ current_data.brand_property_required}} </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Floor area requirment <span
+                                                class="fw-700 w-fit-content">{{ current_data.brand_floor_area_min}} - {{ current_data.brand_floor_area_max}} Sq.ft</span></p>
+                                        <p class="d-flex justify-content-between mb-1"> Preferred location of unit
+                                            franchise outlet<span class="fw-700 w-fit-content"> {{ current_data.brand_fre_location_outlets}} </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Preferred location of master
+                                            franchise <span class="fw-700 w-fit-content">{{ current_data.brand_fre_location_masters}}</span></p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">TRAINING DETAILS</h4>
+                                        <p class="d-flex justify-content-between mb-1">Detailed operating manuals for
+                                            franchisees<span class="fw-700 w-fit-content">{{ current_data.brand_territorial_rights}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise training location <span
+                                                class="fw-700 w-fit-content">{{ current_data.brand_fre_training_location}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Is field assistance available for
+                                            franchise ? <span class="fw-700 w-fit-content">{{ current_data.brand_assistece_available_type }}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Expert guidance from Head Office
+                                            to franchise in opening the franchise <span
+                                                class="fw-700 w-fit-content">{{ current_data.brand_head_office_gyd_type}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Current IT systems will be
+                                            included in franchise <span class="fw-700 w-fit-content">{{ current_data.brand_it_system_type }}</span></p>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Image Gallery</h4>
+                                        <div>
+                                            {% for image in current_data_gallery %}
+                                            <a href="{{image}}" target="_blank"> <img src="{{image}}" class="mh-100px pb-2 pr-1"
+                                                alt="Gallery Image"></a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 mt-3">
+                            <div class="card card-primary card-outline card-outline-tabs h-100">
+                                <div class="card-header p-0">
+                                    <h3 class="h4 m-0 px-3 py-2">Updated Data</h3>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="h5 fw-600 mb-3">{{ req.brand_name|title}}
+                                        <small class="fw-500 fs-16">(under <b>{{ req.category_id.category_name|title}}</b> )</small>
+                                    </h4>
+                                    <div class="text-center">
+                                        <img src="{{req.brand_logo}}"
+                                            class="w-100 mh-100px h-100px object-fit-contain" alt="Brand Logo">
+                                        <p class="mt-1 text-center m-0 fs-12">(Brand Logo)
+                                        </p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <strong>
+                                            <h4 class="h5 fw-600 mb-2">ABOUT {{ req.brand_name|title}} </h4>
+                                        </strong>
+                                        <div>
+                                            {{req.brand_about|safe}}
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <strong>
+                                            <h4 class="h5 fw-600 mb-2">WHY US</h4>
+                                        </strong>
+                                        <div>
+                                            {{req.brand_whyus|safe}}
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="d-flex justify-content-between mb-1">Outlets So Far <span
+                                            class="fw-700 w-fit-content"> {{req.brand_outlets}} </span></p>  
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Commenced Operations</h4>
+                                        <p class="d-flex justify-content-between mb-1">Operations Commenced On <span
+                                                class="fw-700 w-fit-content"> {{req.brand_op_cmd_yr}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise Commenced On <span
+                                                class="fw-700 w-fit-content"> {{req.brand_fr_cmd_yr}}</span></p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Franchise Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">Investment <span
+                                                class="fw-700 w-fit-content">INR {{req.brand_inv_min}}{{req.brand_inv_min_type}} - {{req.brand_inv_max}}{{req.brand_inv_max_type}} </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise/Brand Fee <span
+                                                class="fw-700 w-fit-content"> INR {{req.brand_fr_fee}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Royalty/Commission
+                                            {% for i in req_royalty %}
+                                                <span class="fw-700 w-fit-content"> {{i.royalty_type}} - {{i.royalty_fee}}%;</span>
+                                            {% endfor %}
+                                            </p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">Exclusive territorial rights to a
+                                            unit franchise <span class="fw-700 w-fit-content"> {{ req.brand_territorial_rights }}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Anticipated percentage return on
+                                            Investment <span class="fw-700 w-fit-content"> {{ req.brand_anticipated_percent}}%</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Likely pay back period of capital
+                                            for a Unit Franchise<span class="fw-700 w-fit-content">{{ req.brand_payback_min}} {{ req.brand_payback_min_type|title}} - {{ req.brand_payback_max}} {{ req.brand_payback_max_type|title}}</span></p>
+                                        <!-- <p class="d-flex justify-content-between mb-1">Likely pay back period of capital
+                                            for a Unit Franchise <span class="fw-700 w-fit-content">{{ req.brand_anticipated_percent}} 2-3 year</span></p> -->
+                                        <p class="d-flex justify-content-between mb-1">Other investment requirments
+                                            <span class="fw-700 w-fit-content">{{ req.brand_investment_requir}} %</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise Term <span
+                                                class="fw-700 w-fit-content">{{ req.brand_fr_terms_yr}} Years</span></p>
+                                        <p class="d-flex justify-content-between mb-1">If Renewable <span
+                                                class="fw-700 w-fit-content">{{ req.brand_territorial_rights}}</span></p>
+                                        <!-- <p class="d-flex justify-content-between mb-1">Franchising Models <span
+                                                class="fw-700 w-fit-content">FOFO</span></p> -->
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Master Franchise Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">Is this brand offer master franchise?
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_ismasterfranchaise }}</span></p>
+                                        {% if req.brand_ismasterfranchaise == 'yes' %}
+                                        <p class="d-flex justify-content-between mb-1">Investment Range
+                                            <span class="fw-700 w-fit-content"> {{ req.brand_master_investment_min }}{{ req.brand_master_investment_min_type}}-{{ req.brand_master_investment_max}}{{ req.brand_master_investment_max_type}}</span>
+                                        </p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive city rights
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_exclusive_city_rights }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive region rights
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_exclusive_region_rights}}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive state rights
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_exclusive_state_rights }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Royalty share
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_royalty_share }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Distribution margin
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_distribution_margin }}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Royalty share
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_franchise_fee_share }}</span></p>
+    
+                                            {% endif %}
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">PROPERTY DETAILS</h4>
+                                        <p class="d-flex justify-content-between mb-1">Type of property required for
+                                            this franchise opportunity<span class="fw-700 w-fit-content">{{ req.brand_property_required}} </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Floor area requirment <span
+                                                class="fw-700 w-fit-content">{{ req.brand_floor_area_min}} - {{ req.brand_floor_area_max}} Sq.ft</span></p>
+                                        <p class="d-flex justify-content-between mb-1"> Preferred location of unit
+                                            franchise outlet<span class="fw-700 w-fit-content"> {{ req.brand_fre_location_outlets}} </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Preferred location of master
+                                            franchise <span class="fw-700 w-fit-content">{{ req.brand_fre_location_masters}}</span></p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">TRAINING DETAILS</h4>
+                                        <p class="d-flex justify-content-between mb-1">Detailed operating manuals for
+                                            franchisees<span class="fw-700 w-fit-content">{{ req.brand_territorial_rights}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise training location <span
+                                                class="fw-700 w-fit-content">{{ req.brand_fre_training_location}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Is field assistance available for
+                                            franchise ? <span class="fw-700 w-fit-content">{{ req.brand_assistece_available_type }}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Expert guidance from Head Office
+                                            to franchise in opening the franchise <span
+                                                class="fw-700 w-fit-content">{{ req.brand_head_office_gyd_type}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Current IT systems will be
+                                            included in franchise <span class="fw-700 w-fit-content">{{ req.brand_it_system_type }}</span></p>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Image Gallery</h4>
+                                        <div>
+                                            {% for image in req_gallery %}
+                                            <img src="{{image}}" class="mh-100px pb-2 pr-1"
+                                                alt="Gallery Image">
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-1 float-left bg-red" data-toggle="modal"
+                                        data-target="#reject-modal">Reject</button>
+                                    <button type="submit" class="btn btn-1 float-right" data-toggle="modal"
+                                        data-target="#approve-modal">Approve</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Delete Brand -->
+                    {% elif req.task_type == 'delete' %}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline card-outline-tabs h-100">
+                                <div class="card-header p-0">
+                                    <h3 class="h4 m-0 px-3 py-2">Brand Data</h3>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="h5 fw-600 mb-3">{{ current_data.brand_name|title}}
+                                        <small class="fw-500 fs-16">(under <b>{{current_data.category_id.category_name|title}}</b> )</small>
+                                    </h4>
+                                    <div class="text-center">
+                                            <img src="{{current_data.brand_logo}}"
+                                            class="w-100 mh-100px h-100px object-fit-contain" alt="Brand Logo">
+                                        <p class="mt-1 text-center m-0 fs-12">(Brand Logo)
+                                        </p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <strong>
+                                            <h4 class="h5 fw-600 mb-2">ABOUT</h4>
+                                        </strong>
+                                        <div>{{current_data.brand_about|safe}}</div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <strong>
+                                            <h4 class="h5 fw-600 mb-2">WHY US</h4>
+                                        </strong>
+                                        <div>
+                                            {{current_data.brand_whyus|safe}}
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="d-flex justify-content-between mb-1">Outlets So Far <span
+                                            class="fw-700 w-fit-content"> {{current_data.brand_outlets}} </span></p>  
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Commenced Operations</h4>
+                                        <p class="d-flex justify-content-between mb-1">Operations Commenced On <span
+                                                class="fw-700 w-fit-content"> {{current_data.brand_op_cmd_yr}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise Commenced On <span
+                                                class="fw-700 w-fit-content"> {{current_data.brand_fr_cmd_yr}}</span></p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Franchise Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">Investment <span
+                                                class="fw-700 w-fit-content">INR {{current_data.brand_inv_min}}{{current_data.brand_inv_min_type}} - {{current_data.brand_inv_max}}{{current_data.brand_inv_max_type}} </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise/Brand Fee <span
+                                                class="fw-700 w-fit-content"> INR {{current_data.brand_fr_fee}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Royalty/Commission
+                                            {% for i in current_data_royalty %}
+                                                <span class="fw-700 w-fit-content"> {{i.royalty_type}} - {{i.royalty_fee}}%;</span>
+                                            {% endfor %}
+                                            </p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">Exclusive territorial rights to a
+                                            unit franchise <span class="fw-700 w-fit-content"> {{ current_data.brand_territorial_rights }}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Anticipated percentage return on
+                                            Investment <span class="fw-700 w-fit-content"> {{ current_data.brand_anticipated_percent}}%</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Likely pay back period of capital
+                                            for a Unit Franchise<span class="fw-700 w-fit-content">{{ current_data.brand_payback_min}} {{ current_data.brand_payback_min_type|title}} - {{ current_data.brand_payback_max}} {{ current_data.brand_payback_max_type|title}}</span></p>
+                                        <!-- <p class="d-flex justify-content-between mb-1">Likely pay back period of capital
+                                            for a Unit Franchise <span class="fw-700 w-fit-content">{{ req.brand_anticipated_percent}} 2-3 year</span></p> -->
+                                        <p class="d-flex justify-content-between mb-1">Other investment requirments
+                                            <span class="fw-700 w-fit-content">{{ current_data.brand_investment_requir}} %</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise Term <span
+                                                class="fw-700 w-fit-content">{{ current_data.brand_fr_terms_yr}} Years</span></p>
+                                        <p class="d-flex justify-content-between mb-1">If Renewable <span
+                                                class="fw-700 w-fit-content">{{ current_data.brand_territorial_rights}}</span></p>
+                                        <!-- <p class="d-flex justify-content-between mb-1">Franchising Models <span
+                                                class="fw-700 w-fit-content">FOFO</span></p> -->
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Master Franchise Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">Is this brand offer master franchise?
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_ismasterfranchaise }}</span></p>
+                                        {% if current_data.brand_ismasterfranchaise == 'yes' %}
+                                        <p class="d-flex justify-content-between mb-1">Investment Range
+                                            <span class="fw-700 w-fit-content"> {{ current_data.brand_master_investment_min }}{{ current_data.brand_master_investment_min_type}}-{{ current_data.brand_master_investment_max}}{{ current_data.brand_master_investment_max_type}}</span>
+                                        </p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive city rights
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_exclusive_city_rights }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive region rights
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_exclusive_region_rights}}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive state rights
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_exclusive_state_rights }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Royalty share
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_royalty_share }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Distribution margin
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_distribution_margin }}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Royalty share
+                                                <span class="fw-700 w-fit-content"> {{ current_data.brand_master_franchise_fee_share }}</span></p>
+                                            {% endif %}
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">PROPERTY DETAILS</h4>
+                                        <p class="d-flex justify-content-between mb-1">Type of property required for
+                                            this franchise opportunity<span class="fw-700 w-fit-content">{{ current_data.brand_property_required}} </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Floor area requirment <span
+                                                class="fw-700 w-fit-content">{{ current_data.brand_floor_area_min}} - {{ current_data.brand_floor_area_max}} Sq.ft</span></p>
+                                        <p class="d-flex justify-content-between mb-1"> Preferred location of unit
+                                            franchise outlet<span class="fw-700 w-fit-content"> {{ current_data.brand_fre_location_outlets}} </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Preferred location of master
+                                            franchise <span class="fw-700 w-fit-content">{{ current_data.brand_fre_location_masters}}</span></p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">TRAINING DETAILS</h4>
+                                        <p class="d-flex justify-content-between mb-1">Detailed operating manuals for
+                                            franchisees<span class="fw-700 w-fit-content">{{ current_data.brand_territorial_rights}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise training location <span
+                                                class="fw-700 w-fit-content">{{ current_data.brand_fre_training_location}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Is field assistance available for
+                                            franchise ? <span class="fw-700 w-fit-content">{{ current_data.brand_assistece_available_type }}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Expert guidance from Head Office
+                                            to franchise in opening the franchise <span
+                                                class="fw-700 w-fit-content">{{ current_data.brand_head_office_gyd_type}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Current IT systems will be
+                                            included in franchise <span class="fw-700 w-fit-content">{{ current_data.brand_it_system_type }}</span></p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Image Gallery</h4>
+                                        <div>
+                                            {% for image in current_data_gallery %}
+                                            <a href="{{image}}" target="_blank"> <img src="{{image}}" class="mh-100px pb-2 pr-1"
+                                                alt="Gallery Image"></a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-1 float-left bg-red" data-toggle="modal"
+                                        data-target="#reject-modal">Reject</button>
+                                    <button type="submit" class="btn btn-1 float-right" data-toggle="modal"
+                                        data-target="#delete-modal">Approve</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Insert Brand -->
+                    {% elif req.task_type == 'insert' %}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline card-outline-tabs h-100">
+                                <div class="card-header p-0">
+                                    <h3 class="h4 m-0 px-3 py-2">Brand Data </h3> 
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="h5 fw-600 mb-3">{{ req.brand_name|title}}
+                                        <small class="fw-500 fs-16">(under <b>{{ req.category_id.category_name|title}}</b> )</small>
+                                    </h4>
+                                    <div class="text-center">
+                                            <img src="{{req.brand_logo}}"
+                                            class="w-100 mh-100px h-100px object-fit-contain" alt="Brand Logo">
+                                        <p class="mt-1 text-center m-0 fs-12">(Brand Logo)
+                                        </p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <strong>
+                                            <h4 class="h5 fw-600 mb-2">ABOUT</h4>
+                                        </strong>
+                                        <div>{{req.brand_about|safe}}</div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <strong>
+                                            <h4 class="h5 fw-600 mb-2">WHY US</h4>
+                                        </strong>
+                                        <div>
+                                            {{req.brand_whyus|safe}}
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="d-flex justify-content-between mb-1">Outlets So Far <span
+                                            class="fw-700 w-fit-content"> {{req.brand_outlets}} </span></p>  
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Commenced Operations</h4>
+                                        <p class="d-flex justify-content-between mb-1">Operations Commenced On <span
+                                                class="fw-700 w-fit-content"> {{req.brand_op_cmd_yr}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise Commenced On <span
+                                                class="fw-700 w-fit-content"> {{req.brand_fr_cmd_yr}}</span></p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Franchise Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">Investment <span
+                                                class="fw-700 w-fit-content">INR {{req.brand_inv_min}}{{req.brand_inv_min_type}} - {{req.brand_inv_max}}{{req.brand_inv_max_type}} </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise/Brand Fee <span
+                                                class="fw-700 w-fit-content"> INR {{req.brand_fr_fee}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Royalty/Commission
+                                            {% for i in req_royalty %}
+                                                <span class="fw-700 w-fit-content"> {{i.royalty_type}} - {{i.royalty_fee}}%;</span>
+                                            {% endfor %}
+                                            </p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">Exclusive territorial rights to a
+                                            unit franchise <span class="fw-700 w-fit-content"> {{ req.brand_territorial_rights }}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Anticipated percentage return on
+                                            Investment <span class="fw-700 w-fit-content"> {{ req.brand_anticipated_percent}}%</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Likely pay back period of capital
+                                            for a Unit Franchise<span class="fw-700 w-fit-content">{{ req.brand_payback_min}} {{ req.brand_payback_min_type|title}} - {{ req.brand_payback_max}} {{ req.brand_payback_max_type|title}}</span></p>
+                                        <!-- <p class="d-flex justify-content-between mb-1">Likely pay back period of capital
+                                            for a Unit Franchise <span class="fw-700 w-fit-content">{{ req.brand_anticipated_percent}} 2-3 year</span></p> -->
+                                        <p class="d-flex justify-content-between mb-1">Other investment requirments
+                                            <span class="fw-700 w-fit-content">{{ req.brand_investment_requir}} %</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise Term <span
+                                                class="fw-700 w-fit-content">{{ req.brand_fr_terms_yr}} Years</span></p>
+                                        <p class="d-flex justify-content-between mb-1">If Renewable <span
+                                                class="fw-700 w-fit-content">{{ req.brand_territorial_rights}}</span></p>
+                                        <!-- <p class="d-flex justify-content-between mb-1">Franchising Models <span
+                                                class="fw-700 w-fit-content">FOFO</span></p> -->
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Master Franchise Details</h4>
+                                        <p class="d-flex justify-content-between mb-1">Is this brand offer master franchise?
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_ismasterfranchaise }}</span></p>
+                                        {% if req.brand_ismasterfranchaise == 'yes' %}
+                                        <p class="d-flex justify-content-between mb-1">Investment Range
+                                            <span class="fw-700 w-fit-content"> {{ req.brand_master_investment_min }}{{ req.brand_master_investment_min_type}}-{{ req.brand_master_investment_max}}{{ req.brand_master_investment_max_type}}</span>
+                                        </p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive city rights
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_exclusive_city_rights }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive region rights
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_exclusive_region_rights}}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Exclusive state rights
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_exclusive_state_rights }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Royalty share
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_royalty_share }}</span></p>
+                                            <p class="d-flex justify-content-between mb-1">Distribution margin
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_distribution_margin }}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Royalty share
+                                                <span class="fw-700 w-fit-content"> {{ req.brand_master_franchise_fee_share }}</span></p>
+    
+                                            {% endif %}
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">PROPERTY DETAILS</h4>
+                                        <p class="d-flex justify-content-between mb-1">Type of property required for
+                                            this franchise opportunity<span class="fw-700 w-fit-content">{{ req.brand_property_required}} </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Floor area requirment <span
+                                                class="fw-700 w-fit-content">{{ req.brand_floor_area_min}} - {{ req.brand_floor_area_max}} Sq.ft</span></p>
+                                        <p class="d-flex justify-content-between mb-1"> Preferred location of unit
+                                            franchise outlet<span class="fw-700 w-fit-content"> {{ req.brand_fre_location_outlets}} </span></p>
+                                        <p class="d-flex justify-content-between mb-1">Preferred location of master
+                                            franchise <span class="fw-700 w-fit-content">{{ req.brand_fre_location_masters}}</span></p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">TRAINING DETAILS</h4>
+                                        <p class="d-flex justify-content-between mb-1">Detailed operating manuals for
+                                            franchisees<span class="fw-700 w-fit-content">{{ req.brand_territorial_rights}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Franchise training location <span
+                                                class="fw-700 w-fit-content">{{ req.brand_fre_training_location}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Is field assistance available for
+                                            franchise ? <span class="fw-700 w-fit-content">{{ req.brand_assistece_available_type }}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Expert guidance from Head Office
+                                            to franchise in opening the franchise <span
+                                                class="fw-700 w-fit-content">{{ req.brand_head_office_gyd_type}}</span></p>
+                                        <p class="d-flex justify-content-between mb-1">Current IT systems will be
+                                            included in franchise <span class="fw-700 w-fit-content">{{ req.brand_it_system_type }}</span></p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4 class="h5 fw-600 mb-2">Image Gallery</h4>
+                                        <div>
+                                            {% for image in req_gallery %}
+                                            <img src="{{image}}" class="mh-100px pb-2 pr-1"
+                                                alt="Gallery Image">
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-1 float-left bg-red" data-toggle="modal"
+                                        data-target="#reject-modal">Reject</button>
+                                    <button type="submit" class="btn btn-1 float-right" data-toggle="modal"
+                                        data-target="#approve-modal">Approve</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+
+            <!-- BLOG  -->
+            {% if request.GET.for == 'blog' %}
+                
+                <!-- Update Blog -->
+                {% if req.task_type == 'update' %}
+                    <div class="row">
+                        <div class="col-lg-6 mt-3">
+                            <div class="card card-primary card-outline card-outline-tabs h-100">
+                                <div class="card-header p-0">
+                                    <h3 class="h4 m-0 px-3 py-2">Current Data</h3>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="h5 fw-600 mb-3">{{ current_data.blog_title }}</h4>
+                                    <div>
+                                        <img src="{{ current_data.blog_image }}"
+                                            class="w-100 mh-100px h-100px object-fit-contain" alt="Blog Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Blog Image)</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <div>
+                                            {{ current_data.blog_content|safe }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mt-3">
+                            <div class="card card-primary card-outline card-outline-tabs h-100">
+                                <div class="card-header p-0">
+                                    <h3 class="h4 m-0 px-3 py-2">Updated Data</h3>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="h5 fw-600 mb-3">{{ req.blog_title }}</h4>
+                                    <div>
+                                        <img src="{{ req.blog_image }}"
+                                            class="w-100 mh-100px h-100px object-fit-contain" alt="Blog Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Blog Image)</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <div>
+                                            {{ req.blog_content|safe }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-1 float-left bg-red" data-toggle="modal"
+                                        data-target="#reject-modal">Reject</button>
+                                    <button type="submit" class="btn btn-1 float-right" data-toggle="modal"
+                                        data-target="#approve-modal">Approve</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                <!-- Delete / insert Blog -->
+                {% elif req.task_type == 'insert' or req.task_type == 'delete' %}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline card-outline-tabs h-100">
+                                <div class="card-header p-0">
+                                    <h3 class="h4 m-0 px-3 py-2">Current Data</h3>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="h5 fw-600 mb-3">
+                                        {% if current_data %}
+                                            {{ current_data.blog_title }}
+                                        {% else %}
+                                            {{ req.blog_title }}
+                                        {% endif %}
+                                    </h4>
+                                    <div>
+                                        <img src="{% if current_data %} {{ current_data.blog_image }} {% else %} {{ req.blog_image }}{% endif %}"
+                                            class="w-100 mh-100px h-100px object-fit-contain" alt="Blog Image">
+                                        <p class="mt-1 text-center m-0 fs-12">(Blog Image)</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <div>
+                                        {% if current_data %}
+                                            {{ current_data.blog_content|safe }}
+                                        {% else %}
+                                            {{ req.blog_content|safe }}
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-1 float-left bg-red" data-toggle="modal"
+                                        data-target="#reject-modal">Reject</button>
+                                    <button type="submit" class="btn btn-1 float-right" data-toggle="modal"
+                                        data-target="{% if req.task_type == 'insert' %} #approve-modal {% elif req.task_type == 'delete' %} #delete-modal {% endif %}">Approve</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+        <!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- Approve modal -->
+<div class="modal fade" id="approve-modal" style="display: none;" aria-modal="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h4 class="modal-title">Approval request</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body py-0">
+                <p>Do you want to approve it.</p>
+            </div>
+            <div class="modal-footer justify-content-between border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <a href="{{ request.get_full_path }}&action=approve" class="btn btn-1">Approve</a> 
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /. Approve modal -->
+
+<!-- Reject modal -->
+<div class="modal fade" id="reject-modal" style="display: none;" aria-modal="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h4 class="modal-title">Approval request</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body py-0">
+                <p>Do you want to reject it.</p>
+            </div>
+            <div class="modal-footer justify-content-between border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="{{ request.get_full_path }}&action=reject" class="btn btn-1">Reject</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /. Reject modal -->
+
+
+<!-- Delete modal -->
+<div class="modal fade" id="delete-modal" style="display: none;" aria-modal="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h4 class="modal-title">Delete Category</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body py-0">
+                <p>If you delete this category all its brands will be automatically deleted.</p>
+                <small>To confirm this type "DELETE"</small>
+            </div>
+            <div class="modal-footer justify-content-between border-0">
+                <input type="text" class="form-control w-auto" name="" id="confirm-btn">
+                <a href="{{ request.get_full_path }}&action=approve"  class="btn btn-1 bg-red">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /. Delete modal -->
+                             
+{% endblock content %}

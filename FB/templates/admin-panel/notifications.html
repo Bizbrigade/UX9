@@ -1,0 +1,193 @@
+{% extends 'admin-panel/base.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Franchise Brigade Dashboard</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="./css/all.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="./css/OverlayScrollbars.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="./css/adminlte.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="./css/summernote-bs4.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <style>
+        .notification-link {
+            border-top: 1px solid #dee2e6;
+            color: rgb(33, 37, 41) !important;
+            padding: 8px 12px;
+        }
+
+        .notification-link:hover {
+            box-shadow: 0px 2px 13px 1px rgb(0 0 0 / 15%);
+        }
+
+        .notification-link.visited {
+            color: #869099 !important;
+        }
+        .pagination-btn .page-link{
+            box-shadow: none !important;
+            background-color: transparent;
+            border: none;
+            color: #869099;
+        }
+        .pagination-btn .page-link:hover{
+            color: rgb(33, 37, 41);
+        }
+    </style>
+</head>
+
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Notifications</h1>
+                        </div>
+                        <div class="col-sm-6 d-flex align-items-center justify-content-end">
+                            <p class="mb-0 fs-14"> <span id="notification-from">1</span> - <span id="notification-to">1</span> of <span id="notification-of">45</span></p>
+                            <nav aria-label="Page navigation example" class="d-flex align-items-center justify-content-end pagination-btn">
+                                <a href="javascript:prevPage()" class="page-link" id="btn_prev"><i class="fa-solid fa-chevron-left"></i></a>
+                                <a href="javascript:nextPage()" class="page-link" id="btn_next"><i class="fa-solid fa-chevron-right"></i></a>
+                            </nav>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline card-outline-tabs" id="output">
+                                {% for notification in notifications %}
+                                <div class="list-items">
+                                    <a href="{{notification.notification_url}}&next=/notifications" class="notification-link {% if notification.notification_status == 2 %} visited {% endif %}">
+                                        <div class="row">
+                                            {% if 'Category' in notification.notification_title %}
+                                                <div class="col-6 col-lg-4 order-1">{{ forloop.counter }}. Category</div>
+                                            {% elif 'Brand' in notification.notification_title %}
+                                                <div class="col-6 col-lg-4 order-1">{{ forloop.counter }}. Brand</div>
+                                            {% elif 'Blog' in notification.notification_title %}
+                                                <div class="col-6 col-lg-4 order-1">{{ forloop.counter }}. Blog</div>
+                                            {% endif %}
+                                            <div class="col-lg-6 order-3 order-lg-2 mt-2 mt-lg-0">{{ notification.notification_title }}
+                                            </div>
+                                            <div class="col-6 col-lg-2 order-2 order-lg-3 text-right fs-14">{{ notification.updated_at }}
+                                            </div>
+                                        </div>
+                                    </a>                                    
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="./js/jquery.js"></script>
+    <!-- Bootstrap -->
+    <script src="./js/bootstrap.bundle.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="./js/jquery.overlayScrollbars.js"></script>
+    <!-- AdminLTE App -->
+    <script src="./js/adminlte.js"></script>
+    <!-- Custom JS -->
+    <script src="./js/main.js"></script>
+
+    <!-- Summernote -->
+    <script src="./js/summernote-bs4.js"></script>
+
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            // Summernote
+            $('#blog-content').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
+
+    <!-- Pagination JS -->
+    <script>
+        const itemsPerPage = 15;
+        let currentPage = 1;
+        let cards = document.querySelectorAll('.list-items');
+        let from=document.getElementById('notification-from');
+        let to=document.getElementById('notification-to');
+        document.getElementById('notification-of').innerHTML=cards.length;
+
+        if (cards.length>=itemsPerPage){ to.innerHTML=itemsPerPage}
+        else{to.innerHTML=cards.length}
+
+        const pages = numPages(cards);
+        function numPages(cardsArray) {
+            return Math.ceil(cardsArray.length / itemsPerPage)
+        }
+
+        function changePage(page) {
+            const output = document.getElementById("output") 
+            if (page < 1) page = 1
+            if (page > pages) page = pages
+            output.innerHTML = ""
+            for (let i = (page - 1) * itemsPerPage; i < (page * itemsPerPage) && i < cards.length; i++) {
+                output.innerHTML += `${cards[i].innerHTML}`;
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < pages) {
+                changePage(++currentPage)
+                to.innerHTML=parseInt(to.innerHTML)+itemsPerPage;
+                if (cards.length<=parseInt(to.innerHTML)){to.innerHTML=cards.length}
+                from.innerHTML=parseInt(from.innerHTML)+itemsPerPage;
+                
+            }
+        }
+        
+        function prevPage() {
+            if (currentPage > 1){
+                changePage(--currentPage)
+                if (cards.length==parseInt(to.innerHTML)){let diff=parseInt(to.innerHTML)-parseInt(from.innerHTML)+1; to.innerHTML=parseInt(to.innerHTML)-diff}
+                else{to.innerHTML=parseInt(to.innerHTML)-itemsPerPage;}
+                from.innerHTML=parseInt(from.innerHTML)-itemsPerPage;
+            }
+        }
+        
+        window.addEventListener ? 
+        window.addEventListener("load",changePage(1),false) : 
+        window.attachEvent && window.attachEvent("onload",changePage(1));
+
+    </script>
+
+{% endblock content %}
+

@@ -1,0 +1,261 @@
+/* ================ INDRX PAGE CSS ==================  */
+.franchise-news-row, .franchise-blog-row{
+    height: calc(100% - 60px);
+}
+/* == Franchise Insights and News or Blog Section ===  */
+/* franchise-card */
+.franchise-card img{
+    height: 160px;
+    object-fit: cover;
+    object-position: center;
+}
+.franchise-card .card-body{
+    padding: 0.5rem 0;
+    font-family: var(--second-font);
+}
+.franchise-card .card-title a{
+    color: #000;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 10px;
+    padding: 0;
+}
+.franchise-card .card-text{
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 6px;
+}
+/* franchise-info-card */
+.franchise-info-card{
+    max-height: 315px;
+    overflow-y: auto;
+}
+.franchise-info-card img{
+    border-radius: 4px !important;
+    height: 69px !important;
+    width: 89px !important;
+    object-fit: cover;
+}
+.franchise-info-card .card-body{
+    padding: 0;
+    margin-left: 1rem;
+    align-self: center;
+}
+.franchise-info-card .card-title{
+    margin-bottom: 0;
+}
+.franchise-info-card .card-title a{
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1rem;
+    display: inline-block;
+}
+.franchise-info-card .read-more-btn{
+    font-size: 11px;
+}
+
+/* == Upcoming Events Section ===  */
+.event-card img{
+    height: 250px;
+    object-fit: cover;
+}
+.blog-event-slider .event-card img, .previous-event-slider .event-card img{
+    height: 150px;
+    object-fit: cover;
+}
+.upcoming-events .event-card .btn{
+    font-size: 18px;
+    color: red;
+    padding: 0%;
+}
+.only-upcoming-event-slider p {
+    margin-bottom: 0px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: var(--text-color) !important;
+}
+.only-upcoming-event-slider img {
+    object-fit: contain;
+}
+
+.only-previous-event-card img{
+    object-fit: contain !important;
+}
+.only-previous-event-card p{
+    margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    font-size: 14px;
+    line-height: 20px;
+
+}
+.only-previous-event-card .btn{   
+    font-size: 14px !important;
+    padding-top: 0.5rem !important;
+}
+
+/* == Franchise Directory Section ===  */
+.directory-card{ 
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: var(--second-box-shadow); 
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 10px;
+    position: relative;
+    top: 0;
+    transition: .2s ease-in-out;
+}
+.directory-card:hover{
+    top: -5px;
+}
+.directory-card img{
+    width: 4rem;
+    margin: auto;
+    display: block;
+}
+.directory-card .card-title{
+    margin-top: 0.5rem;
+    color: #000; 
+    margin: auto;
+    text-align: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+.directory-card .card-title h5{
+    font-size: 16px;
+}
+/* Type-2 */
+.directory-card.type-2{
+    padding: 0;
+    height: auto;
+    height: 100%;
+}
+.directory-card.type-2 > a{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.directory-card.type-2 img{
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    margin: 0;
+}
+.directory-card.type-2 .card-title{
+    padding: 0.5rem !important;
+    margin: 0 auto !important;
+}
+
+/* === Featured Franchise Section === */
+.featured-f-card{
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: var(--second-box-shadow);
+    padding: 8px;
+    transition: .2s ease-in-out;
+}
+.featured-f-card img{
+    margin: auto;
+    height: 80px;
+    object-fit: contain;
+}
+.featured-f-card .card-title{
+    margin-top: 0.5rem;
+    color: #000; 
+    margin: auto; 
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+.featured-f-card .card-title h5{
+    font-size: 16px;
+}
+.featured-f-card .card-title .card-info{
+    font-size: 14px;
+}
+.featured-f-card .card-title .card-info-amt{
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/*  ===== testimonial Section ====== */
+
+.testimonial-slider img {
+    width: 130px;
+    border-radius: 50%;
+}
+
+.testimonial-slider span a {
+  color: red;
+  font-weight: 500;
+}
+.testimonial-slider span a:hover {
+  color: #0e6ba1 !important;
+}
+.testimonial-slider .star-rating {
+  display: flex;
+  justify-content: center;
+}
+.testimonial-slider .star-rating i {
+  color: #053a80;
+  font-size: 13px;
+}
+.testimonial-slider .testimonial-items .testimonial-text {
+    position: relative;
+    padding: 30px;
+    margin-bottom: 0;
+}
+.testimonial-slider .fa-quote-left, .testimonial-slider .fa-quote-right {
+    position: absolute;
+    font-size: 40px;
+    z-index: 11;
+}
+.testimonial-slider .fa-quote-left {
+    top: 0px;
+    left: 0px;
+}
+.testimonial-slider .fa-quote-right {
+    bottom: 0px;
+    right: 0px;
+}
+
+@media (max-width: 575px){
+    /* Exclusive Brands Section */
+    .brands-card .brands-box {
+        padding: 8px 0;
+    }
+    .brands-card img {
+        height: 7rem;
+        width: 60%;
+    }
+}
+
+.upcoming-event-card p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+
+

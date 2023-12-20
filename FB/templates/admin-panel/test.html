@@ -1,0 +1,53 @@
+{% load static %}
+<html>
+    <body >
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+<!-- Forgot password  -->
+<div class="container-login100"  id="forgot-password-div"  >
+    <div class="wrap-login100">
+        <div class="login100-form-title" >
+            <span class="login100-form-title-1">
+                ADMIN LOG_IN.
+            </span>
+        </div>
+
+        <!-- <form id='formmsdfs' action="">
+            <div id="csrf-token">
+            {% csrf_token %}
+            </div>
+            <input type="hidden" name='htmldata' id="dataholder" value="">
+            <input class="FormDataInput" type="text" name="fname" value="first field"
+                onchange="inputWasModified(this.name, this.value)">
+            <input class="FormDataInput" type="file" name="lname" value="second field"
+                onchange="for (let x = 0; x < this.files.length; x++) {inputWasModified(this.name, this.files[x])}" multiple>
+            <button type="button" class="submit-button" name="submit"
+                value="SUBMIT" id="updateSubmitBtn" onclick="send_data('/test')">submit</button>
+        </form> -->
+        <form id='formmsdfs' action="">
+            <div id="csrf-token">
+            {% csrf_token %}
+            </div>
+            <input type="hidden" name='htmldata' id="dataholder" value="">
+            <input class="FormDataInput" type="text" name="fname" value="first field">
+            <input class="FormDataInput" type="text" name="lname" value="last field">
+            <input class="FormDataInput" type="file" name="lname" value="second field" multiple>
+            <select name="districts" class="FormDataInput" >
+                <option value="a">A</option>
+                <option value="b">B</option>
+            </select>
+            <textarea name="dfasd" class="form-control FormDataInput" id="" cols="30" rows="10"> dummy text </textarea>
+            <button type="button" class="submit-button" name="submit"
+                value="SUBMIT" id="updateSubmitBtn" onclick="send_data('/test')">submit</button>
+        </form>
+    </div>
+
+
+
+    <script src="{% static '/admin/js/main.js' %}"></script>
+
+</body>
+</html>
+
+   

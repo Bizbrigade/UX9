@@ -1,0 +1,94 @@
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="knowMoreModal" tabindex="-1" aria-labelledby="knowMoreModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="knowMoreModalLabel">Inquiry</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" action="{% url 'dir_inquery_form' %}" name="" id="knowmore-modal-form" class="needs-validation"
+                                            novalidate>
+                                            {% csrf_token %}
+                                            <input type="hidden" name="" value="">
+                                            <input type="hidden" name="category_id" value="" id="set-category-id">
+                                            <input type="hidden" name="brand_id" value="" id="set-brand-id">
+                                            <input type="hidden" name="brand_type" value="" id="set-brand-type">
+                                            <input type="hidden" name="next"  id="redirect-path" value="window.location.pathname">
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <input type="text" name="full_name" class="form-control"
+                                                        id="full_name" placeholder="Your Name" required>
+                                                    <div class="invalid-feedback">
+                                                        This feild is required.
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <input type="tel" name="mobile" class="form-control"
+                                                        id="contact_phone" pattern="[0-9]{10}" placeholder="Phone"
+                                                        required>
+                                                    <div class="invalid-feedback">
+                                                        This feild is required.
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <input type="email" name="email" class="form-control"
+                                                        id="contact_email" aria-describedby="emailHelp"
+                                                        placeholder="Email" required>
+                                                    <div class="invalid-feedback">
+                                                        This feild is required.
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <input type="text" name="city" class="form-control"
+                                                        id="city" placeholder="Your City" required>
+                                                    <div class="invalid-feedback">
+                                                        This feild is required.
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <select class="form-select" id="contact_InvestmentAmount"
+                                                        autocomplete="off" name="investment" required>
+                                                        <option value="" selected="" hidden="">Choose
+                                                            Investment Size</option>
+                                                        <option value="3-10Lac" class="">3-10Lac
+                                                        </option>
+                                                        <option value="10-20Lac">10-20Lac</option>
+                                                        <option value="20-30Lac">20-30Lac</option>
+                                                        <option value="30-50Lac">30-50Lac</option>
+                                                        <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                                        <option value="Above 1Cr">Above 1Cr</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        This feild is required.
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3 text-end">
+                                                    <button type="submit" class="btn">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                document.getElementById("redirect-path").value=window.location.pathname;
+                            </script>
+                            <script>
+                                const allCards = document.querySelectorAll(".read-more-btn");
+                                allCards.forEach(element => {
+                                    element.addEventListener('click', (e) => {
+                                        const setCategoryId = document.querySelector("#set-category-id");
+                                        const setBrandId = document.querySelector("#set-brand-id");
+                                        const setBrandType = document.querySelector("#set-brand-type");
+                                        setCategoryId.value = e.target.dataset.categoryId;
+                                        setBrandId.value = e.target.dataset.brandId;
+                                        setBrandType.value=e.target.dataset.brandType;
+                                    })
+                                });
+                            </script>  
+                        </div>                      
+                        <!-- ./ Modal -->

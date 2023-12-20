@@ -1,0 +1,44 @@
+{% extends 'front-end/base.html' %}
+{% block page_meta_tags %}
+        <meta property="og:image" content="{{blogss.blog_image}}" />
+        <meta name="title" content="{{ blogss.blog_seo_title }}" />
+        <meta name="description" content="{{ blogss.blog_seo_description}}" />
+        <meta name="keywords" itemprop="keyword" content="{{ blogss.blog_seo_keywords }}">
+        <meta property="og:title" content="{{ blogss.blog_seo_title }}" />
+        <meta property="og:description" content="{{ blogss.blog_seo_description}}" />
+        <meta property="og:keywords" content="{{ blogss.blog_seo_keywords }}" />
+        <meta property="og:image:secure_url" content="{{blogss.blog_image}}" />
+        <meta property="og:image:url" content="{{blogss.blog_image}}" />
+        {{  blogss.blog_script|safe}}
+{% endblock page_meta_tags %}
+
+{% block title %}{{ blogss.blog_title }} {% endblock title %}
+
+{% block content %}
+{% load static %}
+    <!-- ===== Blog Page ====== -->
+        <section class="pt-4rem single-blog">
+            <div class="container">
+                <!-- Heading -->
+                <div class="text-center mb-2rem">
+                    <h2 class="">{{blogss.blog_title}}</h2>
+                </div>
+                <!-- Franchise dirctory tabs -->
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-9">
+                        <div class="mb-2rem">
+                            <img src="{{blogss.blog_image}}"  height="400px" width="600px" alt="">
+                            <div class="mt-2">
+                                <strong class="text-dark-blue">{{blogss.post_date}}</strong>
+                            </div>
+                        </div>
+                        <div>
+                            {{blogss.blog_content|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% include "front-end/footer.html" %}
+{% include "front-end/scripts.html" %}
+{% endblock %}

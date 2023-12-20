@@ -1,0 +1,63 @@
+/* ============ Exclusive Brands Page CSS (All brands) ==========  */
+.exclusive-brands .brands-card {
+    box-shadow: var(--second-box-shadow);
+    display: flex;
+    flex-direction: column;
+}
+.exclusive-brands .brands-card .brands-box {
+    padding: unset;
+    box-shadow: none;
+}
+
+/* ============ Exclusive Brands Page CSS ==========  */
+.exclusive-brand-logo{
+    max-height: 152px;
+    height: 152px;
+    width: 100%;
+    margin: auto;
+}
+.exclusive-brand-logo img{
+    height: 100%;
+    object-fit: contain;
+}
+.exclusive-brand-h-sec ul .btn{
+    padding: 8px 8px;
+}
+.exclusive-brand-h-sec .btn-2{
+    border-color: #9e9e9e ;
+    background-color: #82c4f0;
+}
+.exclusive-brand-h-sec .btn-2:hover{
+    background-color: #59b0eb;
+}
+.exclusive-brand-c-sec h4{
+    background: #e1e1e1c2;
+    padding: 12px;
+}
+
+/*  ==== brand-img-slider  ====  */
+.brand-img-slider .slick-track {
+    height: 250px;
+}
+.brand-img-slider img {
+    height: 100%;
+    object-fit: cover; 
+    padding: 6px;
+}
+
+@media (max-width: 991px){
+    .exclusive-brand-h-sec ul .btn{
+        font-size: 12px;
+    }
+    .heading-1.fs-48 {
+        font-size: 32px;
+    }
+}
+@media (max-width: 991px){
+    .exclusive-brand-c-sec .pseudo-border.type-2::after{
+        height: 1px;
+        width: 150px;
+        margin: 8px 0 8px;
+    }
+}
+

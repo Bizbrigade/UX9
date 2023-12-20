@@ -1,0 +1,908 @@
+{% extends 'front-end/base.html' %}
+
+{% block page_meta_tags %}
+    <!-- Meta Tags -->
+    <meta name="description" content="Here we are at FRANCHISE BRIGADE with a Vision & Mission to Highlight and go vocal for our Local Brands to go Global, taking our Legendary and start-up brands from our Country to around the Globe." />
+    <meta name="keywords" itemprop="keyword" content="franchise,franchiseconsultant,businessconsultant,franchiseopportunity,franchise business ,franchise opportunities ,franchisor and franchisee ,franchise india brands ,franchise companies ,franchise business opportunities ,franchising a business ,a franchise ,franchisors ,franchise brands ,indian franchise ,more franchise ,franchise your business ,franchisable ,franchisor franchisee ,a franchisee ,a franchisor ,the franchisor ,franchise franchisor franchisee ,franchise franchisee and franchisor ,it franchise business ,a business franchise ,business consultant do ,branded franchise ,franchisor is ,business consultant business ,to franchise a business ,what franchising ,indian franchise business ,a franchisor is ,business to business franchises ,it business franchise ,the business consultant ,your franchise ,about business consultant ,the franchisor is an ,be a business consultant ,the business of franchising ,best franchise consultant in india ,franchiseconsultantinindia ,businessconsultantinindia
+    franchise brigade, franchise,brigade, bangalore">
+    <meta property="og:title" content="Franchise Brigade" />
+    <meta property="og:description" content="Here we are at FRANCHISE BRIGADE with a Vision & Mission to Highlight and go vocal for our Local Brands to go Global, taking our Legendary and start-up brands from our Country to around the Globe." />
+    <meta property="og:keywords" content="franchise,franchiseconsultant,businessconsultant,franchiseopportunity,franchise business ,franchise opportunities ,franchisor and franchisee ,franchise india brands ,franchise companies ,franchise business opportunities ,franchising a business ,a franchise ,franchisors ,franchise brands ,indian franchise ,more franchise ,franchise your business ,franchisable ,franchisor franchisee ,a franchisee ,a franchisor ,the franchisor ,franchise franchisor franchisee ,franchise franchisee and franchisor ,it franchise business ,a business franchise ,business consultant do ,branded franchise ,franchisor is ,business consultant business ,to franchise a business ,what franchising ,indian franchise business ,a franchisor is ,business to business franchises ,it business franchise ,the business consultant ,your franchise ,about business consultant ,the franchisor is an ,be a business consultant ,the business of franchising ,best franchise consultant in india ,franchiseconsultantinindia ,businessconsultantinindia
+    franchise brigade, franchise,brigade, bangalore "/>
+{% endblock page_meta_tags %} 
+
+{% block title %} Franchise Brigade {% endblock title %}
+
+
+{% block content %}
+{% load static %}
+
+
+<!-- ===== Banner Section ====== -->
+<section class="banner-sec overflow-x-hidden">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 banner-slider">
+                <img src="{{home_details.banner1}}" alt="Banner Image">
+                <img src="{{home_details.banner2}}" alt="Banner Image">
+                <img src="{{home_details.banner3}}" alt="Banner Image">
+            </div>
+        </div>
+    </div>
+</section>
+{% comment %} {% if up_event_data and  pre_event_data%}
+<!-- ===== Upcoming Events Section ====== -->
+<section class="pt-5rem upcoming-events">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div>
+                    <h2 class="heading-2 pseudo-border">Upcoming Events</h2>
+                </div>
+                <div class="single-slider mt-4  third-shadow py-3 px-12">
+                    {% for i in up_event_data %}
+                    <div class="event-card upcoming-event-card">
+                        <a href="{% url 'front_upcoming_event' id=i.id %}"><img src="{{i.event_image}}" alt=""></a>
+                        <div class="event-content p-3 pb-0">
+                            <h4 class="fs-22 text-center mb-2">{{i.event_title}}</h4>
+                            <em class="text-grey d-block mb-2 fw-600">Date:{{i.event_date}}</em>
+                            <p class="text-grey text-ellipsis">{{i.event_content|safe}}</p>
+                            <a href="{% url 'front_upcoming_event' id=i.id %}" class="btn">Read More...</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        <div class="col-lg-6 mt-4 mt-lg-0">
+            <div>
+                <h2 class="heading-2 pseudo-border">Previous Events</h2>
+            </div>
+            <div class="row m-0 mt-4 py-3 franchise-news-row third-shadow">
+                <div class="col-sm-6">
+                    <div class="franchise-card">
+                        {% for i in pre_event_data|slice:"0:1" %}
+                        <a href="{% url 'front_upcoming_event' id=i.id %}"><img src="{{i.event_image}}" class="card-img-top" alt="Event Image"></a>
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{% url 'front_upcoming_event' id=i.id %}" class="text-ellipsis">{{i.event_title}}.</a></h5>
+                            <p class="card-text text-ellipsis type-3">{{i.event_content|safe}}</p>
+                            <a href="{% url 'front_upcoming_event' id=i.id %}" class="read-more-btn">Read More</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="col-sm-6 custom-scrollbar">
+                    <div class="franchise-info-card pt-1">
+                        {% for i in pre_event_data|slice:"1:" %}
+                        
+                        <div class="d-flex mt-2">
+                            <a href="{% url 'front_upcoming_event' id=i.id %}"><img src="{{i.event_image}}" class="card-img-top" alt="Event Image" style="object-fit: contain !important"></a>
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="{% url 'front_upcoming_event' id=i.id %}" class="text-ellipsis">{{i.event_title}}</a></h5>
+                                <a href="{% url 'front_upcoming_event' id=i.id %}" class="read-more-btn fs-11">Read More</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+{% endif %} {% endcomment %}
+
+{% comment %} ============= Only upcoming event======== {% endcomment %}
+{% comment %} {% if up_event_data and not pre_event_data  %} {% endcomment %}
+{% if up_event_data %}
+<section class="pt-5rem upcoming-events">
+    <div class="container">
+        <!-- Franchise dirctory tabs -->
+        <div class="row">
+            <div class="col-12 mt-4 mt-lg-0">
+                <div>
+                    <h2 class="heading-2 pseudo-border">Upcoming Events</h2>
+                </div>
+                <div class="only-upcoming-event-slider slick-p-12 slick-pt-0 mt-4">
+                    <!-- event-1 -->
+                    {% for i in up_event_data %}
+                    <div class="event-card">
+                        <a href="{% url 'front_upcoming_event' id=i.id %}"><img src="{{i.event_image}}" alt=""></a>
+                        <div class="mt-2 text-end"> 
+                            <strong class="text-dark-blue">{{i.event_date}}</strong>
+                        </div>
+                        <div class="event-content p-3 pt-2 pb-0">
+                            <h4 class="fs-22 mb-2">{{i.event_title}}<title></title>
+                            </h4>
+                            <p class="text-grey text-ellipsis">{{i.event_content|safe}}</p>
+                            <a href="{% url 'front_upcoming_event' id=i.id %}" class="btn mt-2">Read More...</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- event  -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ===== Only Previous Events Section ====== -->
+{% comment %} {% if pre_event_data and not up_event_data %} {% endcomment %}
+{% if pre_event_data  %}
+<section class="pt-5rem upcoming-events">
+    <div class="container">
+        <!-- Franchise dirctory tabs -->
+        <div class="row">
+            <div class="col-12 mt-4 mt-lg-0">
+                <div>
+                    <h2 class="heading-2 pseudo-border">Previous Events</h2>
+                </div>
+                <div class="previous-event-slider slick-p-12 slick-pt-0 mt-4">
+                    <!-- event-1 -->
+                    {% for i in pre_event_data %}
+                    <div class="event-card only-previous-event-card">
+                        <a href="{% url 'front_upcoming_event' id=i.id %}"><img src="{{i.event_image}}" alt=""></a>
+                        <div class="event-content pb-0">
+                            <h4 class="fs-18 text-center mb-2">{{i.event_title}}<title></title>
+                            </h4>
+                            <p class="text-grey text-ellipsis">{{i.event_content|safe}}</p>
+                            <a href="{% url 'front_upcoming_event' id=i.id %}" class="btn">Read More...</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- event  -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
+<!-- ===== Franchise Insights and News or Blog Section ====== -->
+<section class="pt-5rem">
+    <div class="container">
+        <div class="row">
+            <!-- Franchise Insights and News Col -->
+            <div class="col-lg-6">
+                <!-- Heading row -->
+                <div>
+                    <h2 class="heading-2 pseudo-border">Franchise Insights and News</h2>
+                </div>
+                <!-- Content row -->
+                <div class="row m-0 mt-4 py-3 franchise-news-row third-shadow">
+                    <!-- Col-1 -->
+                    <div class="col-sm-6">
+                        <div class="franchise-card">
+                            <a href="{{ latest_news.1 }}"><img src="{{ latest_news.2 }}" class="card-img-top" alt="News Image"></a>
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="{{ latest_news.1 }}" class="text-ellipsis">{{latest_news.3 }}.</a></h5>
+                                <p class="card-text text-ellipsis type-2">{{ latest_news.4 }}</p>
+                                <a href="{{ latest_news.1 }}" class="read-more-btn">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Col-2 -->
+                    <div class="col-sm-6 custom-scrollbar">
+                        <div class="franchise-info-card pt-1">
+                            {% for n in news %}
+                            <!-- News-1 -->
+                            <div class="d-flex mt-2">
+                                <a href="{{ n.1 }}"><img src="{{ n.2 }}" class="card-img-top" alt="News Image"></a>
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ n.1 }}" class="text-ellipsis">{{n.3}}</a></h5>
+                                    <a href="{{ n.1 }}" class="read-more-btn fs-11">Read More</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Franchise Insights and News Col -->
+            <!-- Blog Col -->
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <!-- Heading row -->
+                <div>
+                    <h2 class="heading-2 pseudo-border">Blogs and Articles</h2>
+                </div>
+                <!-- Content row -->
+                <div class="row m-0 mt-4 py-3 franchise-blog-row third-shadow">
+                    <!-- Col-1 -->
+                    <div class="col-sm-6">
+                    {% if latest_blog %}
+                        <div class="franchise-card">
+                            <a href="{% url 'front_single_blog' blk=latest_blog.blog_slug %}" target="_blank"><img
+                                    src="{{latest_blog.blog_image}}" class="card-img-top" alt="News Image"></a>
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="{% url 'front_single_blog' blk=latest_blog.blog_slug %}"
+                                        target="_blank" class="text-ellipsis">{{latest_blog.blog_title}}</a></h5>
+                                <div class="card-text text-ellipsis type-2">{{latest_blog.blog_content|safe}}</div>
+                                <a href="{% url 'front_single_blog' blk=latest_blog.blog_slug %}" target="_blank"
+                                    class="read-more-btn">Read
+                                    More</a>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="franchise-card">
+                            <a href="{{ latest_article.article_url }}" target="_blank"><img
+                                    src="{{ latest_article.article_img }}" class="card-img-top" alt="News Image"></a>
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="{{ latest_article.article_url }}"
+                                        target="_blank" class="text-ellipsis">{{latest_article.article_title}}</a></h5>
+                                <div class="card-text text-ellipsis type-2">{{latest_article.article_desc|safe}}</div>
+                                <a href="{{ latest_article.article_url }}" target="_blank"
+                                    class="read-more-btn">Read
+                                    More</a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <!-- Col-2 -->
+                    <div class="col-sm-6 custom-scrollbar">
+                        <div class="franchise-info-card pt-1">
+                            <!-- News-1 -->
+                            {% for i in blogsall %}
+                            <div class="d-flex mt-2">
+                                <a href="{% url 'front_single_blog' blk=i.blog_slug %}" target="_blank"><img
+                                        src="{{i.blog_image}}" class="card-img-top" alt="News Image"></a>
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{% url 'front_single_blog' blk=i.blog_slug %}"
+                                            target="_blank" class="text-ellipsis">{{i.blog_title}}</a></h5>
+                                    <!-- <div class="card-text text-ellipsis">{{i.blog_content|safe}}</div> -->
+                                    <a href="{% url 'front_single_blog' blk=i.blog_slug %}" target="_blank"
+                                        class="read-more-btn">Read
+                                        More</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% for article in articles %}
+                            <div class="d-flex mt-2">
+                                <a href="{{ article.article_url }}" target="_blank"><img
+                                        src="{{article.article_img }}" class="card-img-top" alt="News Image"></a>
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ article.article_url }}"
+                                            target="_blank" class="text-ellipsis">{{article.article_title}}</a></h5>
+                                    <!-- <div class="card-text text-ellipsis">{{i.blog_content|safe}}</div> -->
+                                    <a href="{{ article.article_url }}" target="_blank"
+                                        class="read-more-btn">Read
+                                        More</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!-- <div class="d-flex mt-2">
+                                <a href="https://thefranchisetalk.com/interview-of-the-week/local-goes-global-with-franchise-brigade/" target="_blank"><img
+                                        src="https://thefranchisetalk.com/wp-content/uploads/2022/11/Interview-of-the-Week-5.png" class="card-img-top" alt="News Image"></a>
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="https://thefranchisetalk.com/interview-of-the-week/local-goes-global-with-franchise-brigade/"
+                                            target="_blank" class="text-ellipsis">Local goes Global with Franchise Brigade</a></h5>
+                                    <a href="https://thefranchisetalk.com/interview-of-the-week/local-goes-global-with-franchise-brigade/" target="_blank"
+                                        class="read-more-btn">Read
+                                        More</a>
+                                </div>
+                            </div> -->
+                            <!-- <div class="d-flex mt-2">
+                                <a href="https://www.entrepreneurhunt.com/starting-up/gaining-immunity-to-change-a-unique-approach-by-business-brigade/" target="_blank"><img
+                                        src="https://www.entrepreneurhunt.com/wp-content/uploads/2022/06/WhatsApp-Image-2022-06-13-at-8.53.19-PM.jpeg" class="card-img-top" alt="News Image"></a>
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="https://www.entrepreneurhunt.com/starting-up/gaining-immunity-to-change-a-unique-approach-by-business-brigade/"
+                                    target="_blank" class="text-ellipsis">Gaining Immunity to Change: A Unique approach by Business Brigade</a></h5>
+                                    <a href="https://www.entrepreneurhunt.com/starting-up/gaining-immunity-to-change-a-unique-approach-by-business-brigade/" target="_blank"
+                                        class="read-more-btn">Read
+                                        More</a>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Blog Col -->
+        </div>
+    </div>
+</section>
+
+<!-- ===== Top Business Opportunities Section ====== -->
+
+<section class="pt-5rem">
+    <div class="container">
+        <!-- Heading -->
+        <div class="row align-items-baseline justify-content-between">
+            <div class="col-9">
+                <h2 class="heading-2 pseudo-border">Top Business Opportunities</h2>
+                <p class="text-black mb-0">Browse our range of top business opportunities</p>
+            </div>
+            <div class="col-3 text-end">
+                <a href="{% url 'all_bussiness_opp' %}" class="view-all-btn">View All <i
+                        class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <!-- Content -->
+        <div class="row mt-4">
+            <!-- Exclusive Brands Slider Col -->
+            <div class="col-12">
+                <div class="brands-slider sm-height-parent">
+                    <!-- Card-1 -->
+
+                    {% for j in top_bussiness %}
+                    <div class="brands-card">
+                        <div class="brands-box sm-height">
+                            <a href="{% url 'front_brand' bk=j.brand_slug %}"><img src="{{j.brand_logo}}" class="card-img-top"
+                                    alt="News Image"></a>
+                            <hr class="m-0">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <div>
+                                    <p class="brand-category">{{j.category_id.category_name}}</p>
+                                    <h3 class="fs-20">{{j.brand_name}}</h3>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="card-info">Investment Range</div>
+                                        <div class="card-info-amt">
+                                            {{j.brand_inv_min}}{{j.brand_inv_min_type}}-{{j.brand_inv_max}}{{j.brand_inv_max_type}}
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="card-info">Area Range</div>
+                                        <div class="card-info-amt">{{j.brand_floor_area_min}}-{{j.brand_floor_area_max}}
+                                            sq.ft</div>
+                                    </div>
+                                </div>
+                                <a href="{% url 'front_brand' bk=j.brand_slug %}" class="read-more-btn">Read
+                                    More</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== Best Food & Beverages Business Opportunities Section ====== -->
+{% for category in exclusive_categories %}
+{% if category.count >= 1 %}
+<section class="pt-5rem">
+    <div class="container">
+        <!-- Heading -->
+        <div class="row align-items-baseline justify-content-between">
+            <div class="col-9">
+                <h2 class="heading-2 pseudo-border">{{category.category_name}}</h2>
+                <p class="text-black mb-0">Browse our range of top business opportunities</p>
+            </div>
+            <div class="col-3 text-end">
+                <a href="{% url 'front_category' category.category_slug %}" class="view-all-btn">View All <i
+                        class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <!-- Content -->
+        <div class="row mt-4">
+            <!-- Exclusive Brands Slider Col -->
+            <div class="col-12">
+                <div class="brands-slider sm-height-parent">
+                    <!-- Card-1 -->
+                    {% for n in exclusive_brands %}
+                    {% if n.category_id.id == category.id %}
+                    <div>
+                        <div class="brands-card">
+                            <div class="brands-box sm-height">
+                                <a href="{% url 'front_brand' bk=n.brand_slug %}"><img src="{{n.brand_logo}}"
+                                        class="card-img-top" alt="News Image"></a>
+                                <hr class="m-0">
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <h3 class="fs-20">{{n.brand_name}}</h3>
+                                    <div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="card-info">Investment Range</div>
+                                            <div class="card-info-amt">
+                                                {{n.brand_inv_min}}{{n.brand_inv_min_type}}-{{n.brand_inv_max}}{{n.brand_inv_max_type}}
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="card-info">Area Range</div>
+                                            <div class="card-info-amt">
+                                                {{n.brand_floor_area_min}}-{{n.brand_floor_area_max}} sq.ft</div>
+                                        </div>
+                                        <a href="{% url 'front_brand' bk=n.brand_slug %}" class="read-more-btn">View
+                                            Business</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    <!-- non exclusive brands -->
+                    {% for neb in non_exclusive_brands %}
+                    {% if neb.category_id == category.id %}
+                    <div>
+                        <div class="brands-card">
+                            <div class="brands-box sm-height">
+                                <a href="#"><img src="{{neb.brand_logo}}"
+                                        class="card-img-top" alt="News Image"></a>
+                                <hr class="m-0">
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <h3 class="fs-20">{{neb.brand_name}}</h3>
+                                    <div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="card-info">Investment Range</div>
+                                            <div class="card-info-amt">
+                                                {{neb.brand_inv_min}}{{neb.brand_inv_min_type}}-{{neb.brand_inv_max}}{{neb.brand_inv_max_type}}
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="card-info">Area Range</div>
+                                            <div class="card-info-amt">
+                                                {{neb.brand_floor_area_min}}-{{neb.brand_floor_area_max}} sq.ft</div>
+                                        </div>
+                                        <button type="button" class="read-more-btn" data-brand-type="neb"
+                                            data-category-id="{{category.id}}" data-brand-id="{{neb.id}}"
+                                            data-bs-toggle="modal" data-bs-target="#knowMoreModal">Know More
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        {% endif %}
+                        {% endfor %}
+
+                </div>
+            </div>
+        </div>
+</section>
+{% endif %}
+{% endfor %}
+
+<!-- ===== Franchise Category Section ====== -->
+<section class="pt-5rem" id="franchise-directory">
+    <div class="container">
+        <!-- Heading row -->
+        <div class="row align-items-baseline justify-content-between">
+            <div class="col-9">
+                <h2 class="heading-2 pseudo-border">Franchise Directory</h2>
+            </div>
+            <div class="col-3 text-end">
+                <a href="{% url 'franchise_directory' %}" class="view-all-btn">View All <i
+                        class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <!-- Franchise categories -->
+        <div class="row row-cols-lg-5 g-4 mt-0 d-flex justify-content-center">
+            <!-- Card-1 -->
+            {% for m in category_data %}
+            <div class="col-6 col-sm-4 col-md-3">
+                <div class="directory-card type-2">
+                    <a href="{% url 'front_category' m.category_slug %}" class="w-100">
+                        <img src="{{m.category_home_image}}" class="card-img-top" alt="Directory Card Image">
+                        <h5 class="fw-600 card-title mt-2 fs-16">{{m.category_name}}</h5>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== Featured Brands Section ====== -->
+<section class="pt-5rem" id="franchise-directory">
+    <div class="container">
+        <!-- Heading row -->
+        <div class="row align-items-baseline justify-content-between">
+            <div class="col-9">
+                <h2 class="heading-2 pseudo-border">Featured Brands</h2>
+            </div>
+            <div class="col-3 text-end">
+                <a href="{% url 'all_featured_brands' %}" class="view-all-btn">View All <i
+                        class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <!-- Franchise categories -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="featured-franchise-slider sm-height-parent">
+                    <!-- First card -->
+                    {% for m in featured_brand %}
+                    <div class="brands-card">
+                        <div class="brands-box sm-height">
+                            <a href="{% url 'front_brand' bk=m.brand_slug %}"><img src="{{m.brand_logo}}" class="card-img-top"
+                                    alt="News Image"></a>
+                            <hr class="m-0">
+                            <div class="card-body">
+                                <p class="brand-category">{{m.category_id.category_name}}</p>
+                                <h3 class="fs-20">{{m.brand_name}}</h3>
+                                <div class="d-flex justify-content-between">
+                                    <div class="card-info">Investment Range</div>
+                                    <div class="card-info-amt">
+                                        {{m.brand_inv_min}}{{m.brand_inv_min_type}}-{{m.brand_inv_max}}{{m.brand_inv_max_type}}
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="card-info">Area Range</div>
+                                    <div class="card-info-amt">{{m.brand_floor_area_min}}-{{m.brand_floor_area_max}}
+                                        sq.ft</div>
+                                </div>
+                                <a href="{% url 'front_brand' bk=m.brand_slug %}" class="read-more-btn">Read
+                                    More</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Testimonial Section ====== -->
+<!-- <section class="pt-5rem">
+    <div class="container">
+        <div class="col-12">
+            <h2 class="heading-2 text-center">Testimonials</h2>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <div class="col-lg-8 p-0">
+                <div class="testimonial-slider">
+
+                    {% for i in review_data %}
+                    {% if i.text_review %}
+                    <div class="testimonial-items text-center wow fadeInUp">
+                        <img src="{{i.review_image}}" class="m-auto" alt="Image">
+                        <div class="mb-4 px-2">
+                            <div class="fs-22 testimonial-text">
+                                <i class="fa-solid fa-quote-left"></i>
+                                {{i.review_content|safe}}
+                                <i class="fa-solid fa-quote-right"></i>
+                            </div>
+                            <span><a href="#" class="fs-18">{{i.review_name}}</a></span>
+                            <div class="star-rating mt-3">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="testimonial-items text-center wow fadeInUp">
+                        <video width="100%" height="350" controls="" muted style="object-fit: cover;">
+                            <source src="{{i.review_video}}" type="video/mp4">
+                        </video>
+                        <div class="mb-4">
+                            <span><a href="#" class="fs-18">{{i.review_name}}</a></span>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+    </div>
+</section> -->
+
+<!-- ===== Newsletter Section ====== -->
+<section class="mt-5rem py-5 bg-extra-dark-blue">
+    <div class="container">
+        <div class="row justify-content-between">
+            <!-- First Col -->
+            <div class="col-lg-4">
+                <!-- <p class="text-white">Share your email address to get latest update from the industry</p>
+                        <h2 class="heading-2 text-white">Newsletter Signup</h2> -->
+                <ul class="list-unstyled mb-0">
+                    <li class="text-white mb-2">Mobile: <a href="tel:+91 {{home_details.Phone}}">+91
+                            {{home_details.Phone}}</a></li>
+                    <li class="text-white mb-2">Email: <a
+                            href="mailto:{{home_details.email}}">{{home_details.email}}</a></li>
+                    <li class="text-white"><a href="mailto:{{home_details.email}}">{{home_details.address}}</a></li>
+                </ul>
+            </div>
+            <!-- Second Col -->
+            <div class="col-lg-4 mt-4 mt-lg-0">
+                <p class="text-white">Share your email address to get latest update from the industry</p>
+                <h2 class="heading-2 text-white fs-20">Newsletter Signup</h2>
+                <!-- Newsletter Form -->
+                <div class="mt-3 newsletter-form">
+                    <form method="post" class="d-flex justify-content-between needs-validation" id="newsletter_form"
+                        novalidate>
+                        {% csrf_token %}
+                        <div class="w-100">
+                            <input type="email" class="form-control" name="email" id="newsletter_email"
+                                aria-describedby="emailHelp" placeholder="Email" required>
+                            <div class="invalid-feedback">
+                                This feild is required.
+                            </div>
+                        </div>
+                        <div class="">
+                            <button type="submit" class="btn">SignUp</button>
+                        </div>
+                        <script>
+                            let newsletter_form = document.getElementById('newsletter_form'); // selecting the form
+
+                            newsletter_form.addEventListener('submit', function (event) {
+                                event.preventDefault()
+                                let data = new FormData(); // 2                               
+
+                                data.append("email", document.getElementById('newsletter_email').value)
+                                data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '{% url "newsletter_form" %}',
+                                    data: data,
+                                    cache: false,
+                                    processData: false,
+                                    contentType: false,
+                                    enctype: 'multipart/form-data',
+                                    success: function () {
+                                        alert('The post has been created!');
+                                        newsletter_form.reset();
+                                        newsletter_form.classList.remove('was-validated');
+                                    },
+                                    error: function (xhr, errmsg, err) {
+                                        console.log(xhr.status + ":" + xhr.responseText)
+                                    }
+                                })
+                            })
+                        </script>
+                    </form>
+                </div>
+            </div>
+            <!-- Third Col -->
+            <div class="col-lg-4 mt-4 mt-lg-0 text-lg-end">
+                <p class="text-white">Stay tuned &amp; get updates</p>
+                <h2 class="heading-2 text-white fs-20">Follow Franchise Brigade</h2>
+                <!-- Newsletter Form -->
+                <div class="mt-3 newsletter-icons">
+                    <ul class="list-unstyled d-flex justify-content-lg-end mb-0">
+                        <li><a href="{{social_data.facebook}}" target="_blank"><i
+                                    class="fa-brands fa-facebook px-2 fs-24"></i></a></li>
+                        <li><a href="{{social_data.instagram}}" target="_blank"><i
+                                    class="fa-brands fa-instagram px-2 fs-24"></i></a></li>
+                        <li><a href="{{social_data.linkedin}}" target="_blank"><i
+                                    class="fa-brands fa-linkedin px-2 fs-24"></i></a></li>
+                        <!-- <li><a href="{{social_data.whatsup}}&amp;" target="_blank"><i
+                                    class="fa-brands fa-whatsapp px-2 fs-24"></i></a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== About Us Section ====== -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-12">
+                <div class="about-franchise">
+                    <h4 class="mb-3">{{about_data.head}}</h4>
+
+                    {{about_data.footer_content | safe }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Bottom Footer ====== -->
+<footer class="py-3 bg-extra-dark-blue footer-bottom">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4">
+                <p class="fs-14 mb-0 text-white">Copyright © <span id="current-year"></span> Franchise Brigade </p>
+            </div>
+            <div class="col-lg-8">
+                <ul class="list-unstyled mt-2 mt-lg-0 mb-0 d-flex justify-content-lg-end flex-wrap">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'about-us' %}">About Us</a></li>
+                    <li><a href="{% url 'index' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                    <!-- <li><a href="{% url 'index' %}">Feedback</a></li> -->
+                    <li><a href="{% url 'terms-condition' %}">Terms & conditions</a></li>
+                    <li><a href="{% url 'privacy_policy' %}">Privacy policy</a></li>
+                    <li><a href="{% url 'refund-and-cancelletion' %}">Refund & Cancellation</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== FREE ADVICE Form ===== -->
+<div class="advice-form" id="adviceForm">
+    <button class="btn btn-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+        aria-controls="offcanvasWithBothOptions">Free
+        Consultancy</button>
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+        aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fs-18 fw-300" id="offcanvasWithBothOptionsLabel">FREE ADVICE - ASK OUR
+                EXPERTS</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body mt-5">
+            <form method="post" id="cadviceform" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="row">
+                    <!-- <div class="col-12 mb-5">
+                        <div class="form-check col-12">
+                            <input class="form-check-input" type="radio" name="brandRadio" id="brandRadio1"
+                                checked>
+                            <label class="form-check-label fs-14" for="brandRadio1">
+                                List Your Brand
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="brandRadio" id="brandRadio2">
+                            <label class="form-check-label fs-14" for="brandRadio2">
+                                Become an Investor
+                            </label>
+                        </div>
+                    </div> -->
+                    <div class="col-12 mb-3 d-flex">
+                        <label for="name" class="label-icon"><i class="fa-solid fa-user"></i></label>
+                        <input type="text" class="form-control" name="name" id="cname" placeholder="Enter Name"
+                            required>
+                    </div>
+                    <div class="col-12 mb-3 d-flex">
+                        <label for="email" class="label-icon"><i class="fa-solid fa-envelope"></i></label>
+                        <input type="email" class="form-control" name="email" id="cemail" placeholder="Enter Email"
+                            required>
+                    </div>
+                    <!-- Country Code -->
+                    <div class="col-12 mb-3 d-flex">
+                        <label for="consultancyPhone" class="label-icon"><i class="fa-solid fa-mobile"></i></label>
+                        <input type="tel" class="form-control" name="phone" id="cconsultancyPhone" pattern="[0-9]{10}"
+                            placeholder="Enter Mobile" required>
+                    </div>
+                    <!-- /. Country Code -->
+                    <div class="col-12 mb-3 d-flex">
+                        <label for="pincode" class="label-icon"><i class="fa-solid fa-location-dot"></i></label>
+                        <input type="text" class="form-control" name="pin" id="cpincode" placeholder="Enter pincode"
+                            required>
+                    </div>
+                    <div class="col-12 mb-3 d-flex">
+                        <label for="message" class="label-icon"><i class="fa-solid fa-comment"></i></label>
+                        <textarea class="w-100 form-control" name="message" id="cmessage" cols="30" rows="2"
+                            placeholder="Enter Details" required></textarea>
+                    </div>
+                    <div class="col-12 mt-3 mb-3 text-center">
+                        <button type="submit" class="btn btn-1 fs-16">Ask Our Experts</button>
+                    </div>
+                </div>
+                <script>
+                    let adviceform = document.getElementById('cadviceform'); // selecting the form
+
+                    adviceform.addEventListener('submit', function (event) {
+                        event.preventDefault()
+                        let data = new FormData(); // 2                               
+                        data.append("name", document.getElementById('cname').value)
+                        data.append("email", document.getElementById('cemail').value)
+                        data.append("phone", document.getElementById('cconsultancyPhone').value)
+                        data.append("pin", document.getElementById('cpincode').value)
+                        data.append("message", document.getElementById('cmessage').value)
+                        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '{% url "consultancy" %}',
+                            data: data,
+                            cache: false,
+                            processData: false,
+                            contentType: false,
+                            enctype: 'multipart/form-data',
+                            success: function () {
+                                alert('Form Submitted Successfully');
+                                adviceform.reset();
+                                adviceform.classList.remove('was-validated');
+                            },
+                            error: function (xhr, errmsg, err) {
+                                console.log(xhr.status + ":" + xhr.responseText)
+                            }
+                        })
+                    })
+                </script>
+            </form>
+        </div>
+    </div>
+</div>
+
+</main>
+
+<!-- jQuery JS -->
+<!-- <script src="{% static '/js/jquery.js' %}"></script> -->
+
+<!-- SlickSlider JS -->
+<!-- <script src="{% static '/js/slick.min.js' %}"></script> -->
+
+<!-- Bootstrap JS -->
+<!-- <script src="{% static '/js/bootstrap.js' %}"></script> -->
+<!-- <script src="{% static '/js/bootstrap.bundle.js' %}"></script> -->
+<!-- Custom JS -->
+<!-- <script src="{% static '/js/main.js' %}"></script> -->
+
+<!-- For country code -->
+<!-- <script src="{% static '/js/intlTelInput.js' %}"></script>
+<script>
+    // First Input Field
+    var input = document.querySelector("#consultancyPhone");
+    window.intlTelInput(input, {
+        separateDialCode: true,
+        initialCountry: "in",
+        // excludeCountries: ["us"],
+        utilsScript: "build/js/utils.js",
+    });
+</script> -->
+
+<!-- Adding axios script tag here-->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script> -->
+<!-- advice-form Submit JS -->
+<!-- <script>
+    let form = document.getElementById('advice-form'); // selecting the form
+
+    form.addEventListener('submit', function (event) { // 1
+        event.preventDefault()
+
+        let data = new FormData(); // 2
+
+        data.append("List-Your-Brand", document.getElementById('brandRadio1').value)
+        data.append("become-an-investor", document.getElementById('brandRadio2').value)
+        data.append("name", document.getElementById('name').value)
+        data.append("email", document.getElementById('email_id').value)
+        data.append("phone", document.getElementById('consultancyPhone').value)
+        data.append("pin", document.getElementById('pincode').value)
+        data.append("message", document.getElementById('message').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+
+        axios.post('create_note/', data) // 4
+            .then(res = () => {
+                alert("Form Submitted");
+                form.reset();
+            }) // 5
+            .catch(errors => console.log(errors)) // 6
+    })
+
+</script> -->
+<!-- newsletter_form Submit JS -->
+<!-- <script>
+    let nLetterForm = document.getElementById('newsletter_form'); // selecting the form
+
+    nLetterForm.addEventListener('submit', function (event) { // 1
+        event.preventDefault()
+
+        let data = new FormData(); // 2
+
+        data.append("email", document.getElementById('newsletter_email').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+
+        axios.post('create_note/', data) // 4
+            .then(res = () => {
+                alert("Form Submitted");
+                nLetterForm.reset();
+            }) // 5
+            .catch(errors => console.log(errors)) // 6
+    })
+
+</script> -->
+<script>
+    const d = new Date();
+    let year = d.getFullYear();
+    console.log(year);
+    document.getElementById('current-year').innerHTML=year;
+</script>
+
+{% include "front-end/brand-inquiry-form.html" %}
+{% include "front-end/scripts.html" %}
+
+</body>
+
+</html>
+{% endblock %}

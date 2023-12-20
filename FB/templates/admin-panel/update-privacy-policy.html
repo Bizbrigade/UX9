@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Franchise Brigade Dashboard</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static 'admin/css/all.css' %}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{% static 'admin/css/OverlayScrollbars.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'admin/css/adminlte.css' %}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{% static 'admin/css/summernote-bs4.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'admin/css/style.css' %}">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" id="body">
+    <div class="wrapper">
+
+       <!-- Preloader -->
+       <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__wobble" src="{{home_details.logo}}" alt="AdminLTELogo" height="60" width="60">
+        <h1>Franchise Brigade</h1>
+    </div>
+
+{% include "admin-panel/navbar-sidebar.html" %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Update Privacy Policy</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Update Privacy Policy</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <!-- form start -->
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {% if msg %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>{{msg}}</strong> 
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="about-content">Update page content</label>
+                                            <textarea class="form-control" name="pp" value="{{home_details.pp}}" rows="4" id="about-content"
+                                                placeholder="Content for about us section">{{home_details.pp}}</textarea>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-1 float-right">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2022 <a href="https://www.techfnatic.com/">TechFnatic</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Franchise Brigade</b>
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="{% static 'admin/js/jquery.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'admin/js/bootstrap.bundle.js' %}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static 'admin/js/jquery.overlayScrollbars.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'admin/js/adminlte.js' %}"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'admin/js/main.js' %}"></script>
+
+    <!-- Summernote -->
+    <script src="{% static 'admin/js/summernote-bs4.js' %}"></script>
+
+
+
+    <!-- CodeMirror -->
+    <!-- <script src="./js/codemirror.js"></script> -->
+    <!-- <script src="./js/css.js"></script> -->
+    <!-- <script src="./js/xml.js"></script> -->
+    <!-- <script src="./js/htmlmixed.js"></script> -->
+
+
+
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            // Summernote
+            $('#home-about-content').summernote()
+            $('#about-content').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
+
+</body>
+
+</html>

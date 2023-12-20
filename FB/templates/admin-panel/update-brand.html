@@ -1,0 +1,925 @@
+
+{% extends 'admin-panel/base.html' %}
+{% block content %}
+{% load static %}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Update Brand</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Update Brand</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-header p-0 border-bottom-0">
+                                    <ul class="arrow-tab nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="tab-first" data-toggle="pill"
+                                                href="#step-1" role="tab" aria-controls="step-1"
+                                                aria-selected="true" step="1">Basic Info <img src="{% static 'admin/images/right-arrow.png' %}" alt=""></a>
+                                            <!-- <span class="nav-link active" id="tab-first" step="1">Basic Info</span> -->
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="tab-second" data-toggle="pill"
+                                                href="#step-2" role="tab" aria-controls="step-2"
+                                                aria-selected="false" step="2">About Brand <img src="{% static 'admin/images/right-arrow.png' %}" alt=""></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="tab-third" data-toggle="pill"
+                                                href="#step-3" role="tab" aria-controls="step-3"
+                                                aria-selected="false">Investment Details <img src="{% static 'admin/images/right-arrow.png' %}" alt=""></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="tab-four" data-toggle="pill" href="#step-4"
+                                                role="tab" aria-controls="step-4"
+                                                aria-selected="false">Gallery <img src="{% static 'admin/images/right-arrow.png' %}" alt=""></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="tab-five" data-toggle="pill" href="#step-5"
+                                                role="tab" aria-controls="step-5"
+                                                aria-selected="false">SEO & Analytics <img src="{% static 'admin/images/right-arrow.png' %}" alt=""></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div id="csrf-token">
+                                            {% csrf_token %}
+                                        </div>
+
+                                        {% csrf_token %}
+                                        {% if msg %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>{{msg}}</strong> 
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                        {% endif %}
+                                    <div class="tab-content" id="custom-tabs-four-tabContent">
+                                        <!-- First -->
+                                        <div class="tab-pane fade active show" id="step-1" role="tabpanel"
+                                            aria-labelledby="tab-first">
+                                            <!-- form start -->                                            
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="bname">Brand Name :</label>
+                                                        <input type="text"  name="brand_name" value="{{edit_brand.brand_name}}"  class="form-control FormDataInput" id="bname"
+                                                            placeholder="Write your brand name" >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="brandLogo">Brand Logo :</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input name="brand_logo" type="file" class="custom-file-input FormDataInput"
+                                                                    id="brandLogo" accept="image/*" >
+                                                                <label class="custom-file-label"
+                                                                    for="brandLogobrandLogo">Select Image</label>
+                                                            </div>
+                                                        </div>
+                                                        <small class="form-text">Upload logo 200*200 px for best
+                                                            view</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="brand-category">Brand Category</label>
+                                                        <select class="form-control FormDataInput" name="category_id" id="">
+                                                            <option value="{{edit_brand.category_id.id}}">{{edit_brand.category_id.category_name}}</option>
+                                                            {% for i in category_data %}
+                                                            {% if i.id != edit_brand.category_id.id %}
+                                                            <option value="{{i.id}}" >{{i.category_name}}</option>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="outlets">Outlets So Far</label>
+                                                        <input type="number" name="brand_outlets" value="{{edit_brand.brand_outlets}}" class="form-control FormDataInput" id="outlets"
+                                                            placeholder="Outlets " >
+                                                    </div>
+                                                </div>
+                                                <!-- /.card-body -->
+
+                                                <div class="card-footer">
+                                                    <button type="button" class="btn btn-1 float-left bg-red"
+                                                        data-toggle="modal" data-target="#modal-default">Delete</button>
+                                                    <button type="button" class="btn btn-1 btn-js float-right" step_number="2">Next</button>
+                                                </div>    
+                                                <!-- delete button modal -->
+                                                <div class="modal fade" id="modal-default" style="display: none;"
+                                                    aria-modal="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header border-0">
+                                                                <h4 class="modal-title">Delete Category</h4>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body py-0">
+                                                                <p>If you delete this category all its brands will be
+                                                                    automatically deleted.</p>
+                                                                <small>To confirm this type "DELETE"</small>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between border-0">
+                                                                <input type="text" class="form-control FormDataInput w-auto"
+                                                                    name="Delete_category" id="confirm-btn">
+                                                                 <a href="{%  url 'delete_brand' %}?id={{edit_brand.id }}" class="btn btn-1 bg-red">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /. delete button modal -->                              
+                                        </div>
+                                        <!-- Second -->
+                                        <div class="tab-pane fade" id="step-2" role="tabpanel"
+                                            aria-labelledby="tab-second">
+                                           
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="text-area-summernote">About Brand :</label>
+                                                        <textarea class="form-control FormDataInput" name="brand_about" value="{{edit_brand.brand_about}}" rows="4" id="text-area-summernote"
+                                                            placeholder="About Brand" >{{edit_brand.brand_about}}</textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="text-area-summernote-2">Why Us :</label>
+                                                        <textarea class="form-control FormDataInput" name="brand_whyus" value="{{edit_brand.brand_whyus}}" rows="4" id="text-area-summernote-2"
+                                                            placeholder="Why Us" >{{edit_brand.brand_whyus}}</textarea>
+                                                    </div>
+                                                </div>
+                                                <!-- /.card-body -->
+                                                <div class="card-footer">
+                                                    <button type="button" name="prev_button" step_number="1" class="btn btn-1 btn-js float-left">Prev</button>
+                                                    <button type="button" name="next_button" step_number="3" class="btn btn-1 btn-js float-right">Next</button>
+                                                </div>
+                                           
+                                        </div>
+                                        <!-- Third -->
+                                        <div class="tab-pane fade" id="step-3" role="tabpanel"
+                                            aria-labelledby="tab-third">
+                                            
+                                                <div class="card-body">
+                                                    <!-- 1. -->
+                                                    <h4 class="fw-700">1. Commenced Operations</h4>
+                                                    <div class="form-group">
+                                                        <label for="operationCommend">Operations Commenced Year
+                                                            :</label>
+                                                        <input type="number" name="brand_op_cmd_yr" value="{{edit_brand.brand_op_cmd_yr}}" class="form-control FormDataInput" id="operationCommend"
+                                                            placeholder="Operations Commenced On" >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="franchiseCommend">Franchise Commenced Year :</label>
+                                                        <input type="number" name="brand_fr_cmd_yr" value="{{edit_brand.brand_fr_cmd_yr}}" class="form-control FormDataInput" id="franchiseCommend"
+                                                            placeholder="Franchise Commenced On" >
+                                                    </div>
+                                                    <!-- 2. -->
+                                                    <h4 class="fw-700 mt-5">2. Franchise Details</h4>
+                                                    <div class="form-group">
+                                                        <label for="min">Investment (In INR) :</label>
+                                                        <div class="d-flex">
+                                                            <div class="d-flex align-items-center">
+                                                                <label class="mr-2 fw-500 mw-fit-content" for="min">Min
+                                                                    :</label>
+                                                                <input type="number" name="brand_inv_min" value="{{edit_brand.brand_inv_min}}" class="form-control FormDataInput w-100px"
+                                                                    id="min" placeholder="Min" >
+                                                                
+                                                                <select name="brand_inv_min_type"  class="form-control FormDataInput">
+                                                                    <option value="Lac" {% if   edit_brand.brand_inv_min_type == "Lac" %} selected {% endif %}>Lac</option>
+                                                                    <option value="Cr" {% if   edit_brand.brand_inv_min_type == "Cr" %} selected {% endif %}>Cr</option>
+                                                                </select>
+                                                                
+                                                                
+                                                                
+                                                            </div>
+                                                            <div class="d-flex align-items-center ml-4">
+                                                                <label class="mr-2 fw-500 mw-fit-content" for="max">Max
+                                                                    :</label>
+                                                                <input type="number" name="brand_inv_max" value="{{edit_brand.brand_inv_max}}" class="form-control FormDataInput w-100px"
+                                                                    id="max" placeholder="Max" >
+                                                                <select name="brand_inv_max_type"   class="form-control FormDataInput">
+                                                                    <option value="Lac" {% if   edit_brand.brand_inv_max_type == "Lac" %} selected {% endif %}>Lac</option>
+                                                                    <option value="Cr" {% if   edit_brand.brand_inv_max_type == "Cr" %} selected {% endif %}>Cr</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="franchiseFee">Franchise/Brand Fee (In INR) :</label>
+                                                        <input type="number" name="brand_fr_fee" value="{{edit_brand.brand_fr_fee}}" class="form-control FormDataInput" id="franchiseFee"
+                                                            placeholder="Franchise/Brand Fee in INR" >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="royaltyFee">Royalty/Commission (In %) :</label>
+                                                        <!-- clone box -->
+                                                        <div class="clonable-block" data-toggle="cloner">
+                                                            
+                                                            {% for i in royalty %}
+                                                            <div class="clonable" data-ss="1">
+                                                                <div class="model-commission">
+                                                                    <ul>
+                                                                        <li id="model-commission-repeat">
+                                                                            <div class="row g-3 mb-2 align-items-end">
+                                                                                <div class="col-lg-4">
+                                                                                    <label for="" class="fw-500">Heading
+                                                                                        :</label>
+                                                                                    <select class="form-control FormDataInput" name="brand_royalty_type[]"  id="" required>
+                                                                                        <option value="FOFO" {% if i.royalty_type == "FOFO"  %} selected {% endif %}  >FOFO</option>
+                                                                                        <option value="FICO" {% if i.royalty_type == "FICO"  %} selected {% endif %} >FICO</option> 
+                                                                                        <option value="FOCO" {% if i.royalty_type == "FOCO"  %} selected {% endif %} >FOCO</option> 
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-lg-4">
+                                                                                    <label for="" class="fw-500">Heading
+                                                                                        Royalty/Commission :</label>
+                                                                                    <input type="number" name="brand_royalty_fee[]" value="{{i.royalty_fee}}" class="form-control FormDataInput"
+                                                                                        placeholder="Commission in %" required >
+                                                                                </div>
+                                                                                <div class="col-lg-2">
+                                                                                    <button type="button" class="remove-btn clonable-button-close"><i
+                                                                                        class="fa-solid fa-minus"></i>
+                                                                                    Remove</button>
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div> 
+                                                            {% endfor %}                                                   
+                                            
+                                                            <button type="button" class="clonable-button-add add-btn" id="hap"><i
+                                                                class="fa-solid fa-plus"></i>
+                                                            Add More</button>
+                                                        </div>
+                                                        <!-- /. clone box -->
+                                                    </div>
+                                                    <!-- <div class="form-group">
+                                                        <label for="masterFranchiseFee">Master Franchise Fee (In INR)
+                                                            :</label>
+                                                        <input type="number" name="brand_master_fr_fee" value="{{edit_brand.brand_master_fr_fee}}" class="form-control FormDataInput"
+                                                            id="masterFranchiseFee"
+                                                            placeholder="Master Franchise Fee in INR" >
+                                                    </div> -->
+                                                    <!-- 3. -->
+                                                    <h4 class="fw-700 mt-5">3. Details</h4>
+                                                    <div class="form-group">
+                                                        <label for="territorialYes">Exclusive territorial rights to a
+                                                            unit franchise :</label>
+                                                            
+                                                            <div class="d-flex">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input  class="custom-control-input FormDataInput" type="radio"
+                                                                        id="territorialYes" name="brand_territorial_rights" value="Yes" {% if edit_brand.brand_territorial_rights == 'Yes' %}  checked {% endif %}>
+                                                                    <label for="territorialYes"
+                                                                        class="custom-control-label">Yes</label>
+                                                                </div>
+                                                                  
+                                                                <div class="custom-control custom-radio ml-4">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="territorialNo" name="brand_territorial_rights" value="No" {% if edit_brand.brand_territorial_rights == 'No' %} checked {% endif %}>
+                                                                    <label for="territorialNo"
+                                                                        class="custom-control-label">No</label>
+                                                                </div>
+                                                            </div>
+                                                           
+                                                        
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="anticipatedPercentage">Anticipated percentage return
+                                                            on Investment (In %) :</label>
+                                                        <input type="number" name="brand_anticipated_percent" value="{{edit_brand.brand_anticipated_percent}}" class="form-control FormDataInput"
+                                                            id="anticipatedPercentage" placeholder="Value in %"
+                                                            >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="payBackPeriodMin">Likely pay back period of capital
+                                                            for a Unit Franchise:</label>
+                                                        <div class="d-flex">
+                                                            <div class="d-flex align-items-center">
+                                                                <label class="mr-2 fw-500 mw-fit-content"
+                                                                    for="payBackPeriodMin">Min
+                                                                    :</label>
+                                                                <input type="number" name="brand_payback_min" value="{{edit_brand.brand_payback_min}}" class="form-control FormDataInput w-100px"
+                                                                    id="payBackPeriodMin" placeholder="Min" >
+                                                                    <select name="brand_payback_min_type" class="form-control FormDataInput">
+                                                                        <option value="month" {% if edit_brand.brand_payback_min_type == 'month'%} selected {% endif %} >Months</option>
+                                                                        <option value="year" {% if edit_brand.brand_payback_min_type == 'year'%} selected {% endif %} >Year</option>
+                                                                    </select>
+                                                            </div>
+                                                            <div class="d-flex align-items-center ml-4">
+                                                                <label class="mr-2 fw-500 mw-fit-content"
+                                                                    for="payBackPeriodMax">Max
+                                                                    :</label>
+                                                                <input type="number" name="brand_payback_max" value="{{edit_brand.brand_payback_max}}" class="form-control FormDataInput w-100px"
+                                                                    id="payBackPeriodMax" placeholder="Max" >
+                                                                    <select name="brand_payback_max_type" class="form-control FormDataInput">
+                                                                        <option value="month" {% if edit_brand.brand_payback_max_type == 'month'%} selected {% endif %} >Months</option>
+                                                                        <option value="year" {% if edit_brand.brand_payback_max_type == 'year'%} selected {% endif %} >Year</option>
+                                                                    </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="otherInvestment">Other investment requirments (In %)
+                                                            :</label>
+                                                        <input type="number" name="brand_investment_requir" value="{{edit_brand.brand_investment_requir}}" class="form-control FormDataInput" id="otherInvestment"
+                                                            placeholder="Value in %" >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="franchiseTerm">Franchise Term (In Years)
+                                                            :</label>
+                                                        <input type="number" name="brand_fr_terms_yr" value="{{edit_brand.brand_fr_terms_yr}}" class="form-control FormDataInput" id="franchiseTerm"
+                                                            placeholder="Value in %" >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="ifRenewableYes">If Renewable :</label>
+                                                        <div class="d-flex">
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="ifRenewableYes" name="brand_renewable" value="Yes" {% if edit_brand.brand_territorial_rights == 'Yes' %} checked {% endif %} >
+                                                                <label for="ifRenewableYes"
+                                                                    class="custom-control-label">Yes</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio ml-4">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="ifRenewableNo" name="brand_renewable" value="No" {% if edit_brand.brand_territorial_rights == 'No' %} checked {% endif %}>
+                                                                <label for="ifRenewableNo"
+                                                                    class="custom-control-label">No</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                <!-- Master Frasnchise -->
+                                                    <h4 class="fw-700 mt-5">4. Master Franchise Details</h4>
+                                                    <div class="form-group">
+                                                        <label for="mfranchiseYes" onclick="showContent('masterFranchiseToggle')">Do this brand offer master franchise :</label>
+                                                        <div class="d-flex">
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="mfranchiseYes" name="brand_ismasterfranchaise" value="yes" onclick="showContent('masterFranchiseToggle')"
+                                                                    {% if edit_brand.brand_ismasterfranchaise == 'yes' %} checked {% endif %}>
+                                                                <label for="mfranchiseYes"
+                                                                    class="custom-control-label">Yes</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio ml-4">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="mfranchiseNo" name="brand_ismasterfranchaise" value="no" onclick="hideContent('masterFranchiseToggle')"
+                                                                    {% if edit_brand.brand_ismasterfranchaise == 'no' %} checked {% endif %}>
+                                                                <label for="mfranchiseNo"
+                                                                    class="custom-control-label">No</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="masterFranchiseToggle" style="display: none;">
+                                                        <div class="form-group">
+                                                            <label for="min">Investment range (In INR) :</label>
+                                                            <div class="d-flex">
+                                                                <div class="d-flex align-items-center">
+                                                                    <label class="mr-2 fw-500 mw-fit-content" for="min">Min
+                                                                        :</label>
+                                                                    <input type="number" class="form-control FormDataInput w-100px"
+                                                                        id="min" placeholder="Min" min="1" name="brand_master_investment_min" value="{{ edit_brand.brand_master_investment_min}}">
+                                                                    <select class="form-control FormDataInput" name="brand_master_investment_min_type">
+                                                                        <option value="Lac" {% if edit_brand.brand_master_investment_min_type == "Lac" %} selected {% endif %} >Lac</option>
+                                                                        <option value="Cr" {% if edit_brand.brand_master_investment_min_type == "Cr" %} selected {% endif %} >Cr</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="d-flex align-items-center ml-4">
+                                                                    <label class="mr-2 fw-500 mw-fit-content" for="max">Max
+                                                                        :</label>
+                                                                    <input type="number" class="form-control FormDataInput w-100px"
+                                                                        id="max" placeholder="Max" min="1"  name="brand_master_investment_max" value="{{ edit_brand.brand_master_investment_max}}">
+                                                                    <select class="form-control FormDataInput" name="brand_master_investment_max_type">
+                                                                        <option value="Lac" {% if edit_brand.brand_master_investment_max_type == "Lac" %} selected {% endif %} >Lac</option>
+                                                                        <option value="Cr" {% if edit_brand.brand_master_investment_max_type == "Cr" %} selected {% endif %} >Cr</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="ctryRightsYes">Exclusive city rights :</label>
+                                                            <div class="d-flex">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="ctryRightsYes" name="brand_master_exclusive_city_rights"  value="yes" {% if edit_brand.brand_master_exclusive_city_rights == "yes" %}  checked {% endif %}>
+                                                                    <label for="ctryRightsYes"
+                                                                        class="custom-control-label">Yes</label>
+                                                                </div>
+                                                                <div class="custom-control custom-radio ml-4">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="ctryRightsNo" name="brand_master_exclusive_city_rights" value="no" {% if edit_brand.brand_master_exclusive_city_rights == "no" %} checked {% endif %} >
+                                                                    <label for="ctryRightsNo"
+                                                                        class="custom-control-label">No</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="regionRightsYes">Exclusive region rights :</label>
+                                                            <div class="d-flex">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="regionRightsYes" name="brand_master_exclusive_region_rights" value="yes" {% if edit_brand.brand_master_exclusive_region_rights == "yes" %} checked {% endif %}  >
+                                                                    <label for="regionRightsYes"
+                                                                        class="custom-control-label">Yes</label>
+                                                                </div>
+                                                                <div class="custom-control custom-radio ml-4">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="regionRightsNo" name="brand_master_exclusive_region_rights" value="no" {% if edit_brand.brand_master_exclusive_region_rights == "no" %} checked {% endif %}>
+                                                                    <label for="regionRightsNo"
+                                                                        class="custom-control-label">No</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="stateRightsYes">Exclusive state rights :</label>
+                                                            <div class="d-flex">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="stateRightsYes" name="brand_master_exclusive_state_rights" value="yes" {% if edit_brand.brand_master_exclusive_state_rights == "yes" %} checked {% endif %}>
+                                                                    <label for="stateRightsYes"
+                                                                        class="custom-control-label">Yes</label>
+                                                                </div>
+                                                                <div class="custom-control custom-radio ml-4">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="stateRightsNo" name="brand_master_exclusive_state_rights" value="no" {% if edit_brand.brand_master_exclusive_state_rights == "no" %} checked {% endif %}>
+                                                                    <label for="stateRightsNo"
+                                                                        class="custom-control-label">No</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="royaltyShareYes">Royalty share :</label>
+                                                            <div class="d-flex">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="royaltyShareYes" name="brand_master_royalty_share" value="yes" {% if edit_brand.brand_master_royalty_share == "yes" %} checked {% endif %}>
+                                                                    <label for="royaltyShareYes"
+                                                                        class="custom-control-label">Yes</label>
+                                                                </div>
+                                                                <div class="custom-control custom-radio ml-4">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="royaltyShareNo" name="brand_master_royalty_share" value="no" {% if edit_brand.brand_master_royalty_share == "no" %} checked {% endif %} >
+                                                                    <label for="royaltyShareNo"
+                                                                        class="custom-control-label">No</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="distributionMarginYes">Distribution margin :</label>
+                                                            <div class="d-flex">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="distributionMarginYes" name="brand_master_distribution_margin"  value="yes" {% if edit_brand.brand_master_distribution_margin == "yes" %} checked {% endif %} >
+                                                                    <label for="distributionMarginYes"
+                                                                        class="custom-control-label">Yes</label>
+                                                                </div>
+                                                                <div class="custom-control custom-radio ml-4">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="distributionMarginNo" name="brand_master_distribution_margin" value="no" {% if edit_brand.brand_master_distribution_margin == "no" %} checked {% endif %} >
+                                                                    <label for="distributionMarginNo"
+                                                                        class="custom-control-label">No</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="fFeeShareYes">Franchise fee share :</label>
+                                                            <div class="d-flex">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="fFeeShareYes" name="brand_master_franchise_fee_share" value="yes" {% if edit_brand.brand_master_franchise_fee_share == "yes" %} checked {% endif %} >
+                                                                    <label for="fFeeShareYes"
+                                                                        class="custom-control-label">Yes</label>
+                                                                </div>
+                                                                <div class="custom-control custom-radio ml-4">
+                                                                    <input class="custom-control-input FormDataInput" type="radio"
+                                                                        id="fFeeShareNo" name="brand_master_franchise_fee_share" value="no" {% if edit_brand.brand_master_franchise_fee_share == "no" %} checked {% endif %} >
+                                                                    <label for="fFeeShareNo"
+                                                                        class="custom-control-label">No</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- ./ Master Frasnchise -->
+                                                    
+
+                                                    <!-- 4 -->
+                                                    <h4 class="fw-700 mt-5">5. Property Details</h4>
+                                                    <div class="form-group">
+                                                        <label for="propertyType">Type of property  for this
+                                                            franchise opportunity :</label>
+                                                        <input type="text" name="brand_property_required" value="{{edit_brand.brand_property_required}}" class="form-control FormDataInput" id="propertyType"
+                                                            placeholder="Type of property  for this franchise opportunity"
+                                                            >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="floorAreamin">Floor area requirment (In Sq.ft)
+                                                            :</label>
+                                                        <div class="d-flex">
+                                                            <div class="d-flex align-items-center">
+                                                                <label class="mr-2 fw-500 mw-fit-content"
+                                                                    for="floorAreamin">Min
+                                                                    :</label>
+                                                                <input type="number" name="brand_floor_area_min" value="{{edit_brand.brand_floor_area_min}}" class="form-control FormDataInput w-100px"
+                                                                    id="floorAreamin" placeholder="Min" >
+                                                            </div>
+                                                            <div class="d-flex align-items-center ml-4">
+                                                                <label class="mr-2 fw-500 mw-fit-content"
+                                                                    for="floorAreamax">Max
+                                                                    :</label>
+                                                                <input type="number" name="brand_floor_area_max" value="{{edit_brand.brand_floor_area_max}}" class="form-control FormDataInput w-100px"
+                                                                    id="floorAreamax" placeholder="Max" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="outletLocation">Preferred location of unit franchise
+                                                            outlet :</label>
+                                                        <input type="text" name="brand_fre_location_outlets" value="{{edit_brand.brand_fre_location_outlets}}" class="form-control FormDataInput" id="outletLocation"
+                                                            placeholder="Preferred location of unit franchise outlet"
+                                                            >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="masterFranchiseLocation">Preferred location of
+                                                            master franchise :</label>
+                                                        <input type="text" name="brand_fre_location_masters" value="{{edit_brand.brand_fre_location_masters}}" class="form-control FormDataInput"
+                                                            id="masterFranchiseLocation"
+                                                            placeholder="Preferred location of master franchise"
+                                                            >
+                                                    </div>
+                                                    <!-- 5 -->
+                                                    <h4 class="fw-700 mt-5">6. Training Details</h4>
+                                                    <div class="form-group">
+                                                        <label for="operatingManualsYes">Detailed operating manuals for franchisees :</label>
+                                                        <div class="d-flex">
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="operatingManualsYes" name="brand_operating_type" value="Yes" {% if edit_brand.brand_territorial_rights == 'Yes' %} checked {% endif %}>
+                                                                <label for="operatingManualsYes"
+                                                                    class="custom-control-label">Yes</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio ml-4">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="operatingManualsNo" name="brand_operating_type" value="No" {% if edit_brand.brand_territorial_rights == 'No' %} checked {% endif %}>
+                                                                <label for="operatingManualsNo"
+                                                                    class="custom-control-label">No</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="trainingLocation">Franchise training location :</label>
+                                                        <input type="text" name="brand_fre_training_location" value="{{edit_brand.brand_fre_training_location}}" class="form-control FormDataInput" id="trainingLocation"
+                                                            placeholder="Franchise training location"
+                                                            >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="fieldAvailableYes">Is field assistance available for franchise  :</label>
+                                                        <div class="d-flex">
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="fieldAvailableYes" name="brand_assistece_available_type" value="Yes" {% if edit_brand.brand_assistece_available_type == 'Yes' %} checked {% endif %}>
+                                                                <label for="fieldAvailableYes"
+                                                                    class="custom-control-label">Yes</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio ml-4">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="fieldAvailableNo" name="brand_assistece_available_type" value="No" {% if edit_brand.brand_assistece_available_type == 'No' %} checked {% endif %}>
+                                                                <label for="fieldAvailableNo"
+                                                                    class="custom-control-label">No</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="headOfficeYes">Expert guidance from Head Office to franchise in opening the franchise :</label>
+                                                        <div class="d-flex">
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="headOfficeYes" name="brand_head_office_gyd_type" value="Yes" {% if edit_brand.brand_head_office_gyd_type == 'Yes' %} checked {% endif %}>
+                                                                <label for="headOfficeYes"
+                                                                    class="custom-control-label">Yes</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio ml-4">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="headOfficeNo" name="brand_head_office_gyd_type" value="No" {% if edit_brand.brand_head_office_gyd_type == 'No' %} checked {% endif %}>
+                                                                <label for="headOfficeNo"
+                                                                    class="custom-control-label">No</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="currentSystemYes">Current IT systems will be included in franchise :</label>
+                                                        <div class="d-flex">
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="currentSystemYes" name="brand_it_system_type" value="Yes" {% if edit_brand.brand_it_system_type == 'Yes' %} checked {% endif %}>
+                                                                <label for="currentSystemYes"
+                                                                    class="custom-control-label">Yes</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio ml-4">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="currentSystemNo" name="brand_it_system_type" value="No" {% if edit_brand.brand_it_system_type == 'No' %} checked {% endif %}>
+                                                                <label for="currentSystemNo"
+                                                                    class="custom-control-label">No</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 6 -->
+                                                    <h4 class="fw-700 mt-5">7. Some Other Details</h4>
+                                                    <div class="form-group">
+                                                        <label for="topBusinessOpportunityYes">Is it is a top business opportunity :</label>
+                                                        <div class="d-flex">
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                id="topBusinessOpportunityYes" name="brand_bussiness_opr_type" value="Yes" {% if edit_brand.brand_bussiness_opr_type == 'Yes' %} checked {% endif %}>
+                                                                <label for="topBusinessOpportunityYes"
+                                                                class="custom-control-label">Yes</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio ml-4">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                id="topBusinessOpportunityNo" name="brand_bussiness_opr_type" value="No" {% if edit_brand.brand_bussiness_opr_type == 'No' %} checked {% endif %}>
+                                                                <label for="topBusinessOpportunityNo"
+                                                                class="custom-control-label">No</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="featuredBrandYes">Is it a featured brand :</label>
+                                                        <div class="d-flex">
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                id="featuredBrandYes" name="brand_featured_type" value="Yes" {% if edit_brand.brand_featured_type == 'Yes' %} checked {% endif %}>
+                                                                <label for="featuredBrandYes"
+                                                                class="custom-control-label">Yes</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio ml-4">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                id="featuredBrandNo" name="brand_featured_type" value="No" {% if edit_brand.brand_featured_type == 'No' %} checked {% endif %}>
+                                                                <label for="featuredBrandNo"
+                                                                class="custom-control-label">No</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /.card-body -->
+
+                                                <div class="card-footer">
+                                                    <button type="button" name="prev_button" step_number="2" class="btn btn-1 btn-js float-left">Prev</button>
+                                                    <button type="button" name="next_button" step_number="4" class="btn btn-1 btn-js float-right">Next</button>
+                                                </div>
+                                            
+                                        </div>
+                                        <!-- Four -->
+                                        <div class="tab-pane fade" id="step-4" role="tabpanel"
+                                            aria-labelledby="tab-four">
+                                            <div class="row">
+                                                {% for i in gallery %}
+                                                <div class="col-6 col-lg-3">
+                                                    <div class="image-card">
+                                                        <img src="{{i}}" alt="">
+                                                        <div class="card-footer">
+                                                            <button name="delete_image" value="{{i}}" type="submit">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}                                                
+                                            </div>                                           
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="brandGallery">Gallery Images :</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="brand_gallery[]" class="custom-file-input FormDataInput"
+                                                                    id="brandGallery" accept="image/*" multiple >
+                                                                <label class="custom-file-label"
+                                                                    for="brandGallery">Select Multiple Image</label>
+                                                            </div>
+                                                        </div>
+                                                        <small class="form-text">Select multiple images and size should be
+                                                            540*300 px for best view</small>
+                                                    </div>
+                                                </div>
+                                                <!-- /.card-body -->
+                                                <div class="card-footer">
+                                                    <button type="button" name="prev_button" step_number="3" class="btn btn-1 btn-js float-left">Prev</button>
+                                                    <button type="button" name="next_button" step_number="5" class="btn btn-1 btn-js float-right">Next</button>
+                                                </div>                                         
+                                        </div>
+                                        <!-- Five -->
+                                        <div class="tab-pane fade" id="step-5" role="tabpanel"
+                                            aria-labelledby="tab-five">
+                                            
+                                                <div class="card-body">
+                                                    <!-- <div class="form-group">
+                                                        <label for="keywords">Keywords</label>
+                                                        <textarea class="form-control FormDataInput" name="brand_seo_keywords"  rows="4"
+                                                            placeholder="Write keywords here" id="keywords" =""
+                                                            spellcheck="false">{{ edit_brand.brand_seo_keywords }}</textarea>
+                                                    </div> -->
+                                                     <!-- Five -->
+                                                   
+                                                    <div class="form-group">
+                                                        <label for="brand_seo_title">Brand SEO Title
+                                                            :</label>
+                                                        <input type="text" name="brand_seo_title" class="form-control FormDataInput" id="brand_seo_title"
+                                                            placeholder="Brand SEO Title" value="{{ edit_brand.brand_seo_title }}" >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="brand_seo_desc">Brand SEO Description
+                                                            :</label>
+                                                        <input type="text" name="brand_seo_description" class="form-control FormDataInput" id="brand_seo_desc"
+                                                            placeholder="Brand SEO Description" value="{{ edit_brand.brand_seo_description }}" >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="brand_seo_keyword">Brand SEO Keywords
+                                                            :</label>
+                                                        <input type="text" name="brand_seo_keywords" class="form-control FormDataInput" id="brand_seo_keyword"
+                                                            placeholder="Brand SEO Keywords separated by comma(,)" value="{{ edit_brand.brand_seo_keywords }}"  >
+                                                    </div>
+                                                        
+                                                 <!-- Script -->
+                                                    <div class="form-group">
+                                                        <label for="aboutBsdfsadf"> Brand Bot/Script :</label>
+                                                        <textarea class="form-control FormDataInput" name="brand_script" rows="8" id="abosfsadfutBrand"
+                                                            placeholder="Paste your script here (optional)">{{ edit_brand.brand_script }}</textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="scriptPositionBODY">Script position:</label>
+                                                        <div class="d-flex">
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input FormDataInput"  type="radio"
+                                                                    id="scriptPositionBODY" name="brand_script_position" value="2" {% if edit_brand.brand_script_position == 2 %} checked {% endif %}>
+                                                                <label for="scriptPositionBODY"
+                                                                    class="custom-control-label">on BODY</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio ml-4">
+                                                                <input class="custom-control-input FormDataInput" type="radio"
+                                                                    id="scriptPositionHEAD" name="brand_script_position" value="1" {% if edit_brand.brand_script_position == 1 %} checked {% endif %}>
+                                                                <label for="scriptPositionHEAD"
+                                                                    class="custom-control-label">on HEAD</label>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+
+                                                    
+                                                </div>
+                                            
+                                                <!-- /.card-body -->
+                                                <div class="card-footer">
+                                                    <button type="button" name="prev_button" step_number="4" class="btn btn-1 btn-js float-left">Prev</button>
+                                                    <button type="button" class="btn btn-1 float-right" id="updateSubmitBtn" onclick="send_data('/update_brand/{{edit_brand.id}}')">Update</button>
+                                                    <!-- <button type="submit" class="btn btn-1 float-right">Update</button> -->
+                                                </div>
+                                            
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+
+    <script>
+        $(function () {
+            // Summernote
+            $('#text-area-summernote').summernote()
+            $('#text-area-summernote-2').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
+
+    <!-- clone js -->
+    <script src="{% static 'admin/js/clone.js' %}"> </script>
+    
+    <!-- Input field js -->
+    <script>
+        !function (e, t) { "object" == typeof exports && "undefined" != typeof module ? module.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = e || self).bsCustomFileInput = t() }(this, function () { "use strict"; var s = { CUSTOMFILE: '.custom-file input[type="file"]', CUSTOMFILELABEL: ".custom-file-label", FORM: "form", INPUT: "input" }, l = function (e) { if (0 < e.childNodes.length) for (var t = [].slice.call(e.childNodes), n = 0; n < t.length; n++) { var l = t[n]; if (3 !== l.nodeType) return l } return e }, u = function (e) { var t = e.bsCustomFileInput.defaultText, n = e.parentNode.querySelector(s.CUSTOMFILELABEL); n && (l(n).textContent = t) }, n = !!window.File, r = function (e) { if (e.hasAttribute("multiple") && n) return [].slice.call(e.files).map(function (e) { return e.name }).join(", "); if (-1 === e.value.indexOf("fakepath")) return e.value; var t = e.value.split("\\"); return t[t.length - 1] }; function d() { var e = this.parentNode.querySelector(s.CUSTOMFILELABEL); if (e) { var t = l(e), n = r(this); n.length ? t.textContent = n : u(this) } } function v() { for (var e = [].slice.call(this.querySelectorAll(s.INPUT)).filter(function (e) { return !!e.bsCustomFileInput }), t = 0, n = e.length; t < n; t++)u(e[t]) } var p = "bsCustomFileInput", m = "reset", h = "change"; return { init: function (e, t) { void 0 === e && (e = s.CUSTOMFILE), void 0 === t && (t = s.FORM); for (var n, l, r = [].slice.call(document.querySelectorAll(e)), i = [].slice.call(document.querySelectorAll(t)), o = 0, u = r.length; o < u; o++) { var c = r[o]; Object.defineProperty(c, p, { value: { defaultText: (n = void 0, n = "", (l = c.parentNode.querySelector(s.CUSTOMFILELABEL)) && (n = l.textContent), n) }, writable: !0 }), d.call(c), c.addEventListener(h, d) } for (var f = 0, a = i.length; f < a; f++)i[f].addEventListener(m, v), Object.defineProperty(i[f], p, { value: !0, writable: !0 }) }, destroy: function () { for (var e = [].slice.call(document.querySelectorAll(s.FORM)).filter(function (e) { return !!e.bsCustomFileInput }), t = [].slice.call(document.querySelectorAll(s.INPUT)).filter(function (e) { return !!e.bsCustomFileInput }), n = 0, l = t.length; n < l; n++) { var r = t[n]; u(r), r[p] = void 0, r.removeEventListener(h, d) } for (var i = 0, o = e.length; i < o; i++)e[i].removeEventListener(m, v), e[i][p] = void 0 } } });
+    </script>
+    <script>
+        $(function () {
+            bsCustomFileInput.init();
+        });
+    </script>
+    
+    <!-- Page specific script -->
+    <script>
+        
+        /**
+         * Define a function to navigate betweens form steps.
+         * It accepts one parameter. That is - step number.
+         */
+         const navigateToFormStep = (stepNumber) => {
+            /**
+             * Hide all form steps.
+             */
+            document.querySelectorAll(".tab-pane").forEach((formStepElement) => {
+                formStepElement.classList.remove("active");
+            });
+            document.querySelectorAll(".tab-pane").forEach((formStepElement) => {
+                formStepElement.classList.remove("show");
+            });
+            /**
+             * Mark all form steps as unfinished.
+             */
+            document.querySelectorAll(".nav-link").forEach((formStepHeader) => {
+                // formStepHeader.classList.add("");
+                formStepHeader.classList.remove("active");
+            });
+            /**
+             * Show the current form step (as passed to the function).
+             */
+            console.log("#step-" + stepNumber);
+            document.querySelector("#step-" + stepNumber).classList.add("active");
+            document.querySelector("#step-" + stepNumber).classList.add("show");
+            /**
+             * Select the form step circle (progress bar).
+             */
+            const formStepCircle = document.querySelector('span[step="' + stepNumber + '"]');
+            /**
+             * Mark the current form step as active.
+             */
+            // formStepCircle.classList.remove("");
+            formStepCircle.classList.add("active");
+            /**
+             * Loop through each form step circles.
+             * This loop will continue up to the current step number.
+             * Example: If the current step is 3,
+             * then the loop will perform operations for step 1 and 2.
+             */
+            for (let index = 0; index < stepNumber; index++) {
+                /**
+                 * Select the form step circle (progress bar).
+                 */
+                const formStepCircle = document.querySelector('span[step="' + index + '"]');
+                /**
+                 * Check if the element exist. If yes, then proceed.
+                 */
+                if (formStepCircle) {
+                    console.log(index)
+                    /**
+                     * Mark the form step as completed.
+                     */
+                    formStepCircle.classList.add("active");
+                }
+            }
+        };
+        /**
+         * Select all form navigation buttons, and loop through them.
+         */
+        document.querySelectorAll(".btn-js").forEach((formNavigationBtn) => {
+            /**
+             * Add a click event listener to the button.
+             */
+            formNavigationBtn.addEventListener("click", () => {
+                /**
+                 * Get the value of the step.
+                 */
+                const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
+                // console.log(stepNumber);
+                /**
+                 * Call the function to navigate to the target form step.
+                 */
+                navigateToFormStep(stepNumber);
+            });
+        });
+        
+            </script>
+
+
+{% endblock %}

@@ -1,0 +1,356 @@
+{% extends 'admin-panel/base.html' %}
+{% block content %}
+{% load static %}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Registration Form Data</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Registration Form</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Brand Registation Table -->
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h3 class="card-title fw-600">Brand Registration</h3>
+                                    <div class="card-tools d-flex align-items-center">
+                                        <div class="input-group input-group-sm" style="min-width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right"
+                                                placeholder="Search" style="height: calc(2.25rem + 2px);">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-1 float-left export-modal-button ml-2" data-toggle="modal"
+                                    data-target="#export-modal" value="Brand List Form" id="list-ur-brand-from">Export</button>
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive p-0" style="max-height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr. No.</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Brand Name</th>
+                                                <th>Submition Date</th>
+                                                <th>See Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            
+                                            {% for i in user_data %}                                             
+                                            <tr>  
+                                                <td>{{forloop.counter}}</td>                                              
+                                                <td>{{i.f_name}}</td>
+                                                <td>{{i.l_name}}</td>
+                                                <td>{{i.brand_name}}</td>
+                                                <td>{{i.submition_date}}</td>
+                                                <td><a href="{% url 'single_brand_ur_list' pk=i.id %}" class="view-all-btn">View all <i
+                                                            class="fa-solid fa-arrow-right"></i></a></td>
+                                            </tr>                                                                                     
+                                            {% endfor %}                                           
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- /. Brand Registation Table -->
+                            <!-- Invester Registation Table -->
+                            <div class="card table-card mt-5">
+                                <div class="card-header">
+                                    <h3 class="card-title fw-600">Invester Registration</h3>
+                                    <div class="card-tools d-flex align-items-center">
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Select Industry</option>
+                                            <option value="all">All</option>
+                                            <option value="Beauty and Health">Beauty and Health</option>
+                                            <option value="Spa and Salons">Spa and Salons</option>
+                                            <option value="Business Services">Business Services</option>
+                                            <option value="Education">Education</option>
+                                            <option value="Entertainment">Entertainment</option>
+                                            <option value="Fashion and Lifestyle">Fashion and Lifestyle</option>
+                                            <option value="Food and Beverages">Food and Beverages</option>
+                                            <option value="Automotive">Automotive</option>
+                                            <option value="Hospitality">Hospitality</option>
+                                            <option value="Manufacturing">Manufacturing</option>
+                                            <option value="Healthcare">Healthcare</option>
+                                            <option value="Electronic Vehicle">Electronic Vehicle</option>
+                                            <option value="Real Estate">Real Estate</option>
+                                            <option value="Investment and Stock Market">Investment and Stock Market
+                                            </option>
+                                            <option value="Modular Kitchen">Modular Kitchen</option>
+                                            <option value="Pets">Pets</option>
+                                            <option value="Fitness">Fitness</option>
+                                        </select>
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Investment Range </option>
+                                            <option value="all">All</option>
+                                            <option value="3-10Lac">3-10Lac</option>
+                                            <option value="10-20Lac">10-20Lac</option>
+                                            <option value="20-30Lac">20-30Lac</option>
+                                            <option value="30-50Lac">30-50Lac</option>
+                                            <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                            <option value="50Lac-1Cr">1Cr-5Cr</option>
+                                            <option value="Above 1Cr">Above 5Cr</option>
+                                        </select>
+                                        <div class="input-group input-group-sm" style="min-width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right"
+                                                placeholder="Search" style="height: calc(2.25rem + 2px);">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-1 float-left export-modal-button ml-2" data-toggle="modal"
+                                    data-target="#export-modal" value="Investor Form" id="investor-form">Export</button>
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive p-0" style="max-height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr. No.</th>
+                                                <th>Name</th>
+                                                <th>Industry Name</th>
+                                                <th>Investment Range</th>
+                                                <th>Submition Date</th>
+                                                <th>See Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for j in invester_data %}                                             
+                                            <tr>  
+                                                <td>{{forloop.counter}}</td>                                            
+                                                <td>{{j.full_name}}</td>
+                                                <td>{{j.corporate_name}}</td>
+                                                <td>{{j.franchise_inv_range}}</td>
+                                                <td>{{j.submition_date}}</td>
+                                                <td><a href="{% url 'single_invester_list' pk=j.id %}" class="view-all-btn">View all <i
+                                                            class="fa-solid fa-arrow-right"></i></a></td>
+                                            </tr>                                                                                     
+                                            {% endfor %}                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- /. Invester Registation Table -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2022 <a href="https://www.techfnatic.com/">TechFnatic</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Franchise Brigade</b>
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+            
+            <!-- delete button modal -->
+            <div class="modal fade" id="export-modal" style="display: none;" aria-modal="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header py-2">
+                            <h4 class="modal-title">Export <span id="modalTitle">formName</span> data to Excel</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body pt-2 pb-0"> 
+                            <form action="{% url 'export_form_to_excel' %}" method="POST" >
+                                {% csrf_token %}
+                                <input type="hidden" name="formname" id="modalId" value="">
+                                <div class="form-check d-flex justify-content-between pr-4 pl-0">
+                                    <label class="form-label" for="oneMonth">
+                                        Last one month
+                                    </label>
+                                    <input class="form-check-input position-static w-18px" type="radio"
+                                        name="selectMonth" id="oneMonth" value="1" checked>
+                                </div>
+                                <div class="form-check d-flex justify-content-between pr-4 pl-0">
+                                    <label class="form-label" for="threeMonth">
+                                        Last three months
+                                    </label>
+                                    <input class="form-check-input position-static w-18px" type="radio"
+                                        name="selectMonth" id="threeMonth" value="3">
+                                </div>
+                                <div class="form-check d-flex justify-content-between pr-4 pl-0">
+                                    <label class="form-label" for="sixMonth">
+                                        Last six months
+                                    </label>
+                                    <input class="form-check-input position-static w-18px" type="radio"
+                                        name="selectMonth" id="sixMonth" value="6">
+                                </div>
+                                <div class="form-check d-flex justify-content-between pr-4 pl-0">
+                                    <label class="form-label" for="customDate">
+                                        Custom Date
+                                    </label>
+                                    <input class="form-check-input position-static w-18px" type="radio"
+                                        name="selectMonth" id="customDate" value="custom">
+                                </div>
+                                <div class="mt-3" id="customDateDiv" style="display: none;">
+                                    <div class="mb-3 d-flex align-items-center px-4">
+                                        <label for="fromDate" class="form-label mb-0 me-3"
+                                            style="width: 70px;">From
+                                            :</label>
+                                        <input type="date" class="form-control" name="from" id="fromDate"
+                                            placeholder="Select start date">
+                                    </div>
+                                    <div class="mb-3 d-flex align-items-center px-4">
+                                        <label for="toDate" class="form-label mb-0 me-3"
+                                            style="width: 70px;">To
+                                            :</label>
+                                        <input type="date" class="form-control" name="to"  id="toDate"
+                                            placeholder="Select end date">
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-end border-0">
+                                    <button type="submit" class="btn btn-1" >Download</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /. delete button modal -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="{% static '/admin/js/jquery.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static '/admin/js/bootstrap.bundle.js' %}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static '/admin/js/jquery.overlayScrollbars.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static '/admin/js/adminlte.js' %}"></script>
+    <!-- Custom JS -->
+    <script src="{% static '/admin/js/main.js' %}"></script>
+
+    <!-- Summernote -->
+    <script src="{% static '/admin/js/summernote-bs4.js' %}"></script>
+
+
+    <!-- CodeMirror -->
+    <!-- <script src="{% static '/admin/js/codemirror.js' %}"></script> -->
+    <!-- <script src="{% static '/admin/js/css.js' %}"></script> -->
+    <!-- <script src="{% static '/admin/js/xml.js' %}"></script> -->
+    <!-- <script src="{% static '/admin/js/htmlmixed.js' %}"></script> -->
+
+
+        <script>
+            // ===== for export data select date
+            function exportExcelFun() {
+                let today = new Date();
+                let dd = String(today.getDate()).padStart(2, '0');
+                let mm = String(today.getMonth() + 1).padStart(2, '0');
+                let yyyy = today.getFullYear();
+                
+                let fromDate = document.getElementById('fromDate');
+                let toDate = document.getElementById('toDate');
+                let customDate = document.getElementById('customDate');
+                let customDateDiv = document.getElementById('customDateDiv');
+                let allRadio = document.querySelectorAll('[name="selectMonth"]');
+
+                today = yyyy + '-' + mm + '-' + dd;
+                fromDate.setAttribute('max', today);
+                toDate.setAttribute('max', today);
+
+                fromDate.addEventListener('change', () =>  {
+                    let fromDateVal = fromDate.value;
+                    toDate.setAttribute('min', fromDateVal);
+                })
+
+                allRadio.forEach(element => {
+                    element.addEventListener('change', () =>  {
+                        if(customDate.checked === true) {
+                            customDateDiv.style.display = 'block';
+                        } else{
+                            customDateDiv.style.display = 'none';
+                        }
+                    })
+                });
+
+                
+            }
+            exportExcelFun();
+
+            let formIdw = document.getElementById('formIdw');
+            let exportModalButton = document.querySelectorAll('.export-modal-button');
+            let exportModal = document.getElementById('export-modal');
+            let modalTitle = document.getElementById('modalTitle');
+            let modalId = document.getElementById('modalId');
+            
+            exportModalButton.forEach(element => {
+                element.addEventListener('click', () => {
+                    modalTitle.innerText = element.value;
+                    modalId.value = element.id;
+            
+                    console.log(element.id);
+                    console.log(element.value);
+                    console.log(element);
+                    console.log(element.innerHTML);
+                })
+            });
+
+            </script>
+
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            // Summernote
+            $('#home-about-content').summernote()
+            $('#about-content').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
+
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,365 @@
+{% extends 'admin-panel/base.html' %}
+{% load static %}
+{% block content %}
+
+        <div id="csrf">{% csrf_token %}</div>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Add Article</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Add Article</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-header p-0 border-bottom-0">
+                                    <ul class="progressbar nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <span class="nav-link active" id="tab-first" step="1">Basic Info</span>
+                                        </li>
+                                        <!-- <li class="nav-item">
+                                            <span class="nav-link" id="tab-second" step="2">SEO & Analytics</span>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                                <form method="post" enctype="multipart/form-data">
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-four-tabContent">
+                                        <!-- First -->
+                                        <div class="tab-pane fade active show" id="step-1"
+                                            role="tabpanel" aria-labelledby="tab-first">
+                                            <!-- form start -->
+                                                {% csrf_token %}
+                                                {% if msg %}
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                    <strong>{{msg}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                {% endif %}
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="article-head">Article URL :</label>
+                                                        <input type="text" name="article_url"  class="form-control" id="article-head"
+                                                            placeholder="Paste article url here, wait for 5 seconds to auto fetch data" onpaste="var self = this; setTimeout(function() {handleArticleUrlPaste(self.value)}, 250);" required>
+                                                    </div>
+                                                    
+                                                    <!-- Scrapped data FROM URL -->
+                                                    <div id="article-scraped-data" style="display: none;">
+                                                        <div class="form-group">
+                                                            <label for="article-scraped-img-url">Article Img URL:</label>
+                                                            <input type="text" name="article_scraped_img_url"  class="form-control" id="article-scraped-img-url"
+                                                                placeholder="Paste article url here">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="article-scraped-title">Article Title:</label>
+                                                            <input type="text" name="article_scraped_title"  class="form-control" id="article-scraped-title"
+                                                                placeholder="Article Title">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="article-scraped-description">Article Description:</label>
+                                                            <input type="text" name="article_scraped_description"  class="form-control" id="article-scraped-description"
+                                                                placeholder="Article Description">
+                                                        </div>
+                                                    </div>
+                                                    <!-- -->
+                                                    
+                                                    <div class="form-group">
+                                                        <label for="article-image">Article image :</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="article_image" class="custom-file-input" id="article-image"
+                                                                    accept="image/*" disabled>
+                                                                <label class="custom-file-label" for="blog-image">Choose
+                                                                    Image</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="form-group">
+                                                        <label for="blog-content">Blog content</label>
+                                                        <textarea class="form-control" rows="4" name="blog_content" id="blog-content"
+                                                            placeholder="Content for the blog"></textarea>
+                                                    </div> -->
+                                                </div>
+                                                <!-- /.card-body -->
+            
+                                                <div class="card-footer">
+                                                    <button type="submit" class="btn btn-1 float-right">Add Article</button>
+                                                </div>
+                                            
+                                        </div>
+                                        <!-- Second -->
+                                        <!-- <div class="tab-pane fade" id="step-2" role="tabpanel"
+                                            aria-labelledby="tab-second">
+                                            
+                                                <form id="form1" runat="server">
+                                                 
+                                                    <div id="TextBoxContainer">
+                                                    </div>
+                                                    <br />
+                                                    <asp:Button ID="btnPost" runat="server" Text="Post"
+                                                        OnClick="Post"/>
+                                                        <input class="btn-1" name="blog_seo" id="btnAdd" type="button" value="Add Keyword"
+                                                        onclick="AddTextBox()" />
+                                                </form>
+
+                                                <div class="card-footer">
+                                                    <button type="button" class="btn btn-1 btn-js float-left" step_number="1">Prev</button>
+                                                    <button type="submit" class="btn btn-1 float-right">Create</button>
+                                                </div>                                            
+                                        </div> -->
+                                        <!--  -->
+                                    </div>
+                                </div>
+                            </form>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2022 <a href="https://www.techfnatic.com/">TechFnatic</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Franchise Brigade</b>
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="{% static '/admin/js/jquery.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static '/admin/js/bootstrap.bundle.js' %}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static '/admin/js/jquery.overlayScrollbars.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static '/admin/js/adminlte.js' %}"></script>
+    <!-- Custom JS -->
+    <script src="{% static '/admin/js/main.js' %}"></script>
+
+    <!-- Summernote -->
+    <script src="{% static '/admin/js/summernote-bs4.js' %}"></script>
+    <script>
+        $(function () {
+            // Summernote
+            $('#blog-content').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
+ </script>
+ <script type="text/javascript">
+     function GetDynamicTextBox(value,id_value) {
+         return '<input name = "DynamicTextBox" id="'+id_value+'" onkeyup="wordLimit(this, 1);"  type="text" value = "' + value + '" />' +
+             '<input type="button" value="Remove" onclick = "RemoveTextBox(this)" />'
+     }
+     
+     function AddTextBox() {
+         var div = document.createElement('DIV');  
+         div.innerHTML = GetDynamicTextBox("","seo_add_list");
+         document.getElementById("TextBoxContainer").appendChild(div);
+         
+     }
+     function RemoveTextBox(div) {
+         document.getElementById("TextBoxContainer").removeChild(div.parentNode);
+     }
+
+     function RecreateDynamicTextboxes() {
+         var values = eval('<%=Values%>');
+         if (values != null) {
+             var html = "";
+             for (var i = 0; i < values.length; i++) {
+                 html += "<div>" + GetDynamicTextBox(values[i]) + "</div>";
+             }
+             document.getElementById("TextBoxContainer").innerHTML = html;
+         }
+     }
+     window.onload = RecreateDynamicTextboxes;
+ </script>
+
+<script>
+ function wordLimit(inp, limit){
+ var val = inp.value
+ var words = val.split(/\s+/);
+ var legal = "";
+ for(i = 0; i < words.length; i++) {
+     if(i < limit) {
+         legal += words[i] + " ";
+     }
+     if(i >= limit) {
+         inp.value = legal.trim();
+     }
+ }
+}
+</script>
+ <!-- Page specific script -->
+ <script>
+        
+    /**
+     * Define a function to navigate betweens form steps.
+     * It accepts one parameter. That is - step number.
+     */
+     const navigateToFormStep = (stepNumber) => {
+        /**
+         * Hide all form steps.
+         */
+        document.querySelectorAll(".tab-pane").forEach((formStepElement) => {
+            formStepElement.classList.remove("active");
+        });
+        document.querySelectorAll(".tab-pane").forEach((formStepElement) => {
+            formStepElement.classList.remove("show");
+        });
+        /**
+         * Mark all form steps as unfinished.
+         */
+        document.querySelectorAll(".nav-link").forEach((formStepHeader) => {
+            // formStepHeader.classList.add("");
+            formStepHeader.classList.remove("active");
+        });
+        /**
+         * Show the current form step (as passed to the function).
+         */
+        console.log("#step-" + stepNumber);
+        document.querySelector("#step-" + stepNumber).classList.add("active");
+        document.querySelector("#step-" + stepNumber).classList.add("show");
+        /**
+         * Select the form step circle (progress bar).
+         */
+        const formStepCircle = document.querySelector('span[step="' + stepNumber + '"]');
+        /**
+         * Mark the current form step as active.
+         */
+        // formStepCircle.classList.remove("");
+        formStepCircle.classList.add("active");
+        /**
+         * Loop through each form step circles.
+         * This loop will continue up to the current step number.
+         * Example: If the current step is 3,
+         * then the loop will perform operations for step 1 and 2.
+         */
+        for (let index = 0; index < stepNumber; index++) {
+            /**
+             * Select the form step circle (progress bar).
+             */
+            const formStepCircle = document.querySelector('span[step="' + index + '"]');
+            /**
+             * Check if the element exist. If yes, then proceed.
+             */
+            if (formStepCircle) {
+                console.log(index)
+                /**
+                 * Mark the form step as completed.
+                 */
+                formStepCircle.classList.add("active");
+            }
+        }
+    };
+    /**
+     * Select all form navigation buttons, and loop through them.
+     */
+    document.querySelectorAll(".btn-js").forEach((formNavigationBtn) => {
+        /**
+         * Add a click event listener to the button.
+         */
+        formNavigationBtn.addEventListener("click", () => {
+            /**
+             * Get the value of the step.
+             */
+            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
+            // console.log(stepNumber);
+            /**
+             * Call the function to navigate to the target form step.
+             */
+            navigateToFormStep(stepNumber);
+        });
+    });
+    
+        </script>
+ <!-- jQuery CDN / jQuery Download js -->
+ <script src="https://code.jquery.com/jquery-3.6.0.js"
+ integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+        <script>
+            function handleArticleUrlPaste(input_url){
+                var img_url_element=document.getElementById('article-scraped-img-url');
+                var title_element=document.getElementById('article-scraped-title');
+                var desc_element=document.getElementById('article-scraped-description');
+                var article_data_div=document.getElementById('article-scraped-data');
+                var article_img_upload_element=document.getElementById('article-image');
+
+                $.ajax({
+                    headers:{'X-CSRFToken': document.getElementById('csrf').querySelector('input').value},
+                    type: "PUT",
+                    url: '{% url "add_article" %}?url='.concat(input_url),
+
+                    success: function(data){
+                        var ata=data;
+                        if (ata.status == true){
+                            img_url_element.value=ata.img_url;
+                            img_url_element.disabled = false;
+                            title_element.value=ata.title;
+                            desc_element.value=ata.desc;
+                            article_data_div.style.display="block";
+                            article_img_upload_element.disabled = true;
+                        }
+                        else{
+                            alert("Unable to fetch article data, pls enter details manually");
+                            article_data_div.style.display="block";
+                            img_url_element.disabled = true;
+                            article_img_upload_element.disabled = false;
+                        }
+                    },
+                    error: function(data) { 
+                        alert("Unable to fetch article data, pls enter details manually");
+                        article_data_div.style.display="block";
+                        img_url_element.disabled = true;
+                        article_img_upload_element.disabled = false;
+                    },       
+                });
+            }
+        </script>
+
+</body>
+
+</html>
+{% endblock %}

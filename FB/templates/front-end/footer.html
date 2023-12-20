@@ -1,0 +1,212 @@
+{% load static %}
+        <!-- ===== Newsletter Section ====== -->
+        <section class="mt-5rem py-5 bg-extra-dark-blue">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <!-- First Col -->
+                    <div class="col-lg-4">
+                        <!-- <p class="text-white">Share your email address to get latest update from the industry</p>
+                        <h2 class="heading-2 text-white">Newsletter Signup</h2> -->
+                        <ul class="list-unstyled mb-0">
+                            <li class="text-white mb-2">Mobile: <a href="tel:+91 {{home_details.Phone}}">+91 {{home_details.Phone}}</a></li>
+                            <li class="text-white mb-2">Email: <a href="mailto:{{home_details.email}}">{{home_details.email}}</a></li>
+                            <li class="text-white"><a href="mailto:{{home_details.email}}">{{home_details.address}}</a></li>
+                        </ul>
+                    </div>
+                    <!-- Second Col -->
+                    <div class="col-lg-4 mt-4 mt-lg-0">
+                        <p class="text-white">Share your email address to get latest update from the industry</p>
+                        <h2 class="heading-2 text-white fs-20">Newsletter Signup</h2>
+                        <!-- Newsletter Form -->
+                        <div class="mt-3 newsletter-form">
+                            <form  method="post" class="d-flex justify-content-between needs-validation" id="newsletter_form" novalidate>
+                                {% csrf_token %}
+                                <div class="w-100">
+                                    <input type="email" class="form-control" name="email" id="newsletter_email" aria-describedby="emailHelp"
+                                        placeholder="Email" required>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                </div>
+                                <div class="">
+                                    <button type="submit" class="btn">SignUp</button>
+                                </div>
+                                <script>
+                                    let newsletter_form = document.getElementById('newsletter_form'); // selecting the form
+                        
+                                    newsletter_form.addEventListener('submit', function (event) {
+                                        event.preventDefault()
+                                        let data = new FormData(); // 2                               
+                                        
+                                        data.append("email", document.getElementById('newsletter_email').value)
+                                        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+                        
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '{% url "newsletter_form" %}',
+                                            data: data,
+                                            cache: false,
+                                            processData: false,
+                                            contentType: false,
+                                            enctype: 'multipart/form-data',
+                                            success: function () {
+                                                alert('The post has been created!');
+                                                newsletter_form.reset();
+                                                newsletter_form.classList.remove('was-validated');
+                                            },
+                                            error: function (xhr, errmsg, err) {
+                                                console.log(xhr.status + ":" + xhr.responseText)
+                                            }
+                                        })
+                                    })
+                                </script>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Third Col -->
+                    <div class="col-lg-4 mt-4 mt-lg-0 text-lg-end">
+                        <p class="text-white">Stay tuned &amp; get updates</p>
+                        <h2 class="heading-2 text-white fs-20">Follow Franchise Brigade</h2>
+                        <!-- Newsletter Form -->
+                        <div class="mt-3 newsletter-icons">
+                            <ul class="list-unstyled d-flex justify-content-lg-end mb-0">
+                                <li><a href="{{social_data.facebook}}" target="_blank"><i
+                                            class="fa-brands fa-facebook px-2 fs-24"></i></a></li>
+                                <li><a href="{{social_data.instagram}}" target="_blank"><i
+                                            class="fa-brands fa-instagram px-2 fs-24"></i></a></li>
+                                <li><a href="{{social_data.linkedin}}" target="_blank"><i
+                                            class="fa-brands fa-linkedin px-2 fs-24"></i></a></li>
+                                <li><a href="{{social_data.whatsup}}&amp;"
+                                        target="_blank"><i class="fa-brands fa-whatsapp px-2 fs-24"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Bottom Footer ====== -->
+        <footer class="py-3 bg-extra-dark-blue footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4">
+                        <p class="fs-14 mb-0 text-white">Copyright © <span id="current-year"></span> Franchise Brigade </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <ul class="list-unstyled mt-2 mt-lg-0 mb-0 d-flex justify-content-lg-end flex-wrap">
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="{% url 'about-us' %}">About Us</a></li>
+                            <li><a href="{% url 'index' %}">Blog</a></li>
+                            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                            <!-- <li><a href="{% url 'index' %}">Feedback</a></li> -->
+                            <li><a href="{% url 'terms-condition' %}">Terms & conditions</a></li>
+                            <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+                            <li><a href="{% url 'refund-and-cancelletion' %}">Refund & Cancellation</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- ===== FREE ADVICE Form ===== -->
+        <div class="advice-form" id="adviceForm">
+            <button class="btn btn-1" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Free
+                Consultancy</button>
+            <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title fs-18 fw-300" id="offcanvasWithBothOptionsLabel">FREE ADVICE - ASK OUR
+                        EXPERTS</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body mt-5">
+                    <form method="post" id="cadviceform" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="row">
+                            <!-- <div class="col-12 mb-5">
+                                <div class="form-check col-12">
+                                    <input class="form-check-input" type="radio" name="brandRadio" id="brandRadio1"
+                                        checked>
+                                    <label class="form-check-label fs-14" for="brandRadio1">
+                                        List Your Brand
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="brandRadio" id="brandRadio2">
+                                    <label class="form-check-label fs-14" for="brandRadio2">
+                                        Become an Investor
+                                    </label>
+                                </div>
+                            </div> -->
+                            <div class="col-12 mb-3 d-flex">
+                                <label for="name" class="label-icon"><i class="fa-solid fa-user"></i></label>
+                                <input type="text" class="form-control" name="name" id="cname" placeholder="Enter Name" required>
+                            </div>
+                            <div class="col-12 mb-3 d-flex">
+                                <label for="email" class="label-icon"><i class="fa-solid fa-envelope"></i></label>
+                                <input type="email" class="form-control" name="email" id="cemail" placeholder="Enter Email" required>
+                            </div>
+                            <!-- Country Code -->
+                            <div class="col-12 mb-3 d-flex">
+                                <label for="consultancyPhone" class="label-icon"><i class="fa-solid fa-mobile"></i></label>
+                                <input type="tel" class="form-control" name="phone" id="cconsultancyPhone" pattern="[0-9]{10}" placeholder="Enter Mobile" required>
+                            </div>
+                            <!-- /. Country Code -->
+                            <div class="col-12 mb-3 d-flex">
+                                <label for="pincode" class="label-icon"><i class="fa-solid fa-location-dot"></i></label>
+                                <input type="text" class="form-control" name="pin" id="cpincode" placeholder="Enter pincode" required>
+                            </div>
+                            <div class="col-12 mb-3 d-flex">
+                                <label for="message" class="label-icon"><i class="fa-solid fa-comment"></i></label>
+                                <textarea class="w-100 form-control" name="message" id="cmessage" cols="30" rows="2"
+                                    placeholder="Enter Details" required ></textarea>
+                            </div>
+                            <div class="col-12 mt-3 mb-3 text-center">
+                                <button type="submit" class="btn btn-1 fs-16">Ask Our Experts</button>
+                            </div>
+                        </div>
+                        <script>
+                            let adviceform = document.getElementById('cadviceform'); // selecting the form
+                
+                            adviceform.addEventListener('submit', function (event) {
+                                event.preventDefault()
+                                let data = new FormData(); // 2                               
+                                data.append("name", document.getElementById('cname').value)
+                                data.append("email", document.getElementById('cemail').value)
+                                data.append("phone", document.getElementById('cconsultancyPhone').value)
+                                data.append("pin", document.getElementById('cpincode').value)
+                                data.append("message", document.getElementById('cmessage').value)
+                                data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+                
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '{% url "consultancy" %}',
+                                    data: data,
+                                    cache: false,
+                                    processData: false,
+                                    contentType: false,
+                                    enctype: 'multipart/form-data',
+                                    success: function () {
+                                        alert('Form Submitted Successfully');
+                                        adviceform.reset();
+                                        adviceform.classList.remove('was-validated');
+                                    },
+                                    error: function (xhr, errmsg, err) {
+                                        console.log(xhr.status + ":" + xhr.responseText)
+                                    }
+                                })
+                            })
+                        </script>
+                    </form>
+                </div>
+            </div>
+        </div>
+<script>
+    const d = new Date();
+    let year = d.getFullYear();
+    console.log(year);
+    document.getElementById('current-year').innerHTML=year;
+</script>
+    </main>

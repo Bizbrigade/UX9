@@ -1,0 +1,129 @@
+{% extends 'admin-panel/base.html' %}
+{% block content %}
+{% load static %}
+    
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Update Terms and Conditions</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Update Terms</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <!-- form start -->
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {% if msg %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>{{msg}}</strong> 
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="about-content">Update page content</label>
+                                            <textarea class="form-control" name="tc" value="{{home_details.tc}}" rows="4" id="about-content"
+                                                placeholder="Content for about us section">{{home_details.tc}}</textarea>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-1 float-right">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2022 <a href="https://www.techfnatic.com/">TechFnatic</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Franchise Brigade</b>
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="{% static 'admin/js/jquery.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'admin/js/bootstrap.bundle.js' %}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static 'admin/js/jquery.overlayScrollbars.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'admin/js/adminlte.js' %}"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'admin/js/main.js' %}"></script>
+
+    <!-- Summernote -->
+    <script src="{% static 'admin/js/summernote-bs4.js' %}"></script>
+
+
+    <!-- CodeMirror -->
+    <!-- <script src="{% static 'admin/js/codemirror.js' %}"></script> -->
+    <!-- <script src="{% static 'admin/js/css.js' %}"></script> -->
+    <!-- <script src="{% static 'admin/js/xml.js' %}"></script> -->
+    <!-- <script src="{% static 'admin/js/htmlmixed.js' %}"></script> -->
+
+
+
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            // Summernote
+            $('#home-about-content').summernote()
+            $('#about-content').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
+
+</body>
+
+</html>
+{% endblock %}

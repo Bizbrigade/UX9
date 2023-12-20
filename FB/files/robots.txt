@@ -1,0 +1,20 @@
+
+User-agent: Googlebot
+Disallow: 
+User-agent: googlebot-image
+Disallow: 
+User-agent: googlebot-mobile
+Disallow: 
+User-agent: MSNBot
+Disallow: 
+User-agent: Slurp
+Disallow: 
+User-agent: *
+Disallow: 
+Disallow: /cgi-bin/
+Disallow: https://www.franchisebrigade.com/about-us
+Disallow: https://www.franchisebrigade.com/terms-condition
+Disallow: https://www.franchisebrigade.com/privacy_policy
+Disallow: https://www.franchisebrigade.com/refund-and-cancelletion
+Disallow: https://www.franchisebrigade.com/admin
+Sitemap: https://www.franchisebrigade.com/sitemap.xml

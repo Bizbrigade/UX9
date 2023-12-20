@@ -1,0 +1,86 @@
+/* ===== Franchise directory Page CSS ===== */
+.f-directory-page .f-tabs{
+    position: sticky;
+    top: 0;
+}
+.f-directory-page .f-tabs button{
+    /* display: block;
+    padding: .5rem 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    text-decoration: none; */
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    color: #212529 !important;
+    font-weight: 700;
+    background-color: transparent !important;
+    text-align: left;
+    padding: 8px 8px;
+    margin: 0 4px;
+    border-bottom: 1px solid rgb(33 37 41 / 32%) !important;
+}
+.f-directory-page .f-tabs button:hover, .f-tabs button.active{
+    background-color: #00b7eb !important;
+    color: #fff !important;
+}
+
+/* ===== Category pages CSS ===== */
+.category-card{
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: var(--second-box-shadow);
+    /* padding: 30px 20px; */
+    padding: 15px 15px;
+    text-align: center;
+    position: relative;
+    top: 0;
+    transition: .2s ease-in-out;
+    height: 100%;
+}
+.category-card:hover{
+    top: -5px;
+}
+.category-card img {
+    /* height: 10rem; */
+    width: 80%;
+    margin: auto;
+    height: 7rem;
+    object-fit: contain;
+}
+.category-card .card-title {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+.category-card .read-more-btn {
+    display: inline-block;
+    background-color: #4169e1;
+    color: #f8f9fa !important;
+    border-radius: 25px;
+    /* padding: 8px 22px; */
+    padding: 5px 15px;
+    border: 1px solid transparent;
+    line-height: 1.5;
+    font-weight: 400;
+    /* font-size: 16px; */
+    font-size: 13px;
+    font-family: var(--primary-font);
+}
+
+@media (max-width: 991px){
+    .f-directory-page .f-tabs{
+        position: static;
+    }
+}
+@media (max-width: 575px){
+    /* Category pages css */
+    .category-card {
+        padding: 10px 5px;
+    }
+    .category-card img {
+        height: 5rem;
+    }
+    .category-card .card-title {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,79 @@
+{% extends 'front-end/base.html' %}
+
+{% block title %} Top Fetured Brands  {% endblock title %}
+
+{% block content %}
+{% load static %}
+   <!-- ===== Banner Section ====== -->
+   <section class="banner-sec overflow-x-hidden">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 banner-slider">
+                <img src="{{home_details.banner1}}" alt="Banner Image">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- ===== Exclusive Brands Section ====== -->
+        <section class="pt-4rem exclusive-brands">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="heading-2 text-center fs-48 fw-500">Top Featured Brands</h2>
+                    </div>
+                </div>
+                <div class="row g-4 mt-5 d-flex justify-content-center">
+                    <!-- Card-1 -->
+                    {% for i in all_featured_brands %}
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="brands-card">
+                            <div class="brands-box sm-height">
+                                <a href="{% url 'front_brand' i.brand_slug %}"><img
+                                        src="{{i.brand_logo}}"
+                                        class="card-img-top" alt="News Image"></a>
+                                <hr class="m-0">
+                                <div class="card-body">
+                                    <p class="brand-category">{{i.category_id.category_name}}</p>
+                                    <h3 class="fs-20">Tall Blonde French</h3>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="card-info">Outlets So Far</div>
+                                        <div class="card-info-amt">{{i.brand_outlets}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="card-info">Investment Range</div>
+                                        <div class="card-info-amt">{{i.brand_inv_min}}{{i.brand_inv_min_type}}-{{i.brand_inv_max}}{{i.brand_inv_max_type}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="card-info">Area Range</div>
+                                        <div class="card-info-amt">{{i.brand_floor_area_min}}-{{i.brand_floor_area_max}} sq.ft</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="card-info">Preferred location </div>
+                                        <div class="card-info-amt">{{i.brand_fre_location_masters}}</div>
+                                    </div>
+                                    <a href="{% url 'front_brand' i.brand_slug  %}" class="read-more-btn">Read
+                                        More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+{% include "front-end/footer.html" %}
+
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="{% static '/js/bootstrap.js' %}"></script>
+
+    <!-- Custom JS -->
+    <script src="{% static '/js/main.js' %}"></script>
+    {% include "front-end/scripts.html" %}
+</body>
+
+</html>
+{% endblock %}

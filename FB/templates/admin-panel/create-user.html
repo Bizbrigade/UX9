@@ -1,0 +1,139 @@
+{% extends 'admin-panel/base.html' %}
+{% load static %}
+{% block content %}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Create User</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Create User</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <div class="register-box m-auto">
+                                <div class="card">
+                                    <div class="card-body register-card-body">
+                                        <p class="login-box-msg"><strong>Create a new User</strong></p>
+                                        <form method="POST" enctype="multipart/form-data">
+                                            {%csrf_token%}
+                                            {% if msg%}
+                                                <h5 style="color:'{{color}}'; display:'flex'; justify-content:'center'; ">{{msg}}</h5>
+                                            {%endif%}
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" name="firstname" placeholder="First name"
+                                                    required>
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-user"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" name="lastname" placeholder="Last name"
+                                                    required>
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-user"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-envelope"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <h4 class="fs-20">Access management</h4>
+                                                {% for key, value in all_permissions.items %}
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            id="{{ key }}" name="access[]" value="{{ key }}" required>
+                                                        <label for="{{ key }}"
+                                                            class="custom-control-label fw-400">{{ value }} </label>
+                                                    </div>
+                                                {% endfor %}
+                                                
+                                            </div>
+                                            <p> Default Password is : <b>1234567890</b></p>
+                                            <button type="submit" class="btn btn-primary btn-block">Create</button>
+                                        </form>
+                                    </div>
+                                    <!-- /.form-box -->
+                                </div><!-- /.card -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+     
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.js'%}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'js/bootstrap.bundle.js'%}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static 'js/jquery.overlayScrollbars.js'%}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'js/adminlte.js' %}"></script>
+    
+
+    <!-- Min One Checkbox required -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var checkboxes = $('.custom-control-input');
+            checkboxes.change(function () {
+                if ($('.custom-control-input:checked').length > 0) {
+                    checkboxes.removeAttr('required');
+                } else {
+                    checkboxes.attr('required', 'required');
+                }
+            });
+        });
+    </script>
+    <!-- Submit Form Popup -->
+    <script>
+        function formSubmit() {
+            alert("The form was submitted");
+        }
+    </script>
+
+
+{% endblock content %}

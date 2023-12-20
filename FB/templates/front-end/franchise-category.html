@@ -1,0 +1,213 @@
+{% extends 'front-end/base.html' %}
+
+{% block title %} Franchise Directory {% endblock title %}
+
+{% block content %}
+{% load static %}
+<!-- ===== Banner Section ====== -->
+<section class="banner-sec overflow-x-hidden">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 banner-slider">
+                <img src="{{home_details.banner1}}" alt="Banner Image">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Franchise All Categories Section ====== -->
+<section class="pt-4rem f-directory-page">
+    <div class="container">
+        <!-- Franchise dirctory tabs -->
+        <div class="row d-flex align-items-start">
+            <div class="col-lg-3 f-tabs">
+                <div>
+                    <h3 class="border-left-pink text-light-black fs-20 ps-1">Directory</h3>
+                </div>
+                <!--  -->
+                <!--  -->
+                <div class="nav flex-column nav-pills me-3 my-4" id="v-pills-tab" role="tablist"
+                    aria-orientation="vertical">
+                    <!-- <button class="nav-link active" id="v-pills-{{j.category_name}}-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-{{j.category_name}}" type="button" role="tab"
+                                aria-controls="v-pills-{{j.category_name}}" aria-selected="true">Automotive</button> -->
+                    {% for i in category_data %}
+                    <button class="nav-link" id="v-pills-{{i.id}}-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-{{i.id}}" type="button" role="tab" aria-controls="v-pills-{{i.id}}"
+                        aria-selected="false">{{i.category_name}}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-9 mt-3 mt-lg-0">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <!-- Automotive -->
+                    {% for j in category_data %}
+                    {% if category_data.0.id == j.id %}
+                    <div class="tab-pane fade show active" id="v-pills-{{j.id}}" role="tabpanel"
+                        aria-labelledby="v-pills-{{j.category_id.id}}-tab">
+                        {% else %}
+                        <div class="tab-pane fade " id="v-pills-{{j.id}}" role="tabpanel"
+                            aria-labelledby="v-pills-{{j.category_id.id}}-tab">
+                            {% endif %}
+                            <!-- <div class=""> -->
+                            <!-- Category Heading -->
+                            <div>
+                                <!-- <h3 class="text-light-black text-center fs-28">Automotive</h3> -->
+                                <h3 class="heading-2 text-underline right-arrow">{{j.category_name}}</h3>
+                            </div>
+                            <!-- Category cards -->
+                            <div class="row g-1 mt-1 mt-lg-3 d-flex justify-content-center sm-height-parent">
+                                <!-- Card-1 -->
+
+                                {% for l in brand_data%}
+                                {%if l.category_id.id == j.id %}
+                                <div class="col-6 col-md-4">
+                                    <div class="brands-card h-100">
+                                        <div class="brands-box sm-height h-100">
+                                            <a href="{% url 'front_brand' l.brand_slug %}?type=eb"><img src="{{l.brand_logo}}"
+                                                    class="card-img-top" alt="Brand Image"></a>
+                                            <hr class="m-0">
+                                            <div class="card-body d-flex flex-column justify-content-between">
+                                                <h3 class="fs-20">{{l.brand_name}}</h3>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="card-info">Since</div>
+                                                    <div class="card-info-amt">
+                                                        {{l.brand_op_cmd_yr}}
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="card-info">Outlets So Far</div>
+                                                    <div class="card-info-amt">
+                                                        {{l.brand_outlets}}
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="card-info">Investment Range</div>
+                                                    <div class="card-info-amt">
+                                                        {{l.brand_inv_min}}{{l.brand_inv_min_type}}-{{l.brand_inv_max}}{{l.brand_inv_max_type}}
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="card-info">Area Range</div>
+                                                    <div class="card-info-amt">
+                                                        {{l.brand_floor_area_min}}-{{l.brand_floor_area_max}} sq.ft
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="card-info">ROI</div>
+                                                    <div class="card-info-amt">
+                                                        {{l.brand_payback_min}}{{l.brand_payback_min_type}}-{{l.brand_payback_max}}{{l.brand_payback_max_type}}
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="read-more-btn" data-brand-type="eb" data-category-id="{{j.id}}" data-brand-id="{{l.id}}" data-bs-toggle="modal"
+                                                    data-bs-target="#knowMoreModal">Know More
+                                                </button>
+                                                <!-- <button type="button" class="read-more-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#knowMoreModal">Know More CAT: {{ j.id}}, BRD: {{ l.id }} DASH: {{l.category_id.id}}
+                                                </button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {%endif%}
+                                {% endfor %}
+                                
+                                <!-- Non exlusive brands  -->
+                                {% if non_exclusive_brands %}
+                                    {% for neb in non_exclusive_brands %}
+                                        {%if neb.category_id == j.id %}
+                                        <div class="col-6 col-md-4">
+                                            <div class="brands-card h-100">
+                                                <div class="brands-box sm-height h-100">
+                                                    <a href="#"><img src="{{neb.brand_logo}}"
+                                                            class="card-img-top" alt="Brand Image"></a>
+                                                    <hr class="m-0">
+                                                    <div class="card-body d-flex flex-column justify-content-between">
+                                                        <h3 class="fs-20">{{neb.brand_name}}</h3>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="card-info">Since</div>
+                                                            <div class="card-info-amt">
+                                                                {{ neb.yr_of_establish}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="card-info">Outlets So Far</div>
+                                                            <div class="card-info-amt">
+                                                                {{neb.brand_outlets}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="card-info">Investment Range</div>
+                                                            <div class="card-info-amt">
+                                                                {{neb.brand_inv_min}}{{neb.brand_inv_min_type}}-{{neb.brand_inv_max}}{{neb.brand_inv_max_type}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="card-info">Area Range</div>
+                                                            <div class="card-info-amt">
+                                                                {{neb.brand_floor_area_min}}-{{neb.brand_floor_area_max}} sq.ft
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="card-info">ROI</div>
+                                                            <div class="card-info-amt">
+                                                            {{neb.brand_payback_min}}{{neb.brand_payback_min_type}}-{{neb.brand_payback_max}}{{neb.brand_payback_max_type}}
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" class="read-more-btn" data-brand-type="neb" data-category-id="{{j.id}}" data-brand-id="{{neb.id}}" data-bs-toggle="modal"
+                                                            data-bs-target="#knowMoreModal">Know More
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                    {% endfor %}
+                                {% endif %}
+                                <!-- Card-3 -->
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                        {% endfor %}
+                        <!-- enquiry form -->
+                            {% include "front-end/brand-inquiry-form.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+
+
+{% include "front-end/footer.html" %}
+{% include "front-end/scripts.html" %}
+</main>
+
+<!-- jQuery JS -->
+<!-- <script src="{% static '/js/jquery.js' %}"></script> -->
+
+<!-- Bootstrap JS -->
+<!-- <script src="{% static '/js/bootstrap.js' %}"></script>
+    <script src="{% static '/js/bootstrap.bundle.js' %}"></script> -->
+
+<!-- Main JS -->
+<!-- <script src="{% static '/js/main.js' %}"></script> -->
+
+
+
+
+<!-- jQuery JS -->
+<script src="{% static '/js/jquery.js' %}"></script>
+
+<!-- SlickSlider JS -->
+<script src="{% static '/js/slick.min.js' %}"></script>
+
+<!-- Bootstrap JS -->
+<script src="{% static '/js/bootstrap.js' %}"></script>
+
+<!-- Custom JS -->
+<script src="{% static '/js/main.js' %}"></script>
+
+
+{% endblock %}

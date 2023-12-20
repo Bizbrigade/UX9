@@ -1,0 +1,215 @@
+{% extends 'admin-panel/base.html' %}
+{% block content %}
+{% load static %}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Invester Registration Single Form</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'list_ur_brand_data' %}">Registration Form</a>
+                                </li>
+                                <li class="breadcrumb-item active">Details</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Brand Registation Table -->
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <table class="table table-bordered text-left">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 300px">Full Name</th>
+                                                <td>{{invester_data.full_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">In case of Body Corporate (Director/Partner
+                                                    Name)</th>
+                                                <td>{{invester_data.corporate_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Country</th>
+                                                <td>{{invester_data.country_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">State</th>
+                                                <td>{{invester_data.state_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">City</th>
+                                                <td>{{invester_data.city_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Pin Code</th>
+                                                <td>{{invester_data.pincode}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Complete Address</th>
+                                                <td>{{invester_data.full_address}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">PAN and/or CIN</th>
+                                                <td>{{invester_data.pan_number}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Mobile Number</th>
+                                                <td>{{invester_data.mobile_number}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Email Id</th>
+                                                <td>{{invester_data.email}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Website</th>
+                                                <td>{{invester_data.website}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Academic Qualification</th>
+                                                <td>{{invester_data.academic_qualification}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Age as on date of signing this form</th>
+                                                <td>{{invester_data.age}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Current Nature of Business</th>
+                                                <td>{{invester_data.nature_bussiness}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px"> Number of years of experience</th>
+                                                <td>{{invester_data.experiance}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Profile Interested</th>
+                                                <td>{{invester_data.profile_intrested}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Nature of the arrangement</th>
+                                                <td>{{invester_data.no_of_arrangment}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Choice of Industry</th>
+                                                <td>{{invester_data.category_id.category_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Business Partner Name</th>
+                                                <td>{{invester_data.bpt_full_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Business Partner Mobile Number</th>
+                                                <td>{{invester_data.bpt_mobile_no}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Business Partner Email</th>
+                                                <td>{{invester_data.bpt_email}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Business Partner PAN Number</th>
+                                                <td>{{invester_data.bpt_pan}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Reason of choosing the industry</th>
+                                                <td>{{invester_data.bpt_resion_for_choose}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Do you hold any prior experience  </th>
+                                                <td>{{invester_data.industry_exp_type}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px"> Elaborate your prior experience</th>
+                                                <td>{{invester_data.elaborate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Investment Range</th>
+                                                <td>{{invester_data.franchise_inv_range}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Trade Association Membership Details</th>
+                                                <td>{{invester_data.membership_detail}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">How do you intend to finance the franchise business</th>
+                                                <td>{{invester_data.finance_type}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Your preferred location for operating the business</th>
+                                                <td>{{invester_data.preferd_location}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">How do you intend to run your business you are applying for herein</th>
+                                                <td>LLP</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">How soon you are intending to start up the business applied for herein.</th>
+                                                <td>{{invester_data.full_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Do you already have a premises to run the franchising business</th>
+                                                <td>{{invester_data.bussiness_run_type}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Details</th>
+                                                <td>{{invester_data.bussiness_run_type_details}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="fs-18" colspan="2">1. Business Reference</th>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Full Name</th>
+                                                <td>{{invester_data.bussiness_reference_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Phone Number</th>
+                                                <td>{{invester_data.bussiness_reference_phone}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Email Address</th>
+                                                <td>{{invester_data.bussiness_reference_email}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="fs-18" colspan="2">1. Personal Reference</th>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Full Name</th>
+                                                <td>{{invester_data.personal_reference_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Phone Number</th>
+                                                <td>{{invester_data.personal_reference_phone}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 300px">Email Address</th>
+                                                <td>{{invester_data.personal_reference_email}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /. Brand Registation Table -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+{% endblock %}

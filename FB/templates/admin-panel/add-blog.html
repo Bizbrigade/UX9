@@ -1,0 +1,314 @@
+{% extends 'admin-panel/base.html' %}
+{% load static %}
+{% block content %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Add Blog</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Add Blog</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-header p-0 border-bottom-0">
+                                    <ul class="progressbar nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <span class="nav-link active" id="tab-first" step="1">Basic Info</span>
+                                        </li>
+                                        <li class="nav-item">
+                                            <span class="nav-link" id="tab-second" step="2">SEO & Analytics</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <form method="post" enctype="multipart/form-data">
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-four-tabContent">
+                                        <!-- First -->
+                                        <div class="tab-pane fade active show" id="step-1"
+                                            role="tabpanel" aria-labelledby="tab-first">
+                                            <!-- form start -->
+                                                {% csrf_token %}
+                                                {% if msg %}
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                    <strong>{{msg}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                {% endif %}
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="blog-head">Blog Title :</label>
+                                                        <input type="text" name="blog_title"  class="form-control" id="blog-head"
+                                                            placeholder="Blog title write here" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="blog-image">Blog image :</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="blog_image" class="custom-file-input" id="blog-image"
+                                                                    accept="image/*" required>
+                                                                <label class="custom-file-label" for="blog-image">Choose
+                                                                    Image</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="blog-content">Blog content</label>
+                                                        <textarea class="form-control" rows="4" name="blog_content" id="blog-content"
+                                                            placeholder="Content for the blog"></textarea>
+                                                    </div>
+                                                </div>
+                                                <!-- /.card-body -->
+            
+                                                <div class="card-footer">
+                                                    <button type="button" class="btn btn-1 btn-js float-right" step_number="2">Next</button>
+                                                </div>
+                                            
+                                        </div>
+                                        <!-- Second -->
+                                        <div class="tab-pane fade" id="step-2" role="tabpanel"
+                                            aria-labelledby="tab-second">
+                                            <div class="form-group">
+                                                <label for="blog_seo_title">Blog SEO Title
+                                                    :</label>
+                                                <input type="text" name="blog_seo_title" class="form-control FormDataInput" id="blog_seo_title"
+                                                    placeholder="Blog SEO Title" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="blog_seo_desc">Blog SEO Description
+                                                    :</label>
+                                                <input type="text" name="blog_seo_description" class="form-control FormDataInput" id="blog_seo_desc"
+                                                    placeholder="Blog SEO Description">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="blog_seo_keyword">Blog SEO Keywords
+                                                    :</label>
+                                                <input type="text" name="blog_seo_keywords" class="form-control FormDataInput" id="blog_seo_keyword"
+                                                    placeholder="Blog SEO Keywords separated by comma(,)" >
+                                            </div>
+                                                
+                                         <!-- Script -->
+                                            <div class="form-group">
+                                                <label for="aboutBsdfsadf"> Blog Bot/Script :</label>
+                                                <textarea class="form-control" name="blog_script" rows="8" id="fd"
+                                                    placeholder="Paste your script here (optional)"></textarea>
+                                            </div>
+
+                                                <div class="card-footer">
+                                                    <button type="button" class="btn btn-1 btn-js float-left" step_number="1">Prev</button>
+                                                    <button type="submit" class="btn btn-1 float-right">Create</button>
+                                                </div>                                            
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+                            </form>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2022 <a href="https://www.techfnatic.com/">TechFnatic</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Franchise Brigade</b>
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="{% static '/admin/js/jquery.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static '/admin/js/bootstrap.bundle.js' %}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static '/admin/js/jquery.overlayScrollbars.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static '/admin/js/adminlte.js' %}"></script>
+    <!-- Custom JS -->
+    <script src="{% static '/admin/js/main.js' %}"></script>
+
+    <!-- Summernote -->
+    <script src="{% static '/admin/js/summernote-bs4.js' %}"></script>
+    <script>
+        $(function () {
+            // Summernote
+            $('#blog-content').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
+ </script>
+ <script type="text/javascript">
+     function GetDynamicTextBox(value,id_value) {
+         return '<input name = "DynamicTextBox" id="'+id_value+'" onkeyup="wordLimit(this, 1);"  type="text" value = "' + value + '" />' +
+             '<input type="button" value="Remove" onclick = "RemoveTextBox(this)" />'
+     }
+     
+     function AddTextBox() {
+         var div = document.createElement('DIV');  
+         div.innerHTML = GetDynamicTextBox("","seo_add_list");
+         document.getElementById("TextBoxContainer").appendChild(div);
+         
+     }
+     function RemoveTextBox(div) {
+         document.getElementById("TextBoxContainer").removeChild(div.parentNode);
+     }
+
+     function RecreateDynamicTextboxes() {
+         var values = eval('<%=Values%>');
+         if (values != null) {
+             var html = "";
+             for (var i = 0; i < values.length; i++) {
+                 html += "<div>" + GetDynamicTextBox(values[i]) + "</div>";
+             }
+             document.getElementById("TextBoxContainer").innerHTML = html;
+         }
+     }
+     window.onload = RecreateDynamicTextboxes;
+ </script>
+
+<script>
+ function wordLimit(inp, limit){
+ var val = inp.value
+ var words = val.split(/\s+/);
+ var legal = "";
+ for(i = 0; i < words.length; i++) {
+     if(i < limit) {
+         legal += words[i] + " ";
+     }
+     if(i >= limit) {
+         inp.value = legal.trim();
+     }
+ }
+}
+</script>
+ <!-- Page specific script -->
+ <script>
+        
+    /**
+     * Define a function to navigate betweens form steps.
+     * It accepts one parameter. That is - step number.
+     */
+     const navigateToFormStep = (stepNumber) => {
+        /**
+         * Hide all form steps.
+         */
+        document.querySelectorAll(".tab-pane").forEach((formStepElement) => {
+            formStepElement.classList.remove("active");
+        });
+        document.querySelectorAll(".tab-pane").forEach((formStepElement) => {
+            formStepElement.classList.remove("show");
+        });
+        /**
+         * Mark all form steps as unfinished.
+         */
+        document.querySelectorAll(".nav-link").forEach((formStepHeader) => {
+            // formStepHeader.classList.add("");
+            formStepHeader.classList.remove("active");
+        });
+        /**
+         * Show the current form step (as passed to the function).
+         */
+        console.log("#step-" + stepNumber);
+        document.querySelector("#step-" + stepNumber).classList.add("active");
+        document.querySelector("#step-" + stepNumber).classList.add("show");
+        /**
+         * Select the form step circle (progress bar).
+         */
+        const formStepCircle = document.querySelector('span[step="' + stepNumber + '"]');
+        /**
+         * Mark the current form step as active.
+         */
+        // formStepCircle.classList.remove("");
+        formStepCircle.classList.add("active");
+        /**
+         * Loop through each form step circles.
+         * This loop will continue up to the current step number.
+         * Example: If the current step is 3,
+         * then the loop will perform operations for step 1 and 2.
+         */
+        for (let index = 0; index < stepNumber; index++) {
+            /**
+             * Select the form step circle (progress bar).
+             */
+            const formStepCircle = document.querySelector('span[step="' + index + '"]');
+            /**
+             * Check if the element exist. If yes, then proceed.
+             */
+            if (formStepCircle) {
+                console.log(index)
+                /**
+                 * Mark the form step as completed.
+                 */
+                formStepCircle.classList.add("active");
+            }
+        }
+    };
+    /**
+     * Select all form navigation buttons, and loop through them.
+     */
+    document.querySelectorAll(".btn-js").forEach((formNavigationBtn) => {
+        /**
+         * Add a click event listener to the button.
+         */
+        formNavigationBtn.addEventListener("click", () => {
+            /**
+             * Get the value of the step.
+             */
+            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
+            // console.log(stepNumber);
+            /**
+             * Call the function to navigate to the target form step.
+             */
+            navigateToFormStep(stepNumber);
+        });
+    });
+    
+        </script>
+
+
+</body>
+
+</html>
+{% endblock %}

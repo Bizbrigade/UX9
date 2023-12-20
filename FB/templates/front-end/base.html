@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title and Favicon -->
+    <title>{% block title %}{% endblock title %} Franchise Brigade</title>
+    <!-- <title>Franchise Brigade</title> -->
+    {% block page_meta_tags %}
+    {% endblock page_meta_tags %}
+    
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.png' %}">
+    <!-- Font-awesome CSS -->
+    <link rel="stylesheet" href="{% static '/css/all.min.css' %}">
+
+    <!-- Slick Slider CSS -->
+    <link rel="stylesheet" href="{% static '/css/slick.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}">
+
+    <!-- For country code -->
+    <link rel="stylesheet" href="{% static '/css/intlTelInput.css' %}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static '/css/base.css' %}">
+    <link rel="stylesheet" href="{% static '/css/index.css' %}">
+    <link rel="stylesheet" href="{% static '/css/form.css' %}">
+    <link rel="stylesheet" href="{% static '/css/card.css' %}">
+    <link rel="stylesheet" href="{% static '/css/franchise-directory.css' %}">
+
+
+
+    <style>
+        .privacy-policy .col-md-10 div:last-child p:last-child {
+            margin-bottom: 0rem !important;
+        }
+
+        .terms-conditions .col-md-10 div:last-child p:last-child {
+            margin-bottom: 0rem !important;
+        }
+
+        .refund-cancellation .col-md-10 div:last-child p:last-child {
+            margin-bottom: 0rem !important;
+        }
+    </style>
+    <!-- <style>
+        .refund-cancellation .col-md-10 div:last-child p:last-child {
+            margin-bottom: 0rem !important;
+        }
+    </style> -->
+    <!-- <style>
+        .terms-conditions .col-md-10 div:last-child p:last-child {
+            margin-bottom: 0rem !important;
+        }
+    </style> -->
+    {% block headbots %}
+    {% endblock headbots %}
+
+    {% for tob in head_bots %}
+        {{ tob.bot_script|safe }}
+    {% endfor %}
+
+
+</head>
+
+<body>
+    <main>
+        <!-- ===== Header Section With Franchise Directory Dropdown ====== -->
+        <header id="navigation">
+            <nav class="navbar navbar-expand-lg p-0">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'index' %}"><img src="{{home_details.logo}}" class="logo-img"
+                            alt="Logo Image"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <img src="{% static '/images/icon-bars.png' %}" style="width: 50px;" alt="Toggler Icon">
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-0 w-100 justify-content-center">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                            </li>
+                            <li class="nav-item dropdown custom-scrollbar">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Franchise Category
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    {% for i in category_data %}
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'front_category' pk=i.category_slug %}">{{i.category_name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'about-us' %}">About Us</a>
+                            </li>
+                        </ul>
+                        <ul class="list-unstyled d-flex my-2 my-lg-0 left-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Register Yourself
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{% url 'list_your_brand' %}">List Your Brand</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{% url 'become_an_investor' %}">Become an
+                                            Investor</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- <li class="btn btn-1 ms-2">
+                                <a href="{{social_data.whatsup}}" target="_blank"><i
+                                        class="fa-brands fa-whatsapp"></i></a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    
+        <!--  BOT SCRIPTS  -->
+    {% for tob in body_bots %}
+        {{ tob.bot_script|safe }}
+    {% endfor %}
+      
+    {% block content %}
+
+        {% endblock %}
+
+        <!-- Adding axios script tag here-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+        <!-- jQuery JS -->
+        <script src="{% static '/js/jquery.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+            integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+        <!-- SlickSlider JS -->
+        <script src="{% static '/js/slick.min.js' %}"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="{% static '/js/bootstrap.js' %}"></script>
+        <!-- <script src="{% static '/js/bootstrap.bundle.js' %}"></script> -->
+        <!-- Custom JS -->
+        <script src="{% static '/js/main.js' %}"></script>
+
+        <!-- For country code -->
+        <script src="{% static '/js/intlTelInput.js' %}"></script>
+        <script>
+            // First Input Field
+            var input = document.querySelector("#consultancyPhone");
+            var input = document.querySelector("#phone");
+            var input = document.querySelector("#contact_phone");
+
+            window.intlTelInput(input, {
+                separateDialCode: true,
+                initialCountry: "in",
+                // excludeCountries: ["us"],
+                utilsScript: "{% static 'build/js/utils.js' %}",
+            });
+        </script>
+        <!-- Bootstrap Validation -->
+        <script>
+            (() => {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                const forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })()
+        </script>
+        <!-- contact_form Submit JS -->
+        <script>
+            let contactForm = document.getElementById('contact_form'); // selecting the form
+
+            contactForm.addEventListener('submit', function (event) {
+                event.preventDefault()
+                let data = new FormData(); // 2
+                data.append("full_name", document.getElementById('full_name').value)
+                data.append("mobile", document.getElementById('contact_phone').value)
+                data.append("email", document.getElementById('contact_email').value)
+                data.append("investment", document.getElementById('contact_InvestmentAmount').value)
+                data.append("category_id", document.getElementById('contact_industry').value)
+                data.append("details", document.getElementById('contact_message').value)
+                data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+                console.log(data)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "contact" %}',
+                    data: data,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    enctype: 'multipart/form-data',
+                    success: function () {
+                        alert('Form Submitted Successfully');
+                        contactForm.reset();
+                        contactForm.classList.remove('was-validated');
+                    },
+                    error: function (xhr, errmsg, err) {
+                        console.log(xhr.status + ":" + xhr.responseText)
+                    }
+                })
+            })
+        </script>
+        
+        <!-- Country, State and City Code -->
+        <script src="{% static '/js/country-code.js' %}"></script>
+        <!-- clone js -->
+        <script src="{% static '/js/clone.js' %}"> </script>
+

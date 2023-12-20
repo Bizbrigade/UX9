@@ -1,0 +1,90 @@
+{% extends 'admin-panel/base.html' %}
+{% block content %}
+{% load static %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    
+    {% if category_requests or brand_requests %}
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0"> Category / Brand / Blog Approval Requests</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                        <li class="breadcrumb-item active">Approval requests</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Info boxes -->
+                <div class="row">
+                   
+                    <!-- Category requests -->
+                    {% for cat_req in  category_requests %}
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="brands-card p-0 h-100">
+                            <div class="brands-box h-100">
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <h3 class="fs-16 text-center"> category {{ cat_req.task_type }} approval request </h3>
+                                    <div class="text-center">
+                                        <a href="{% url 'approval_requests' %}?for=category&id={{cat_req.id}}" class="read-more-btn">Take action</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                
+                    {% for brand_req in  brand_requests %}
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="brands-card p-0 h-100">
+                                <div class="brands-box h-100">
+                                    <div class="card-body d-flex flex-column justify-content-between">
+                                        <h3 class="fs-16 text-center"> brand {{ brand_req.task_type }} approval request </h3>
+                                        <div class="text-center">
+                                            <a href="{% url 'approval_requests' %}?for=brand&id={{brand_req.id}}" class="read-more-btn">Take action</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                    {% for blog_req in  blog_requests %}
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="brands-card p-0 h-100">
+                            <div class="brands-box h-100">
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <h3 class="fs-16 text-center"> blog {{ blog_req.task_type }} approval request </h3>
+                                    <div class="text-center">
+                                        <a href="{% url 'approval_requests' %}?for=blog&id={{blog_req.id}}" class="read-more-btn">Take action</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                </div>
+            </div>
+        </section>    
+
+    {% else %}
+        <br><br><br><br><br><br><br><br><br><br>
+        <p style="text-align: center;"> No Approval Requests Currently </p>
+    {% endif %}
+
+</div>
+                             
+{% endblock content %}

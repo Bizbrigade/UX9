@@ -1,0 +1,492 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Franchise Brigade Dashboard</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static '/admin/css/all.css' %}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{% static '/admin/css/OverlayScrollbars.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static '/admin/css/adminlte.css' %}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{% static '/admin/css/summernote-bs4.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static '/admin/css/style.css' %}">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" id="body">
+    <div class="wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__wobble" src="{{home_details.logo}}" alt="AdminLTELogo" height="60" width="60">
+            <h1>Franchise Brigade</h1>
+        </div>
+        {% include "admin-panel/navbar-sidebar.html" %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Update Non Exclusive Brand</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Update Brand</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {% if msg %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>{{msg}}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endif %}
+                                    <!-- card-body -->
+                                    <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="bname">Brand Name :</label>
+                                                <input type="text" name="brand_name" class="form-control" id="bname"
+                                                    placeholder="Write your brand name" value="{{ edit_brand.brand_name }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="brandLogo">Brand Logo :</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="brand_logo" class="custom-file-input"
+                                                            id="brandLogo" accept="image/*"  >
+                                                        <label class="custom-file-label" for="brandLogobrandLogo">Brand
+                                                            Logo size should be
+                                                            200*200 px</label>
+                                                    </div>
+                                                </div>
+                                                <small class="form-text">Upload logo 200*200 px for best
+                                                    view</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="brand-category">Brand Category</label>
+                                                <select class="form-control" name="category_id" id="">
+                                                    {% for i in view_category %}
+                                                    <option value="{{i.id}}" {% if edit_brand.category_id == i.id %} selected {% endif %}>{{i.category_name}} </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="since">Since</label>
+                                                <input type="number" name="brand_since" class="form-control" id="since"
+                                                    placeholder="When Brand Starts" value="{{ edit_brand.yr_of_establish }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="outlets">Outlets So Far</label>
+                                                <input type="number" name="brand_outlets" class="form-control"
+                                                    id="outlets" placeholder="Outlets " value="{{ edit_brand.brand_outlets }}"  required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="min">Investment (In INR) :</label>
+                                                <div class="d-flex">
+                                                    <div class="d-flex align-items-center">
+                                                        <label class="mr-2 fw-500 mw-fit-content" for="min">Min
+                                                            :</label>
+                                                        <input type="number" name="brand_inv_min" value="{{ edit_brand.brand_inv_min }}"
+                                                            class="form-control w-100px" id="min" placeholder="Min"
+                                                            required>
+                                                        <select name="brand_inv_min_type" class="form-control">
+                                                            <option value="Lac" {% if edit_brand.brand_inv_min_type == 'Lac' %} selected {% endif %}>Lac</option>
+                                                            <option value="Cr" {% if edit_brand.brand_inv_min_type == 'Cr' %} selected {% endif %}>Cr</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="d-flex align-items-center ml-4">
+                                                        <label class="mr-2 fw-500 mw-fit-content" for="max">Max
+                                                            :</label>
+                                                        <input type="number" name="brand_inv_max" value="{{ edit_brand.brand_inv_max }}"
+                                                            class="form-control w-100px" id="max" placeholder="Max"
+                                                            required>
+                                                        <select name="brand_inv_max_type" class="form-control">
+                                                            <option value="Lac" {% if edit_brand.brand_inv_max_type == 'Lac' %} selected {% endif %}>Lac</option>
+                                                            <option value="Cr" {% if edit_brand.brand_inv_max_type == 'Cr' %} selected {% endif %} >Cr</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="floorAreamin">Floor area requirment (In Sq.ft)
+                                                    :</label>
+                                                <div class="d-flex">
+                                                    <div class="d-flex align-items-center">
+                                                        <label class="mr-2 fw-500 mw-fit-content" for="floorAreamin">Min
+                                                            :</label>
+                                                        <input type="number" name="brand_floor_area_min" value="{{ edit_brand.brand_floor_area_min }}"
+                                                            class="form-control w-100px" id="floorAreamin"
+                                                            placeholder="Min" required>
+                                                    </div>
+                                                    <div class="d-flex align-items-center ml-4">
+                                                        <label class="mr-2 fw-500 mw-fit-content" for="floorAreamax">Max
+                                                            :</label>
+                                                        <input type="number" name="brand_floor_area_max" value="{{ edit_brand.brand_floor_area_max }}"
+                                                            class="form-control w-100px" id="floorAreamax"
+                                                            placeholder="Max" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="payBackPeriodMin">Likely pay back period of capital
+                                                    for a Unit Franchise:</label>
+                                                <div class="d-flex">
+                                                    <div class="d-flex align-items-center">
+                                                        <label class="mr-2 fw-500 mw-fit-content"
+                                                            for="payBackPeriodMin">Min
+                                                            :</label>
+                                                        <input type="number" name="brand_payback_min" value="{{ edit_brand.brand_payback_min }}"
+                                                            class="form-control w-100px" id="payBackPeriodMin"
+                                                            placeholder="Min" required>
+                                                            <select name="brand_payback_min_type" class="form-control">
+                                                                <option value="month" {% if edit_brand.brand_payback_min_type == 'month'%} selected {% endif %} >Month</option>
+                                                                <option value="year" {% if edit_brand.brand_payback_min_type == 'year'%} selected {% endif %} >Year</option>
+                                                            </select>
+                                                    </div>
+                                                    <div class="d-flex align-items-center ml-4">
+                                                        <label class="mr-2 fw-500 mw-fit-content"
+                                                            for="payBackPeriodMax">Max
+                                                            :</label>
+                                                        <input type="number" name="brand_payback_max" value="{{ edit_brand.brand_payback_max }}"
+                                                            class="form-control w-100px" id="payBackPeriodMax"
+                                                            placeholder="Max" required>
+                                                            <select name="brand_payback_max_type" class="form-control">
+                                                                <option value="month"{% if edit_brand.brand_payback_max_type == 'month'%} selected {% endif %}>Month</option>
+                                                                <option value="year" {% if edit_brand.brand_payback_max_type == 'year'%} selected {% endif %} >Year</option>
+                                                            </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="territorialYes">Show this brand on home page?:</label>
+                                                <div class="d-flex">
+                                                    <div class="custom-control custom-radio">
+                                                        <input class="custom-control-input"  type="radio"
+                                                            id="showonhomepageYes" name="show_on_hp" value="Yes" {%if edit_brand.brand_show_on_homepage == "1"%}  checked {% endif %}>
+                                                        <label for="showonhomepageYes"
+                                                            class="custom-control-label">Yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio ml-4">
+                                                        <input class="custom-control-input" type="radio"
+                                                            id="showonhomepageNo" name="show_on_hp" value="No" {%if edit_brand.brand_show_on_homepage == "0"%}  checked {% endif %} >
+                                                        <label for="showonhomepageNo"
+                                                            class="custom-control-label">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        <div class="card-footer">
+                                            <button type="button" class="btn btn-1 float-left bg-red" data-toggle="modal" data-target="#modal-default" fdprocessedid="6w6o0ppe">Delete</button>
+                                            <button type="submit" class="btn btn-1 float-right">Update</button>
+                                        </div>
+                                        <div class="modal fade" id="modal-default" style="display: none;" aria-modal="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header border-0">
+                                                        <h4 class="modal-title">Delete Category</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body py-0">
+                                                        <p>If you delete this category all its brands will be
+                                                            automatically deleted.</p>
+                                                        <small>To confirm this type "DELETE"</small>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-between border-0">
+                                                        <input type="text" class="form-control w-auto" name="Delete_category" id="confirm-btn">
+                                                        <a href="{% url 'delete_non_exclusive_brand' %}?id={{edit_brand.id}}"><button type="button" class="btn btn-1 bg-red" name="Delete_button">DELETE</button></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+
+                                </form>
+
+                                <!-- /.card -->
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2022 <a href="https://www.techfnatic.com/">TechFnatic</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Franchise Brigade</b>
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="{% static '/admin/js/jquery.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static '/admin/js/bootstrap.bundle.js' %}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static '/admin/js/jquery.overlayScrollbars.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static '/admin/js/adminlte.js' %}"></script>
+    <!-- Custom JS -->
+    <script src="{% static '/admin/js/main.js' %}"></script>
+
+    <!-- Summernote -->
+    <script src="{% static '/admin/js/summernote-bs4.js' %}"></script>
+
+    <!-- Page specific script -->
+    <script>
+        const navigateToFormStep = (stepNumber) => {
+            /**
+             * Hide all form steps.
+             */
+            document.querySelectorAll(".tab-pane").forEach((formStepElement) => {
+                formStepElement.classList.remove("active");
+            });
+            document.querySelectorAll(".tab-pane").forEach((formStepElement) => {
+                formStepElement.classList.remove("show");
+            });
+            /**
+             * Mark all form steps as unfinished.
+             */
+            document.querySelectorAll(".nav-link").forEach((formStepHeader) => {
+                // formStepHeader.classList.add("");
+                formStepHeader.classList.remove("active");
+            });
+            /**
+             * Show the current form step (as passed to the function).
+             */
+            console.log("#step-" + stepNumber);
+            document.querySelector("#step-" + stepNumber).classList.add("active");
+            document.querySelector("#step-" + stepNumber).classList.add("show");
+            /**
+             * Select the form step circle (progress bar).
+             */
+            const formStepCircle = document.querySelector('span[step="' + stepNumber + '"]');
+            /**
+             * Mark the current form step as active.
+             */
+            // formStepCircle.classList.remove("");
+            formStepCircle.classList.add("active");
+            /**
+             * Loop through each form step circles.
+             * This loop will continue up to the current step number.
+             * Example: If the current step is 3,
+             * then the loop will perform operations for step 1 and 2.
+             */
+            for (let index = 0; index < stepNumber; index++) {
+                /**
+                 * Select the form step circle (progress bar).
+                 */
+                const formStepCircle = document.querySelector('span[step="' + index + '"]');
+                /**
+                 * Check if the element exist. If yes, then proceed.
+                 */
+                if (formStepCircle) {
+                    console.log(index)
+                    /**
+                     * Mark the form step as completed.
+                     */
+                    formStepCircle.classList.add("active");
+                }
+            }
+        };
+        /**
+         * Select all form navigation buttons, and loop through them.
+         */
+        document.querySelectorAll(".btn-js").forEach((formNavigationBtn) => {
+            /**
+             * Add a click event listener to the button.
+             */
+            formNavigationBtn.addEventListener("click", () => {
+                /**
+                 * Get the value of the step.
+                 */
+                const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
+                console.log(stepNumber);
+                /**
+                 * Call the function to navigate to the target form step.
+                 */
+                navigateToFormStep(stepNumber);
+            });
+        });
+    </script>
+
+
+    <script>
+        $(function () {
+            // Summernote
+            $('#aboutBrand').summernote()
+            $('#whyUs').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
+    <script type="text/javascript">
+
+        function GetDynamicTextBox(value, id_value) {
+            return '<input name="brand_seo_keywords" id="' + id_value + '" onkeyup="wordLimit(this, 1);"  type="text" value = "' + value + '" />' +
+                '<input type="button" value="Remove" onclick = "RemoveTextBox(this)" />'
+        }
+
+
+
+        function AddTextBox() {
+            var div = document.createElement('DIV');
+            div.innerHTML = GetDynamicTextBox("", "seo_add_list");
+            document.getElementById("TextBoxContainer").appendChild(div);
+
+        }
+        function RemoveTextBox(div) {
+            document.getElementById("TextBoxContainer").removeChild(div.parentNode);
+        }
+
+        function RecreateDynamicTextboxes() {
+            var values = eval('<%=Values%>');
+            if (values != null) {
+                var html = "";
+                for (var i = 0; i < values.length; i++) {
+                    html += "<div>" + GetDynamicTextBox(values[i]) + "</div>";
+                }
+                document.getElementById("TextBoxContainer").innerHTML = html;
+            }
+        }
+        window.onload = RecreateDynamicTextboxes;
+    </script>
+
+    <script>
+        function wordLimit(inp, limit) {
+            var val = inp.value
+            var words = val.split(/\s+/);
+            var legal = "";
+            for (i = 0; i < words.length; i++) {
+                if (i < limit) {
+                    legal += words[i] + " ";
+                }
+                if (i >= limit) {
+                    inp.value = legal.trim();
+                }
+            }
+        }
+    </script>
+
+
+    <script>
+        const multipleEvents = (element, eventNames, listener) => {
+            const events = eventNames.split(' ');
+
+            events.forEach(event => {
+                element.addEventListener(event, listener, false);
+            });
+        };
+
+        const fileUpload = () => {
+            const INPUT_FILE = document.querySelector('#upload-files');
+            const INPUT_CONTAINER = document.querySelector('#upload-container');
+            const FILES_LIST_CONTAINER = document.querySelector('#files-list-container');
+            const FILE_LIST = [];
+
+            multipleEvents(INPUT_FILE, 'click dragstart dragover', () => {
+                INPUT_CONTAINER.classList.add('active');
+            });
+
+            multipleEvents(INPUT_FILE, 'dragleave dragend drop change', () => {
+                INPUT_CONTAINER.classList.remove('active');
+            });
+
+            INPUT_FILE.addEventListener('change', () => {
+                const files = [...INPUT_FILE.files];
+
+                files.forEach(file => {
+                    const fileURL = URL.createObjectURL(file);
+                    const fileName = file.name;
+                    const uploadedFiles = {
+                        name: fileName,
+                        url: fileURL
+                    };
+
+
+                    FILE_LIST.push(uploadedFiles);
+                });
+
+                FILES_LIST_CONTAINER.innerHTML = '';
+                FILE_LIST.forEach(addedFile => {
+                    const content = `
+             <div class="form__files-container">
+               <span class="form__text">${addedFile.name}</span>
+               <div>
+                 <a class="form__icon" href="${addedFile.url}" target="_blank" title="Preview">&#128065;</a>
+                 <a class="form__icon" href="${addedFile.url}" title="Download" download>&#11123;</a>
+               </div>
+             </div>
+           `;
+
+                    FILES_LIST_CONTAINER.insertAdjacentHTML('beforeEnd', content);
+                });
+            });
+        };
+
+        fileUpload();
+
+    </script>
+
+
+
+
+
+    <!-- clone js -->
+    <script src="{% static '/admin/js/clone.js' %}"> </script>
+
+</body>
+
+</html>

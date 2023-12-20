@@ -1,0 +1,651 @@
+{% extends 'front-end/base.html' %}
+
+{% block title %}Become an Investor {% endblock title %}
+
+{% block content %}
+{% load static %}
+        <!-- ===== Banner Section ====== -->
+        <section class="banner-sec overflow-x-hidden">
+            <div class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-12 banner-slider">
+                        <img src="{{home_details.banner1}}" alt="Banner Image">                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Become an Invester Form Section ====== -->
+        <section class="pt-4rem">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <form action="" method="post" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            {% if msg %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{msg}}</strong> 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                            {% endif %}
+                            <br>
+                            <!-- INVESTOR REGISTRATION FORM -->
+                            <div>
+                                <h4 class="b-bottom mb-4">INVESTOR REGISTRATION FORM</h4>
+                                <hr>
+                                <div class="row mt-4 align-items-baseline">
+                                    <!-- 1 -->
+                                    <div class="col-12 mb-4 flex-end">
+                                        <label for="fullName" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" name="full_name" id="fullName"
+                                            placeholder="Enter Full Name" required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- 2 -->
+                                    <div class="col-12 mb-4 flex-end">
+                                        <label for="bodyCorporate" class="form-label">In case of Body Corporate
+                                            (Name of the Director/Partner along with the name of the body
+                                            corporate)</label>
+                                        <textarea class="w-100" name="corporate_name" id="bodyCorporate" cols="30"
+                                            rows="3" placeholder=""></textarea>
+                                    </div>
+                                    <!-- 3a -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="country" class="form-label">Country Name</label>
+                                        <select class="form-select" id="country" autocomplete="off" name="country_name"
+                                            required>
+                                            <option value="" selected hidden>Select Country</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <!-- 3b -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="region" class="form-label">State</label>
+                                        <select class="form-select" id="region" autocomplete="off" name="state_name"
+                                            required>
+                                            <option value="" selected hidden>Select State</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <!-- 3c -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="city" class="form-label">Select City</label>
+                                        <select class="form-select" id="city" autocomplete="off" name="city_name" required>
+                                            <option value="" selected hidden>Select City</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <!-- 3d -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="pinCode" class="form-label">Pin Code</label>
+                                        <input type="number" class="form-control" name="pincode" id="pinCode"
+                                            placeholder="" required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- 3 -->
+                                    <div class="col-12 mb-4 flex-end">
+                                        <label for="completeAddress" class="form-label">Complete Address</label>
+                                        <textarea class="w-100 form-control" name="full_address" id="completeAddress" cols="30"
+                                            rows="3" placeholder="" required></textarea>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- 4 -->
+                                    <div class="col-12 mb-4 flex-end">
+                                        <label for="panCIN" class="form-label">PAN and/or CIN</label>
+                                        <input type="text" class="form-control" name="pan_number" id="panCIN"
+                                            placeholder="Enter PAN or CIN Number" required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+
+                                    <!-- 5 (Country code) -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="phone" class="form-label d-flex">Mobile Number </label>
+                                        <input type="tel" class="form-control" name="mobile_number" id="phone" pattern="[0-9]{10}"
+                                            placeholder="Enter Mobile Number" required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- /. Country code  -->
+                                    <!-- 5a (OTP Field) -->
+                                    <div class="col-lg-6 mb-4 flex-end" id="sendOtp">
+                                        <button type="button" class="otp-btn" onclick="otpShow()">Send OPT</button>
+                                    </div>
+                                    <div class="col-lg-6 mb-4 flex-end" id="verifyOtp" style="display: none;">
+                                        <label for="otp" class="form-label d-flex">Write OTP</label>
+                                        <div class="d-flex justify-content-between">
+                                            <input type="number" class="form-control" id="otp"
+                                                placeholder="Write OTP for mobile verification" required>
+                                            <button type="button" class="otp-btn">Verify</button>
+                                            <button type="button" class="otp-btn resend-otp">Resend</button>
+                                        </div>
+                                    </div>
+                                    <!-- /. OTP Field  -->
+
+                                    <!-- 6 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="email" class="form-label">Email Id</label>
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email"
+                                            required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+
+                                    <!-- 7 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="website" class="form-label">Website (if any)</label>
+                                        <input type="url" name="website" class="form-control" id="website"
+                                            placeholder="Enter Website URL">
+                                    </div>
+                                    <!-- 8 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="qualification" class="form-label">Academic Qualification</label>
+                                        <input type="text" name="academic_qualification" class="form-control" id="qualification"
+                                            placeholder="Enter Your Qualification" required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- 9 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="signingDate" class="form-label">Age as on date of signing this
+                                            form</label>
+                                        <input type="number" class="form-control" id="signingDate" name="age" placeholder=""
+                                            required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- 10 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="currentNature" class="form-label">Current Nature of Business</label>
+                                        <input type="text" class="form-control" name="nature_bussiness" id="currentNature" placeholder="">
+                                    </div>
+                                    <!-- 11 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="experienceYear" class="form-label">Number of years of
+                                            experience</label>
+                                        <input type="number" class="form-control" name="experiance" id="experienceYear" placeholder=""
+                                            required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- 12 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="profileInterested" class="form-label">Profile Interested</label>
+                                        <select class="form-select" id="profileInterested" autocomplete="off"
+                                            name="profile_intrested" required>
+                                            <option value="" selected hidden>Select One Option</option>
+                                            <option value="Products ">Products</option>
+                                            <option value="Services">Services</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <!-- 13 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="natureArrangement" class="form-label">Nature of the
+                                            arrangement</label>
+                                        <select class="form-select"   id="natureArrangement" autocomplete="off"
+                                            name="no_of_arrangment" required>
+                                            <option value="" selected hidden>Select One Option</option>
+                                            <option value="Franchising">Franchising</option>
+                                            <option value="Distributorship">Distributorship</option>
+                                            <option value="Investment">Investment</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <!-- 14 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="industry" class="form-label">Choice of Industry</label>
+                                        <select class="form-select" id="industry" autocomplete="off" name="category_id"
+                                            required>
+                                            <option value="" selected="" hidden="">Select Industry</option>
+                                           {% for i in category_data %}
+                                           <option value="{{i.id}}" >{{i.category_name}}</option>
+                                           {% endfor %}
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <!-- 15 -->
+                                    <div class="col-12 mb-4 flex-end">
+                                        <label class="form-check-label" for="radio1"
+                                            onclick="showContent('toggleBrand')">Will you have a business
+                                            partner?</label>
+                                        <div class="form-check ms-2">
+                                            <input class="form-check-input" type="radio" value="Yes" name="bussiness_partener_type" id="radio1"
+                                                onclick="showContent('toggleBrand')">
+                                            <label class="form-check-label" for="radio1">Yes</label>
+                                        </div>
+                                        <div class="form-check ms-2">
+                                            <input class="form-check-input" type="radio" value="No" name="bussiness_partener_type" id="radio2"
+                                                onclick="hideContent('toggleBrand')" checked>
+                                            <label class="form-check-label" for="radio2">No</label>
+                                        </div>
+                                    </div>
+                                    <!-- Checkbox hover content -->
+                                    <div class="col-12 mb-4 flex-end" id="toggleBrand">
+                                        <div class="row align-items-baseline">
+                                            <div class="col-lg-6 mb-4">
+                                                <label for="partnerName" class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" name="bpt_full_name"
+                                                    id="partnerName" placeholder="Enter Your Partner Name" required>
+                                                    <div class="invalid-feedback">
+                                                        This feild is required.
+                                                    </div>
+                                            </div>
+                                            <!-- Country code -->
+                                            <div class="col-lg-6 mb-4 d-flex flex-column">
+                                                <label for="partnerPhone" class="form-label">Mobile Number</label>
+                                                <input type="tel" class="form-control" name="bpt_mobile_no" pattern="[0-9]{10}"
+                                                    id="partnerPhone" placeholder="Enter Your Partner Mobile Number"
+                                                    required>
+                                                    <div class="invalid-feedback">
+                                                        This feild is required.
+                                                    </div>
+                                            </div>
+                                            <!-- End Country code -->
+                                            <div class="col-lg-6 mb-4">
+                                                <label for="partnerEmail" class="form-label">Email Address</label>
+                                                <input type="email" class="form-control" name="bpt_email"
+                                                    id="partnerEmail" placeholder="Enter Your Partner">
+                                            </div>
+                                            <div class="col-lg-6 mb-4">
+                                                <label for="partnerPAN" class="form-label">PAN Number</label>
+                                                <input type="text" class="form-control" name="bpt_pan"
+                                                    id="partnerPAN" placeholder="Enter Your Partner PAN Number"
+                                                    required>
+                                                    <div class="invalid-feedback">
+                                                        This feild is required.
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /. Checkbox hover content -->
+                                    <!-- 16 -->
+                                    <div class="col-12 mb-4 flex-end">
+                                        <label for="industryReason" class="form-label">Reason of choosing the
+                                            industry</label>
+                                        <textarea class="w-100" name="bpt_resion_for_choose" id="industryReason" cols="30"
+                                            rows="3" placeholder="Minimum 50 Characters" required></textarea>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- 17 -->
+                                    <div class="col-12 mb-4 flex-end">
+                                        <label class="form-check-label" for="experienceYes"
+                                            onclick="showContent('priorExperience')">Do you hold any prior experience in
+                                            the Industry you selected for hereinabove?(If yes, please elaborate)</label>
+                                        <div class="form-check ms-2">
+                                            <input class="form-check-input" type="radio" name="industry_exp_type"
+                                                id="experienceYes" onclick="showContent('priorExperience')">
+                                            <label class="form-check-label" for="experienceYes">Yes</label>
+                                        </div>
+                                        <div class="form-check ms-2">
+                                            <input class="form-check-input" type="radio" name="industry_exp_type"
+                                                id="experienceNo" onclick="hideContent('priorExperience')" checked>
+                                            <label class="form-check-label" for="experienceNo">No</label>
+                                        </div>
+                                    </div>
+                                    <!-- Checkbox hover content -->
+                                    <div class="col-12 mb-4 flex-end" id="priorExperience">
+                                        <div class="row">
+                                            <div class="col-12 mb-4">
+                                                <label for="experienceMess" class="form-label">Please Elaborate</label>
+                                                <textarea class="w-100" name="elaborate" id="experienceMess"
+                                                    cols="30" rows="3" placeholder="" required></textarea>
+                                                    <div class="invalid-feedback">
+                                                        This feild is required.
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /. checkbox hoer content -->
+                                    <!-- 18 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="InvestmentAmount" class="form-label">Amount you are intending to
+                                            invest for Franchising / Distributor</label>
+                                        <select class="form-select" id="InvestmentAmount" autocomplete="off"
+                                            name="franchise_inv_range" required>
+                                            <option value="" selected hidden>Choose Investment Range</option>
+                                            <option value="3-10Lac" class="">3-10Lac</option>
+                                            <option value="10-20Lac">10-20Lac</option>
+                                            <option value="20-30Lac">20-30Lac</option>
+                                            <option value="30-50Lac">30-50Lac</option>
+                                            <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                            <option value="50Lac-1Cr">1Cr-5Cr</option>
+                                            <option value="Above 1Cr">Above 5Cr</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <!-- 19 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="membershipDetails" class="form-label">Trade Association Membership
+                                            Details</label>
+                                        <input type="text" class="form-control" name="membership_detail" id="membershipDetails" placeholder=""
+                                            required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- 20 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="financeFranchise" class="form-label">How do you intend to finance
+                                            the franchise business</label>
+                                        <select class="form-select" id="financeFranchise" autocomplete="off"
+                                            name="finance_type" required>
+                                            <option value="" selected hidden>Choose One Option</option>
+                                            <option value="Bank Loan" class="">Bank Loan</option>
+                                            <option value="Your Own Money">Your Own Money</option>
+                                            <option value="Others">Others</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <!-- 21 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="locationForOperating" class="form-label">Your preferred location for
+                                            operating the business</label>
+                                        <input type="text" name="preferd_location" class="form-control" id="locationForOperating" placeholder=""
+                                            required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- 22 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="intendYourBusiness" class="form-label">How do you intend to run your
+                                            business you are applying for herein.</label>
+                                        <select class="form-select" id="intendYourBusiness" autocomplete="off"
+                                            name="bussiness_run_type" required>
+                                            <option value="" selected hidden>Choose One Option</option>
+                                            <option value="Proprietorship" class="">Proprietorship</option>
+                                            <option value="Private Limited Company">Private Limited Company</option>
+                                            <option value="Partnership">Partnership</option>
+                                            <option value="LLP">LLP</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <!-- 23 -->
+                                    <div class="col-lg-6 mb-4 flex-end">
+                                        <label for="timeToStartBusiness" class="form-label">How soon you are intending
+                                            to start up the business applied for herein.</label>
+                                        <input type="text" class="form-control" name="time_to_start_business" id="timeToStartBusiness" placeholder=""
+                                            required>
+                                            <div class="invalid-feedback">
+                                                This feild is required.
+                                            </div>
+                                    </div>
+                                    <!-- 24 -->
+                                    <div class="col-12 mb-4 flex-end">
+                                        <label class="form-check-label" for="premisesYes"
+                                            onclick="showContent('premisesForFr')">Do you already have a premises to run
+                                            the franchising business. If any please share details</label>
+                                        <div class="form-check ms-2">
+                                            <input class="form-check-input" type="radio" value="Yes" name="bussiness_run_type" id="premisesYes"
+                                                onclick="showContent('premisesForFr')">
+                                            <label class="form-check-label" for="premisesYes">Yes</label>
+                                        </div>
+                                        <div class="form-check ms-2">
+                                            <input class="form-check-input" type="radio" value="No" name="bussiness_run_type" id="premisesNo"
+                                                onclick="hideContent('premisesForFr')" checked="">
+                                            <label class="form-check-label" for="premisesNo">No</label>
+                                        </div>
+                                    </div>
+                                    <!-- Checkbox hover content -->
+                                    <div class="col-12 mb-4 flex-end" id="premisesForFr">
+                                        <div class="row">
+                                            <div class="col-12 mb-4">
+                                                <label for="premisesForFranchising" class="form-label">Details</label>
+                                                <textarea class="w-100" name="bussiness_run_type_details"
+                                                    id="premisesForFranchising" cols="30" rows="3" placeholder=""
+                                                    required></textarea>
+                                                    <div class="invalid-feedback">
+                                                        This feild is required.
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 25 -->
+                                    <div class="col-12 mb-4 flex-end">
+                                        <p class="fw-700 mb-2 fs-18">Please provide Two(02)
+                                            business and personal references.</p>
+                                        <div class="business-reference">
+                                            <ol>
+                                                <li id="buss-reference">
+                                                    <p class="fw-500 mb-1">Business Reference </p>
+                                                    <!-- clone box -->
+                                                    <div class="clonable-block" data-toggle="cloner">
+                                                        <div class="clonable" data-ss="1">
+                                                            <div class="model-commission">
+                                                                <ul>
+                                                                    <li id="model-commission-repeat">
+                                                                        <div class="row g-3 mb-2 align-items-end">
+                                                                            <div class="col-lg-4">
+                                                                                <input type="text" name="bussiness_reference_name[]" class="form-control"
+                                                                                    placeholder="Full Name" required>
+                                                                                    <div class="invalid-feedback">
+                                                                                        This feild is required.
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4">
+                                                                                <input type="tel" name="bussiness_reference_phone[]" class="form-control"
+                                                                                    placeholder="Phone Number" pattern="[0-9]{10}" required>
+                                                                                    <div class="invalid-feedback">
+                                                                                        This feild is required.
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4">
+                                                                                <input type="email" name="bussiness_reference_email[]" class="form-control"
+                                                                                    placeholder="Email Address" required>
+                                                                                    <div class="invalid-feedback">
+                                                                                        This feild is required.
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="col-12 text-end">
+                                                                                <button type="button" class="remove-btn clonable-button-close"><i
+                                                                                    class="fa-solid fa-minus"></i>
+                                                                                Remove</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <button type="button" class="clonable-button-add add-btn" id="hap"><i
+                                                            class="fa-solid fa-plus"></i>
+                                                        Add More</button>
+                                                    </div>
+                                                    <!-- /. clone box -->
+                                                </li>
+                                            </ol>
+                                        </div>
+                                        <div class="personal-reference mt-2">
+                                            <ol>
+                                                <li id="pers-reference">
+                                                    <p class="fw-500 mb-1">Personal Reference</p>
+                                                    <!-- clone box -->
+                                                    <div class="clonable-block" data-toggle="cloner">
+                                                        <div class="clonable" data-ss="1">
+                                                            <div class="model-commission">
+                                                                <ul>
+                                                                    <li id="model-commission-repeat">
+                                                                        <div class="row g-3 mb-2 align-items-end">
+                                                                            <div class="col-lg-4">
+                                                                                <input type="text" name="personal_reference_name[]" class="form-control"
+                                                                                    placeholder="Full Name" required>
+                                                                                    <div class="invalid-feedback">
+                                                                                        This feild is required.
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4">
+                                                                                <input type="tel" name="personal_reference_phone[]" pattern="[0-9]{10}" class="form-control"
+                                                                                    placeholder="Phone Number" required>
+                                                                                    <div class="invalid-feedback">
+                                                                                        This feild is required.
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4">
+                                                                                <input type="email" name="personal_reference_email[]" class="form-control"
+                                                                                    placeholder="Email Address" required>
+                                                                                    <div class="invalid-feedback">
+                                                                                        This feild is required.
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="col-12 text-end">
+                                                                                <button type="button" class="remove-btn clonable-button-close"><i
+                                                                                    class="fa-solid fa-minus"></i>
+                                                                                Remove</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <button type="button" class="clonable-button-add add-btn" id="hap"><i
+                                                            class="fa-solid fa-plus"></i>
+                                                        Add More</button>
+                                                    </div>
+                                                    <!-- /. clone box -->
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <!-- Terms & conditions -->
+                                    <div class="col-12 mb-4">
+                                        <input class="form-check-input" type="checkbox" value="Yes" id="checkboxTerms"
+                                            required>
+                                        <label class="form-check-label ms-1" for="checkboxTerms">
+                                            I agree to the <a href="{% url 'terms-condition' %}" target="_blank"
+                                                class="text-danger">Terms & Conditions</a>
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <!-- Submit Button -->
+                                    <div class="col-12 mt-3 mb-4">
+                                        <button type="submit" class="btn-1 type-2 border-0 fs-20">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% include "front-end/footer.html" %}
+
+    </main>
+
+    <!-- jQuery JS -->
+    <!-- <script src="{% static '/js/jquery.js' %}"></script> -->
+
+    <!-- Business and personal references Show hide function -->
+    <script>
+        $(document).ready(function () {
+            // Business Reference
+            $("#buss-add").click(function () {
+                $(".business-reference ol").append("<li>" + $("#buss-reference").html() + "</li>");
+            });
+            
+            // Personal Reference
+            $("#pers-add").click(function () {
+                $(".personal-reference ol").append("<li>" + $("#pers-reference").html() + "</li>");
+            });
+        });
+            var result = document.getElementById('abc').lastElementChild.innerHTML;
+            console.log(result);
+           
+            // $(document).ready(function () {
+            //     $("#btn_one").on("click", function () {
+            //         $(document.body).append('<div class="box"></div>');
+            //     });
+
+            //     $("#btn_two").on("click", function () {
+            //         $(".box:last").remove();
+            //     });
+
+            //     $(".btn").on("click", function () {
+            //         setTimeout(function () {
+            //             alert("Hi");
+            //         }, 500);
+            //     });
+            // });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <!-- <script src="{% static '/js/bootstrap.js' %}"></script> -->
+
+    <!-- Main JS -->
+    <!-- <script src="{% static '/js/main.js' %}"></script> -->
+
+    <!-- For Checkbox focus content -->
+    <script>
+        function showContent(checkboxPara) {
+            document.getElementById(checkboxPara).style.display = 'block';
+        }
+        function hideContent(checkboxPara) {
+            document.getElementById(checkboxPara).style.display = 'none';
+        }
+
+        // OTP Verify field show function
+        function otpShow() {
+            document.getElementById('sendOtp').style.display = 'none';
+            document.getElementById('verifyOtp').style.display = 'block';
+        }
+    </script>
+
+    <!-- For country code -->
+    <!-- <script src="{% static '/js/intlTelInput.js' %}"></script>
+    <script>
+        var input = document.querySelector("#phone");
+        window.intlTelInput(input, {
+            separateDialCode: true,
+            initialCountry: "in",
+            // excludeCountries: ["in"],
+            utilsScript: "build/js/utils.js' %}",
+        });
+    </script> -->
+
+    <!-- Country, State and City Code -->
+    <!-- <script src="{% static '/js/country-code.js' %}"></script> -->
+    <!-- clone js -->
+    <!-- <script src="{% static '/js/clone.js' %}"> </script> -->
+    {% include "front-end/scripts.html" %}
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,195 @@
+/* ================ CARD CSS ==================  */
+
+/* === Brand Card type-1 ==== */
+.brands-card{
+    /* padding: 20px 20px;
+    box-shadow: var(--second-box-shadow); */
+    padding: 8px 8px;
+}
+.brands-card .brands-box{
+    padding: 12px;
+    box-shadow: var(--second-box-shadow);
+    display: flex;
+    flex-direction: column;
+}
+/* .brands-card .brands-box hr{
+    width: 80%;
+    margin: auto;
+} */
+.brands-card img{
+    /* height: 10rem;
+    object-fit: contain; */
+    /* height: 150px; */
+    height: 120px;
+    width: 100%;
+    margin: auto;
+    object-fit: contain;
+}
+.brands-card .card-body {
+    padding: 0;
+    /* margin-top: 8px; */
+    margin-top: 4px;
+    /* text-align: center; */
+}
+.brands-card .card-body .brand-category{
+    margin-bottom: 0rem;
+    font-size: 14px;
+}
+.brands-card .card-body h3{
+    margin: 4px 0;
+    /* margin: 8px 0; */
+    font-weight: 700;
+}
+.brands-card .card-body .card-info{
+    font-size: 14px;
+}
+.brands-card .card-body .card-info-amt{
+    font-size: 14px;
+    font-weight: 700;
+}
+.brands-card .card-title {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+.brands-card .read-more-btn{
+    display: inline-block;
+    /* background-color: #4169e1;
+    color: #f8f9fa !important;
+    border-radius: 25px;
+    padding: 8px 22px;
+    border: 1px solid transparent; */
+    line-height: 1.5;
+    /* font-weight: 400; */
+    font-size: 16px;
+    font-family: var(--primary-font);
+
+    border-radius: 4px;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    border: 1px solid #043476 ;
+    color: #043476  !important;
+    font-weight: 700;
+    /* margin-top: 1rem;
+    padding: 6px 22px; */
+
+    margin-top: 0.5rem;
+    padding: 4px 15px;
+}
+
+/* === Brand Card Type 2 === */
+/* .brands-card-t2{
+    padding: 8px 8px;
+} */
+.brands-card-t2 .brands-box{
+    box-shadow: var(--second-box-shadow);
+    display: flex;
+    flex-direction: column;
+}
+.brands-card-t2 img{
+    height: 120px;
+    width: 100%;
+    margin: auto;
+    object-fit: contain;
+}
+/* .brands-card-t2 .card-body {
+    margin-top: 4px;
+} */
+.brands-card-t2 .card-body .brand-category{
+    margin-bottom: 0rem;
+    font-size: 14px;
+}
+.brands-card-t2 .card-body h3{
+    margin: 4px 0;
+    font-weight: 700;
+}
+.brands-card-t2 .card-body .card-info{
+    font-size: 14px;
+    font-weight: 700;
+}
+.brands-card-t2 .card-title {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+.brands-card-t2 .read-more-btn{
+    display: inline-block;
+    line-height: 1.5;
+    font-size: 16px;
+    font-family: var(--primary-font);
+    border-radius: 4px;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    border: 1px solid #4169e1;
+    color: #065cf0 !important;
+    font-weight: 700;
+    margin-top: 0.6rem;
+    padding: 4px 15px;
+    width: auto;
+}
+
+.card-text.text-ellipsis p{
+    font-size: 13px !important;
+    padding-bottom: 0 !important;
+}
+.blog-content-ellipsis p{
+    color: var(--body-color) !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    padding-bottom: 0 !important;
+}
+
+
+/* .exclusive-brands-sec a.btn-2{
+    width: 140px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.brands-card{
+    padding: 8px 8px;
+}
+.brands-card .brands-box{
+    padding: 12px;
+    box-shadow: var(--second-box-shadow);
+    display: flex;
+    flex-direction: column;
+}
+.brands-card > a{
+    flex: auto;
+}
+.brands-card img{
+    height: 10rem;
+    width: 90%;
+    margin: auto;
+    object-fit: contain;
+}
+.brands-card .card-body {
+    margin-top: 0.5rem;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+.brands-card .card-title {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+.brands-card .read-more-btn{
+    display: inline-block;
+    background-color: #4169e1;
+    color: #f8f9fa !important;
+    border-radius: 25px;
+    padding: 8px 22px;
+    border: 1px solid transparent;
+    line-height: 1.5;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: var(--primary-font);
+    width: 130px;
+    margin-left: auto;
+    margin-right: auto;
+} */

@@ -1,0 +1,32 @@
+{% extends 'front-end/base.html' %}
+
+{% block title %}Page Not Found{% endblock title %}
+
+{% block content %}
+{% load static %}
+
+<head>
+    <style>
+        .about-page .col-md-10 div:last-child p:last-child {margin-bottom: 0rem !important;}
+    </style>
+</head>
+        <!-- ===== 404 Section ====== -->
+        <section class="content mt-3">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12 text-center">
+                        <img src="{% static 'images/404.png' %}" alt="404 Error Image" style="max-width: 250px;">
+                        <div class="mt-4">
+                            <!-- <h1 class="heading-1">404</h1> -->
+                            <P class="fs-18 mb-1">SORRY! PAGE YOU ARE LOOKING CAN’T BE FOUND.
+                            <p class="mt-3">Go back to the <a href="{% url 'index' %}" class="btn text-light bg-extra-dark-blue ms-2">homepage</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        {% include "front-end/footer.html" %}
+
+{% endblock content %}
+       

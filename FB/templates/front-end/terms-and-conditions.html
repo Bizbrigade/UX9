@@ -1,0 +1,143 @@
+{% extends 'front-end/base.html' %}
+{% block content %}
+{% load static %}
+
+        <!-- ===== Banner Section ====== -->
+        <section class="banner-sec overflow-x-hidden">
+            <div class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-12">
+                        <img src="{% static '/images/contact-banner.jpeg' %}" alt="Banner Image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Terms and conditions ====== -->
+        <section class="terms-conditions pt-4rem">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-9">
+                        <div class="text-center mb-2rem">
+                            <h1 class="">Terms and conditions</h1>
+                        </div>
+                        {{home_details.tc|safe}}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       <!-- ===== Newsletter Section ====== -->
+       <section class="mt-5rem py-5 bg-extra-dark-blue">
+        <div class="container">
+            <div class="row justify-content-between">
+                <!-- First Col -->
+                <div class="col-lg-4">
+                    <!-- <p class="text-white">Share your email address to get latest update from the industry</p>
+                    <h2 class="heading-2 text-white">Newsletter Signup</h2> -->
+                    <ul class="list-unstyled mb-0">
+                        <li class="text-white mb-2">Mobile: <a href="tel:+91 {{home_details.Phone}}">+91 {{home_details.Phone}}</a></li>
+                        <li class="text-white mb-2">Email: <a href="mailto:{{home_details.email}}">{{home_details.email}}</a></li>
+                        <li class="text-white"><a href="mailto:{{home_details.email}}">{{home_details.address}}</a></li>
+                    </ul>
+                </div>
+                <!-- Second Col -->
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <p class="text-white">Share your email address to get latest update from the industry</p>
+                    <h2 class="heading-2 text-white fs-20">Newsletter Signup</h2>
+                    <!-- Newsletter Form -->
+                    <div class="mt-3 newsletter-form">
+                        <form class="d-flex justify-content-between" id="newsletter_form">
+                            <div class="w-100">
+                                <input type="email" class="form-control" id="newsletter_email" aria-describedby="emailHelp"
+                                    placeholder="Email">
+                            </div>
+                            <div class="">
+                                <button type="submit" class="btn">SignUp</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Third Col -->
+                <div class="col-lg-4 mt-4 mt-lg-0 text-lg-end">
+                    <p class="text-white">Stay tuned &amp; get updates</p>
+                    <h2 class="heading-2 text-white fs-20">Follow Franchise Brigade</h2>
+                    <!-- Newsletter Form -->
+                    <div class="mt-3 newsletter-icons">
+                        <ul class="list-unstyled d-flex justify-content-lg-end mb-0">
+                            <li><a href="{{social_data.facebook}}" target="_blank"><i
+                                        class="fa-brands fa-facebook px-2 fs-24"></i></a></li>
+                            <li><a href="{{social_data.instagram}}" target="_blank"><i
+                                        class="fa-brands fa-instagram px-2 fs-24"></i></a></li>
+                            <li><a href="{{social_data.linkedin}}" target="_blank"><i
+                                        class="fa-brands fa-linkedin px-2 fs-24"></i></a></li>
+                            <li><a href="{{social_data.whatsup}}&amp;"
+                                    target="_blank"><i class="fa-brands fa-whatsapp px-2 fs-24"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Bottom Footer ====== -->
+    <footer class="py-3 bg-extra-dark-blue footer-bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4">
+                    <p class="fs-14 mb-0 text-white">Copyright © 2022 Franchise Brigade </p>
+                </div>
+                <div class="col-lg-8">
+                    <ul class="list-unstyled mt-2 mt-lg-0 mb-0 d-flex justify-content-lg-end flex-wrap">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'about-us' %}">About Us</a></li>
+                        <li><a href="{% url 'index' %}">Blog</a></li>
+                        <li><a href="{% url 'index' %}">Contact Us</a></li>
+                        <!-- <li><a href="{% url 'index' %}">Feedback</a></li> -->
+                        <li><a href="{% url 'terms-condition' %}">Terms</a></li>
+                        <li><a href="{% url 'privacy_policy' %}">Privacy</a></li>
+                        <li><a href="{% url 'refund-and-cancelletion' %}">Refund & Cancellation</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="{% static '/js/bootstrap.js' %}"></script>
+    
+    <!-- Custom JS -->
+    <script src="{% static '/js/main.js' %}"></script>
+
+    
+<!-- Adding axios script tag here-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<!-- newsletter_form Submit JS -->
+<script>
+    let nLetterForm = document.getElementById('newsletter_form'); // selecting the form
+
+    nLetterForm.addEventListener('submit', function (event) { // 1
+        event.preventDefault()
+
+        let data = new FormData(); // 2
+
+        data.append("email", document.getElementById('newsletter_email').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+
+        axios.post('create_note/', data) // 4
+            .then(res = () => {
+                alert("Form Submitted");
+                nLetterForm.reset();
+            }) // 5
+            .catch(errors => console.log(errors)) // 6
+    })
+
+</script>
+{% include "front-end/scripts.html" %}
+</body>
+
+</html>
+{% endblock %}

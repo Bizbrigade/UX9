@@ -1,0 +1,380 @@
+{% extends 'admin-panel/base.html' %}
+{% block content %}
+{% load static %}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Update Category</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Update Category</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-header p-0 border-bottom-0">
+                                    <ul class="arrow-tab nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="tab-first" data-toggle="pill"
+                                                href="#custom-tab-first" role="tab" aria-controls="custom-tab-first"
+                                                aria-selected="true">Basic Info <img src="./images/right-arrow.png"
+                                                    alt=""></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="tab-second" data-toggle="pill"
+                                                href="#custom-tab-second" role="tab" aria-controls="custom-tab-second"
+                                                aria-selected="false">SEO & Analytics <img
+                                                    src="./images/right-arrow.png" alt=""></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="tab-third" data-toggle="pill"
+                                                href="#custom-tab-third" role="tab" aria-controls="custom-tab-third"
+                                                aria-selected="false">Exclusive Brand <img src="./images/right-arrow.png"
+                                                    alt=""></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="tab-fourth" data-toggle="pill"
+                                                href="#custom-tab-fourth" role="tab" aria-controls="custom-tab-fourth"
+                                                aria-selected="false">Non Exclusive Brand <img src="./images/right-arrow.png"
+                                                    alt=""></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-four-tabContent">
+                                        <!-- First -->
+                                        <div class="tab-pane fade active show" id="custom-tab-first" role="tabpanel"
+                                            aria-labelledby="tab-first">
+                                            <!-- form start -->
+                                            <form>
+                                                <div id="csrf-token">
+                                                    {% csrf_token %}
+                                                </div>
+
+                                                {% if msg %}
+                                                <div class="alert alert-success alert-dismissible fade show"
+                                                    role="alert">
+                                                    <strong>{{msg}}</strong>
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                {% endif %}
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="name">Category Name :</label>
+                                                        <input type="text" name="category_name" class="form-control FormDataInput"
+                                                            id="name" placeholder="Write your category name"
+                                                            value="{{edit_category.category_name}}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="bannerImage">Banner Image :</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="category_banner_image"
+                                                                    
+                                                                    class="custom-file-input FormDataInput" id="bannerImage"
+                                                                    accept="image/*" value="{{ edit_category.category_banner_image }}">
+                                                                <label class="custom-file-label"
+                                                                    for="bannerImage">Banner size should be
+                                                                    1366*350 px</label>
+                                                            </div>
+                                                        </div>
+                                                        <small class="form-text">Upload banner image 1366*350 px for
+                                                            best view</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="categoryImage">Category Image (Home Page)
+                                                            :</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="category_home_image"
+                                                                    
+                                                                    class="custom-file-input FormDataInput" id="categoryImage"
+                                                                    accept="image/*" value="{{ edit_category.category_home_image }}">
+                                                                <label class="custom-file-label"
+                                                                    for="categoryImage">Category image will appear in
+                                                                    the home page and its size should be 204*120
+                                                                    px</label>
+                                                            </div>
+                                                        </div>
+                                                        <small class="form-text">Upload category image 204*120 px for
+                                                            best view</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="text-area-summernote">About Category</label>
+                                                        <textarea class="form-control FormDataInput" name="about_category" rows="4"
+                                                            id="text-area-summernote" placeholder="Write a Review"
+                                                            value="{{edit_category.about_category}}">{{edit_category.about_category}}</textarea>
+                                                    </div>
+                                                </div>
+                                                <!-- /.card-body -->
+
+                                                <div class="card-footer">
+                                                    <button type="button" class="btn btn-1 float-left bg-red"
+                                                        data-toggle="modal" data-target="#modal-default">Delete</button>
+                                                    <button type="button" class="btn btn-1 float-right" id="updateSubmitBtn" onclick="send_data('/update_category/{{edit_category.id}}')">Update</button>
+                                                    <!-- <button type="submit" class="btn btn-1 float-right">Update</button> -->
+                                                </div>
+                                                <!-- delete button modal -->
+                                                <div class="modal fade" id="modal-default" style="display: none;"
+                                                    aria-modal="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header border-0">
+                                                                <h4 class="modal-title">Delete Category</h4>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body py-0">
+                                                                <p>If you delete this category all its brands will be
+                                                                    automatically deleted.</p>
+                                                                <small>To confirm this type "DELETE"</small>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between border-0">
+                                                                <input type="text" class="form-control FormDataInput w-auto"
+                                                                    name="Delete_category" id="confirm-btn">
+                                                                    <a href="{% url 'delete_category' %}?id={{ edit_category.id }}" class="btn btn-1 bg-red" >Delete</a>
+                                                                <!-- <input type="submit" class="btn btn-1 bg-red"
+                                                                    value="Delete" name="Delete_button"> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /. delete button modal -->
+                                            </form>
+                                        </div>
+                                        <!-- Second -->
+                                        <div class="tab-pane fade" id="custom-tab-second" role="tabpanel"
+                                            aria-labelledby="tab-second">
+                                            
+                                            <div class="form-group">
+                                                <label for="category_seo_title">Category SEO Title
+                                                    :</label>
+                                                <input type="text" name="category_seo_title" class="form-control FormDataInput" id="category_seo_title"
+                                                    placeholder="Category SEO Title" value="{{edit_category.category_seo_title}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="category_seo_keyword">Category SEO Keywords
+                                                    :</label>
+                                                <input type="text" name="category_seo_keywords" class="form-control FormDataInput" id="category_seo_keyword"
+                                                    placeholder="Category SEO Keywords separated by comma(,)"  value="{{edit_category.category_seo_keywords }}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="category_seo_desc">Category SEO Description
+                                                    :</label>
+                                                <input type="text" name="category_seo_description" class="form-control FormDataInput" id="category_seo_desc"
+                                                    placeholder="Category SEO Description"  value="{{edit_category.category_seo_description }}">
+                                            </div>
+                                            
+                                            <!-- Script -->
+                                            <div class="form-group">
+                                                <label for="aboutBrand"> Category Bot/Script :</label>
+                                                <textarea class="form-control FormDataInput" name="category_script" rows="8" id="aboutBrand"
+                                                    placeholder="Paste your script here (optional)">{{edit_category.category_script}}</textarea>
+                                            </div>
+                                            
+                                            <!-- Script_position  -->
+                                            <div class="form-group">
+                                                <label for="territorialYes">Script position:</label>
+                                                <div class="d-flex">
+                                                    <div class="custom-control custom-radio">
+                                                        <input class="custom-control-input FormDataInput"  type="radio"
+                                                            id="territorialYes" name="category_script_position" value="2" {% if edit_category.category_script_position == 2 %} checked {% endif %}>
+                                                        <label for="territorialYes"
+                                                            class="custom-control-label">on BODY</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio ml-4">
+                                                        <input class="custom-control-input FormDataInput" type="radio"
+                                                            id="territorialNo" name="category_script_position" value="1" {% if edit_category.category_script_position == 1 %} checked {% endif %}>
+                                                        <label for="territorialNo"
+                                                            class="custom-control-label">on HEAD</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card-footer">
+                                                <!-- <button type="button" class="btn btn-1 float-right" id="updateSubmitBtn" onclick="send_data('/update_category/{{edit_category.id}}')">Update</button> -->
+                                                <!-- <button type="submit" class="btn btn-1 float-right">Update</button> -->
+                                            </div>
+
+                                        </div>
+                                        <!-- Third -->
+                                        <div class="tab-pane fade" id="custom-tab-third" role="tabpanel"
+                                            aria-labelledby="tab-third">
+                                            <div class="row">
+                                                <!-- First -->
+                                                {% if edit_brand %}
+                                                {% for i in edit_brand %}
+                                                <div class="col-sm-6 col-lg-3">
+                                                    <div class="brands-card p-0 h-100">
+                                                        <div class="brands-box h-100">
+                                                            <img src="{{i.brand_logo}}" class="card-img-top"
+                                                                alt="News Image">
+                                                            <hr class="m-0">
+                                                            <div
+                                                                class="card-body d-flex flex-column justify-content-between">
+                                                                <h3 class="fs-20 text-center">
+                                                                    {{i.category_id.category_name}}</h3>
+                                                                <p>brand id {{i.id}}</p>
+                                                                <p>category id {{i.category_id.id}}</p>
+                                                                <div class="text-center">
+                                                                    <a href="{% url 'update_brand' i.id %}"
+                                                                        class="read-more-btn">Update</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {% endfor %}
+                                                {% else %}
+                                                <div class="text-center">
+                                                   <a href="{% url 'add_brand' %}" class="btn btn-1">Add Exclusive Brands</a> 
+                                                </div>
+                                                {% endif %}
+                                                <!-- {% for i in edit_brand %}
+                                                                             
+                                                {% endfor %} -->
+                                            </div>
+                                        </div>
+                                        <!-- Fourth -->
+                                       
+                                        <div class="tab-pane fade" id="custom-tab-fourth" role="tabpanel"
+                                            aria-labelledby="tab-fourth">
+                                            <div class="row">
+                                                <!-- First -->
+                                                {% if edit_brand_neb %}
+                                                {% for neb in edit_brand_neb %}
+                                                <div class="col-sm-6 col-lg-3">
+                                                    <div class="brands-card p-0 h-100">
+                                                        <div class="brands-box h-100">
+                                                            <img src="{{neb.brand_logo}}" class="card-img-top"
+                                                                alt="News Image">
+                                                            <hr class="m-0">
+                                                            <div
+                                                                class="card-body d-flex flex-column justify-content-between">
+                                                                <h3 class="fs-20 text-center">
+                                                                    {{ neb.brand_name}}</h3>
+                                                                <!-- <p>brand id {{i.id}}</p>
+                                                                <p>category id {{i.category_id.id}}</p> -->
+                                                                <div class="text-center">
+                                                                    <a href="{% url 'update_non_exclusive_brand' neb.id %}"
+                                                                        class="read-more-btn">Update</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                                {% else %}
+                                                <div class="text-center">
+                                                    <a href="{% url 'add_non_exclusive_brand' %}" class="btn btn-1"> Add Non-Exclusive Brands</a> 
+                                                 </div>
+                                                {% endif %}
+
+                                                <!-- {% for i in edit_brand %}
+                                                                             
+                                                {% endfor %} -->
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+    <!-- Page specific script -->
+
+
+    <script type="text/javascript">
+        function GetDynamicTextBox(value, id_value) {
+            return '<input name = "DynamicTextBox" id="' + id_value + '" onkeyup="wordLimit(this, 1);"  type="text" value = "' + value + '" />' +
+                '<input type="button" value="Remove" onclick = "RemoveTextBox(this)" />'
+        }
+
+
+
+        function AddTextBox() {
+            var div = document.createElement('DIV');
+            div.innerHTML = GetDynamicTextBox("", "seo_add_list");
+            document.getElementById("TextBoxContainer").appendChild(div);
+
+        }
+        function RemoveTextBox(div) {
+            document.getElementById("TextBoxContainer").removeChild(div.parentNode);
+        }
+
+        function RecreateDynamicTextboxes() {
+            var values = eval('<%=Values%>');
+            if (values != null) {
+                var html = "";
+                for (var i = 0; i < values.length; i++) {
+                    html += "<div>" + GetDynamicTextBox(values[i]) + "</div>";
+                }
+                document.getElementById("TextBoxContainer").innerHTML = html;
+            }
+        }
+        window.onload = RecreateDynamicTextboxes;
+    </script>
+
+    <script>
+        function wordLimit(inp, limit) {
+            var val = inp.value
+            var words = val.split(/\s+/);
+            var legal = "";
+            for (i = 0; i < words.length; i++) {
+                if (i < limit) {
+                    legal += words[i] + " ";
+                }
+                if (i >= limit) {
+                    inp.value = legal.trim();
+                }
+            }
+        }
+    </script>
+
+    <!-- Input field js -->
+    <script>
+        !function (e, t) { "object" == typeof exports && "undefined" != typeof module ? module.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = e || self).bsCustomFileInput = t() }(this, function () { "use strict"; var s = { CUSTOMFILE: '.custom-file input[type="file"]', CUSTOMFILELABEL: ".custom-file-label", FORM: "form", INPUT: "input" }, l = function (e) { if (0 < e.childNodes.length) for (var t = [].slice.call(e.childNodes), n = 0; n < t.length; n++) { var l = t[n]; if (3 !== l.nodeType) return l } return e }, u = function (e) { var t = e.bsCustomFileInput.defaultText, n = e.parentNode.querySelector(s.CUSTOMFILELABEL); n && (l(n).textContent = t) }, n = !!window.File, r = function (e) { if (e.hasAttribute("multiple") && n) return [].slice.call(e.files).map(function (e) { return e.name }).join(", "); if (-1 === e.value.indexOf("fakepath")) return e.value; var t = e.value.split("\\"); return t[t.length - 1] }; function d() { var e = this.parentNode.querySelector(s.CUSTOMFILELABEL); if (e) { var t = l(e), n = r(this); n.length ? t.textContent = n : u(this) } } function v() { for (var e = [].slice.call(this.querySelectorAll(s.INPUT)).filter(function (e) { return !!e.bsCustomFileInput }), t = 0, n = e.length; t < n; t++)u(e[t]) } var p = "bsCustomFileInput", m = "reset", h = "change"; return { init: function (e, t) { void 0 === e && (e = s.CUSTOMFILE), void 0 === t && (t = s.FORM); for (var n, l, r = [].slice.call(document.querySelectorAll(e)), i = [].slice.call(document.querySelectorAll(t)), o = 0, u = r.length; o < u; o++) { var c = r[o]; Object.defineProperty(c, p, { value: { defaultText: (n = void 0, n = "", (l = c.parentNode.querySelector(s.CUSTOMFILELABEL)) && (n = l.textContent), n) }, writable: !0 }), d.call(c), c.addEventListener(h, d) } for (var f = 0, a = i.length; f < a; f++)i[f].addEventListener(m, v), Object.defineProperty(i[f], p, { value: !0, writable: !0 }) }, destroy: function () { for (var e = [].slice.call(document.querySelectorAll(s.FORM)).filter(function (e) { return !!e.bsCustomFileInput }), t = [].slice.call(document.querySelectorAll(s.INPUT)).filter(function (e) { return !!e.bsCustomFileInput }), n = 0, l = t.length; n < l; n++) { var r = t[n]; u(r), r[p] = void 0, r.removeEventListener(h, d) } for (var i = 0, o = e.length; i < o; i++)e[i].removeEventListener(m, v), e[i][p] = void 0 } } });
+    </script>
+    <script>
+        $(function () {
+            bsCustomFileInput.init();
+        });
+    </script>
+
+{% endblock %}

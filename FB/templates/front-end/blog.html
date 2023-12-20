@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Title and Favicon -->
+    <title>Blogs</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.png">
+    <!-- Meta Tags -->
+    <meta name="description" content="page description."/>
+    <meta name="keywords" itemprop="keyword" content="#">
+    <meta property="og:title" content="Blogs"/>
+    <meta property="og:description" content="page description."/>
+    <meta property="og:keywords" content="#" />
+
+    <!-- Font-awesome CSS -->
+    <link rel="stylesheet" href="./css/all.min.css">
+
+    <!-- Slick Slider CSS -->
+    <link rel="stylesheet" href="./css/slick.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/form.css">
+    <link rel="stylesheet" href="./css/blog.css">
+
+    <style>
+        .single-blog p:last-child {
+            margin-bottom: 0rem;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <!-- ===== Header Section (Navigation Bar) ====== -->
+        <header id="navigation">
+            <nav class="navbar navbar-expand-lg p-0">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="./index.html"><img src="./images/franchise_brigade_logo.png"
+                            class="logo-img" alt="Logo Image"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <img src="./images/icon-bars.png" style="width: 50px;" alt="Toggler Icon">
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-0 w-100 justify-content-center">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                            </li>
+                            <li class="nav-item dropdown custom-scrollbar">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Franchise Category
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="./category-automotive.html">Automotive</a></li>
+                                    <li><a class="dropdown-item" href="./category-health.html">Beauty and Health</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="./category-salons.html">Spa and Salons</a></li>
+                                    <li><a class="dropdown-item" href="./category-business.html">Business Services</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="./category-education.html">Education</a></li>
+                                    <li><a class="dropdown-item" href="./category-entertainment.html">Entertainment</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="./category-fashion.html">Fashion and
+                                            Lifestyle</a></li>
+                                    <li><a class="dropdown-item" href="./category-food.html">Food and Beverages</a></li>
+                                    <li><a class="dropdown-item" href="./category-hospitality.html">Hospitality</a></li>
+                                    <li><a class="dropdown-item" href="./category-manufacturing.html">Manufacturing</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="./category-helthcare.html">Healthcare</a></li>
+                                    <li><a class="dropdown-item" href="./category-vehicle.html">Electronic Vehicle</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="./category-real-estate.html">Real Estate</a></li>
+                                    <li><a class="dropdown-item" href="./category-investment.html">Investment and Stock
+                                            Market</a></li>
+                                    <li><a class="dropdown-item" href="./category-kitchen.html">Modular Kitchen</a></li>
+                                    <li><a class="dropdown-item" href="./category-pets.html"> Pets</a></li>
+                                    <li><a class="dropdown-item" href="./category-fitness.html">Fitness</a></li>
+                                </ul> 
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./about-us.html">About Us</a>
+                            </li>
+                        </ul>
+                        <ul class="list-unstyled d-flex my-2 my-lg-0 left-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Register Yourself
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="./list-your-brand.html">List Your Brand</a></li>
+                                    <li><a class="dropdown-item" href="./become-an-investor.html">Become an Investor</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="btn btn-1 ms-2">
+                                <a href="https://api.whatsapp.com/send?phone=916361662946&text=Hello,%20I%20am%20interested%20in%20knowing%20more%20about%20%E2%9E%9E%20"
+                                    target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ===== Banner Section ====== -->
+        <section class="banner-sec overflow-x-hidden">
+            <div class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-12">
+                        <img src="./images/banner.png" alt="Banner Image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Blog Page ====== -->
+        <section class="pt-4rem blog-page">
+            <div class="container">
+                <!-- Heading Row -->
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h1 class="heading-1 fs-48 text-center">Blogs</h1>
+                    </div>
+                </div>
+                <!-- Franchise dirctory tabs -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div>
+                            <h2 class="heading-2 pseudo-border">Latest Blog</h2>
+                        </div>
+                        <!-- <h2 class="fs-40 text-blue mb-3">Latest Blog</h2> -->
+                        <div class="blog-card pt-12">
+                            <a href="#"><img src="./images/blog-4.jpg" alt=""></a>
+                            <div class="blog-content p-3">
+                                <h4 class="fs-22 text-center mb-2">Factors to consider before stepping into the franchise world!</h4>
+                                <em class="text-grey">Posted on Apr 27,2022 . byAdmin</em>
+                                <p class="text-grey">India is one of the most uprising markets for franchises nowadays........</p>
+                                <a href="#" class="btn">Read More...</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-4 mt-lg-0">
+                        <div>
+                            <h2 class="heading-2 pseudo-border">Previous Blog</h2>
+                        </div>
+                        <div class="blog-event-slider slick-p-12">
+                            <!-- blog-1 -->
+                            <div class="blog-card">
+                                <a href="#"><img src="./images/blog-2.jpg" alt=""></a>
+                                <div class="blog-content p-3">
+                                    <h4 class="fs-22 text-center mb-2">Franchise opportunity</h4>
+                                    <p class="text-grey">Franchising is an alternative to company-owned....</p>
+                                    <a href="#" class="btn">Read More...</a>
+                                </div>
+                            </div>
+                            <!-- blog-2 -->
+                            <div class="blog-card">
+                                <a href="#"><img src="./images/blog-2.jpg" alt=""></a>
+                                <div class="blog-content p-3">
+                                    <h4 class="fs-22 text-center mb-2">More About Franchises</h4>
+                                    <p class="text-grey">The premiere franchise news magazine....</p>
+                                    <a href="#" class="btn">Read More...</a>
+                                </div>
+                            </div>
+                            <!-- blog-3 -->
+                            <div class="blog-card">
+                                <a href="#"><img src="./images/blog-2.jpg" alt=""></a>
+                                <div class="blog-content p-3">
+                                    <h4 class="fs-22 text-center mb-2">Franchise opportunity</h4>
+                                    <p class="text-grey">Franchising is an alternative to company-owned....</p>
+                                    <a href="#" class="btn">Read More...</a>
+                                </div>
+                            </div>
+                            <!-- blog 4 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Newsletter Section ====== -->
+        <section class="mt-5rem py-5 bg-extra-dark-blue">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <!-- First Col -->
+                    <div class="col-lg-4">
+                        <!-- <p class="text-white">Share your email address to get latest update from the industry</p>
+                        <h2 class="heading-2 text-white">Newsletter Signup</h2> -->
+                        <ul class="list-unstyled mb-0">
+                            <li class="text-white mb-2">Mobile: <a href="tel:+91 6361662946">+91 6361662946</a></li>
+                            <li class="text-white mb-2">Email: <a href="mailto:info@franchisebrigade.com">Info@franchisebrigade.com</a></li>
+                            <li class="text-white"><a href="mailto:info@franchisebrigade.com">139, 4th Floor, Sterling Heights,
+                                Infantry Rd, Bengaluru, Karnataka 560001</a></li>
+                        </ul>
+                    </div>
+                    <!-- Second Col -->
+                    <div class="col-lg-4 mt-4 mt-lg-0">
+                        <p class="text-white">Share your email address to get latest update from the industry</p>
+                        <h2 class="heading-2 text-white fs-20">Newsletter Signup</h2>
+                        <!-- Newsletter Form -->
+                        <div class="mt-3 newsletter-form">
+                            <form class="d-flex justify-content-between" id="newsletter_form">
+                                <div class="w-100">
+                                    <input type="email" class="form-control" id="newsletter_email" aria-describedby="emailHelp"
+                                        placeholder="Email">
+                                </div>
+                                <div class="">
+                                    <button type="submit" class="btn">SignUp</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Third Col -->
+                    <div class="col-lg-4 mt-4 mt-lg-0 text-lg-end">
+                        <p class="text-white">Stay tuned &amp; get updates</p>
+                        <h2 class="heading-2 text-white fs-20">Follow Franchise Brigade</h2>
+                        <!-- Newsletter Form -->
+                        <div class="mt-3 newsletter-icons">
+                            <ul class="list-unstyled d-flex justify-content-lg-end mb-0">
+                                <li><a href="https://facebook.com/FranchiseBrigade" target="_blank"><i
+                                            class="fa-brands fa-facebook px-2 fs-24"></i></a></li>
+                                <li><a href="https://instagram.com/franchisebrigade_official/" target="_blank"><i
+                                            class="fa-brands fa-instagram px-2 fs-24"></i></a></li>
+                                <li><a href="https://www.linkedin.com/company/franchise-brigade/" target="_blank"><i
+                                            class="fa-brands fa-linkedin px-2 fs-24"></i></a></li>
+                                <li><a href="https://api.whatsapp.com/send?phone=916361662946&amp;text=Hello,%20I%20am%20interested%20in%20knowing%20more%20about%20%E2%9E%9E%20"
+                                        target="_blank"><i class="fa-brands fa-whatsapp px-2 fs-24"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Bottom Footer ====== -->
+        <footer class="py-3 bg-extra-dark-blue footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4">
+                        <p class="fs-14 mb-0 text-white">Copyright © 2022 Franchise Brigade </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <ul class="list-unstyled mt-2 mt-lg-0 mb-0 d-flex justify-content-lg-end flex-wrap">
+                            <li><a href="./index.html">Home</a></li>
+                            <li><a href="./about-us.html">About Us</a></li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contact Us</a></li>
+                            <!-- <li><a href="./feedback.html">Feedback</a></li> -->
+                            <li><a href="./terms-and-conditions.html">Terms</a></li>
+                            <li><a href="./privacy-policy.html">Privacy</a></li>
+                            <li><a href="./refund-and-cancellation.html">Refund & Cancellation</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- ===== FREE ADVICE Form ===== -->
+        <div class="advice-form" id="adviceForm">
+            <button class="btn btn-1" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Free
+                Consultancy</button>
+            <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title fs-18 fw-300" id="offcanvasWithBothOptionsLabel">FREE ADVICE - ASK OUR
+                        EXPERTS</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body mt-5">
+                    <form id="advice-form">
+                        <div class="row">
+                            <div class="col-12 mb-5">
+                                <div class="form-check col-12">
+                                    <input class="form-check-input" type="radio" name="brandRadio" id="brandRadio1"
+                                        checked>
+                                    <label class="form-check-label fs-14" for="brandRadio1">
+                                        List Your Brand
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="brandRadio" id="brandRadio2">
+                                    <label class="form-check-label fs-14" for="brandRadio2">
+                                        Become an Investor
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3 d-flex">
+                                <label for="name" class="label-icon"><i class="fa-solid fa-user"></i></label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter Name">
+                            </div>
+                            <div class="col-12 mb-3 d-flex">
+                                <label for="email" class="label-icon"><i class="fa-solid fa-envelope"></i></label>
+                                <input type="email" class="form-control" id="email_id" placeholder="Enter Email">
+                            </div>
+                            <!-- Country Code -->
+                            <div class="col-12 mb-3 d-flex">
+                                <label for="consultancyPhone" class="label-icon"><i class="fa-solid fa-mobile"></i></label>
+                                <input type="tel" class="form-control" id="consultancyPhone" pattern="[0-9]{10}" placeholder="Enter Mobile">
+                            </div>
+                            <!-- /. Country Code -->
+                            <div class="col-12 mb-3 d-flex">
+                                <label for="pincode" class="label-icon"><i class="fa-solid fa-location-dot"></i></label>
+                                <input type="text" class="form-control" id="pincode" placeholder="Enter pincode">
+                            </div>
+                            <div class="col-12 mb-3 d-flex">
+                                <label for="message" class="label-icon"><i class="fa-solid fa-comment"></i></label>
+                                <textarea class="w-100" name="message" id="message" cols="30" rows="2"
+                                    placeholder="Enter Details"></textarea>
+                            </div>
+                            <div class="col-12 mt-3 mb-3 text-center">
+                                <button type="submit" class="btn btn-1 fs-16">Ask Our Experts</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    
+    <!-- jQuery JS -->
+    <script src="./js/jquery.js"></script>
+
+    <!-- SlickSlider JS -->
+    <script src="./js/slick.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="./js/bootstrap.js"></script>
+
+    <!-- Main JS -->
+    <script src="./js/main.js"></script>
+
+    
+<!-- Adding axios script tag here-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<!-- advice-form Submit JS -->
+<script>
+    let form = document.getElementById('advice-form'); // selecting the form
+
+    form.addEventListener('submit', function (event) { // 1
+        event.preventDefault()
+
+        let data = new FormData(); // 2
+
+        data.append("List-Your-Brand", document.getElementById('brandRadio1').value)
+        data.append("become-an-investor", document.getElementById('brandRadio2').value)
+        data.append("name", document.getElementById('name').value)
+        data.append("email", document.getElementById('email_id').value)
+        data.append("phone", document.getElementById('consultancyPhone').value)
+        data.append("pin", document.getElementById('pincode').value)
+        data.append("message", document.getElementById('message').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+
+        axios.post('create_note/', data) // 4
+            .then(res = () => {
+                alert("Form Submitted");
+                form.reset();
+            }) // 5
+            .catch(errors => console.log(errors)) // 6
+    })
+
+</script>
+<!-- newsletter_form Submit JS -->
+<script>
+    let nLetterForm = document.getElementById('newsletter_form'); // selecting the form
+
+    nLetterForm.addEventListener('submit', function (event) { // 1
+        event.preventDefault()
+
+        let data = new FormData(); // 2
+
+        data.append("email", document.getElementById('newsletter_email').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+
+        axios.post('create_note/', data) // 4
+            .then(res = () => {
+                alert("Form Submitted");
+                nLetterForm.reset();
+            }) // 5
+            .catch(errors => console.log(errors)) // 6
+    })
+
+</script>
+{% include "front-end/scripts.html" %}
+</body>
+
+</html>

@@ -1,0 +1,454 @@
+{% extends 'front-end/base.html' %}
+{% block content %}
+{% load static %}
+<!-- ===== Banner Section ====== -->
+<section class="banner-sec overflow-x-hidden">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 banner-slider">
+                <img src="{{home_details.banner1}}" alt="Banner Image">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== List Your Brand Form Section ====== -->
+<section class="pt-4rem">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <form action="" method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    {% if msg %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{msg}}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                    <!-- Confidential Information -->
+                    <div>
+                        <h4 class="b-bottom mb-4">Confidential Information?</h4>
+                        <hr>
+                        <div class="row mt-4">
+                            <div class="col-lg-6 mb-4">
+                                <div class="row">
+                                    <label for="fname" class="form-label">Authorized Person Name</label>
+                                    <div class="col-sm-6 mb-4 mb-sm-0">
+                                        <input type="text" class="form-control" name="f_name" id="fname"
+                                            placeholder="Enter First Name" required>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="l_name" id="lname"
+                                            placeholder="Enter Last Name" required>
+                                        <div class="invalid-feedback">
+                                            This feild is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="email" class="form-label">Official Email ID</label>
+                                <input type="email" name="email" class="form-control" id="email"
+                                    placeholder="Enter Email" required>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <!-- Country code -->
+                            <div class="col-12 mb-4 d-flex flex-column">
+                                <label for="phone" class="form-label">Mobile Number</label>
+                                <input type="tel" class="form-control" name="mobile" id="phone"
+                                    placeholder="Enter Mobile Number" pattern="[0-9]{10}" required>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <!-- End Country code -->
+                            <div class="col-12 mb-4 d-flex">
+                                <label class="form-check-label" for="radio1" onclick="showContent()">Are you registering
+                                    on behalf of
+                                    the brand?</label>
+                                <div class="form-check ms-2">
+                                    <input class="form-check-input" type="radio" name="representative_type" id="radio1"
+                                        value="Yes" onclick="showContent()">
+                                    <label class="form-check-label" for="radio1">Yes</label>
+                                </div>
+                                <div class="form-check ms-2">
+                                    <input class="form-check-input" type="radio" name="representative_type" value="No"
+                                        id="radio2" onclick="hideContent()" checked>
+                                    <label class="form-check-label" for="radio2">No</label>
+                                </div>
+                            </div>
+                            <!-- Checkbox hover content -->
+                            <div class="col-12 mb-4" id="toggleBrand">
+                                <div class="row">
+                                    <div class="col-lg-6 mb-4">
+                                        <label for="companyName" class="form-label">Company Name</label>
+                                        <input type="text" class="form-control" name="compnay_name" id="companyName"
+                                            placeholder="Enter Company Name">
+                                    </div>
+                                    <!-- Country code -->
+                                    <div class="col-lg-6 mb-4 d-flex flex-column">
+                                        <label for="corporatePhone" class="form-label">Corporate Number</label>
+                                        <input type="tel" class="form-control" blank="True" name="corporate_number"
+                                            id="corporatePhone" pattern="[0-9]{10}" placeholder="Your Corporate No.">
+                                    </div>
+                                    <!-- End Country code -->
+                                    <div class="col-lg-6 mb-4">
+                                        <label for="ceoName" class="form-label">Who is your company's Director /
+                                            CEO?</label>
+                                        <input type="text" class="form-control" name="compnay_director_name"
+                                            id="ceoName" placeholder="Enter Director / CEO Name">
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <label for="franchisedCompany" class="form-label">Who is your company's
+                                            Franchise Head?</label>
+                                        <input type="text" class="form-control" name="franchise_head"
+                                            id="franchisedCompany" placeholder="Enter Franchise Head Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Checkbox hover content -->
+                        </div>
+                    </div>
+                    <!-- Brand Information -->
+                    <div class="mt-5">
+                        <h4 class="b-bottom mb-4">Brand Information</h4>
+                        <hr>
+                        <div class="row mt-4">
+                            <div class="col-lg-6 mb-4">
+                                <label for="brandName" class="form-label">Name of the Brand</label>
+                                <input type="text" class="form-control" name="brand_name" id="brandName"
+                                    placeholder="Enter Brand Name" required>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="showcaseURL" class="form-label">Your Showcase URL on
+                                    FranchiseBrigade.com</label>
+                                <input type="text" class="form-control" name="url_name_on_fb" id="showcaseURL"
+                                    placeholder="Enter Url(eg./my-brand)" required>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="website" class="form-label">Brand Website</label>
+                                <input type="url" class="form-control" name="brand_website" id="website"
+                                    placeholder="Enter Brand Website in format (https://brand.com)">
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="country" class="form-label">Where is your brand's headquarters
+                                    located?</label>
+                                <!-- <input type="text" class="form-control" name="headquarter_country_name" id="country"
+                                    placeholder="Enter country" required> -->
+                                <select class="form-select" id="country" autocomplete="off"
+                                    name="headquarter_country_name" required>
+                                    <option value="" selected hidden>Select Country</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="region" class="form-label">Select State</label>
+                                <!-- <input type="text" class="form-control" name="headquarter_state_name" id="state"
+                                    placeholder="Enter state" required> -->
+                                <select class="form-select" id="region" autocomplete="off" name="headquarter_state_name" required>
+                                    <option value="" selected hidden>Select State</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="city" class="form-label">Select City</label>
+                                <!-- <input type="text" class="form-control" name="headquarter_city_name" id="city"
+                                    placeholder="Enter city" required> -->
+                                <select class="form-select" id="city" autocomplete="off" name="headquarter_city_name" required>
+                                    <option value="" selected hidden>Select City</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="pinCode" class="form-label">Enter Pin Code</label>
+                                <input type="number" class="form-control" name="headquarter_pincode" id="pinCode"
+                                    placeholder="Enter Pin Code" required>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="address" class="form-label">Enter Address</label>
+                                <input type="text" class="form-control" name="headquarter_address" id="address"
+                                    placeholder="Enter Address" required>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label for="brandDescrption" class="form-label">About Brand</label>
+                                <textarea class="w-100" name="about_brand" id="brandDescrption" cols="30" rows="3"
+                                    placeholder="Enter Info About Brand" required></textarea>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="startDate" class="form-label">When did your brand start
+                                    operations?</label>
+                                <input type="date" class="form-control" name="brand_start_date" id="startDate"
+                                    placeholder="mm/dd/yyyy" required>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="frDate" class="form-label">When did your brand start
+                                    franchising?</label>
+                                <input type="date" class="form-control" name="franchise_strat_date" id="frDate"
+                                    placeholder="mm/dd/yyyy" required>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="oprFranchise" class="form-label">How many franchisees are
+                                    operational in home country?</label>
+                                <select class="form-select" id="oprFranchise" autocomplete="off"
+                                    name="franchise_operation_in_country" required>
+                                    <option value selected hidden>Select</option>
+                                    <option value="No Franchisee">No Franchisee</option>
+                                    <option value="Less than 10">Less than 10</option>
+                                    <option value="10 - 20">10 - 20</option>
+                                    <option value="20 - 40">20 - 40</option>
+                                    <option value="40 - 80">40 - 80</option>
+                                    <option value="80 - 160">80 - 160</option>
+                                    <option value="160 - 300">160 - 300</option>
+                                    <option value="300 - 500">300 - 500</option>
+                                    <option value="500 - 800">500 - 800</option>
+                                    <option value="800 - 1200">800 - 1200</option>
+                                    <option value="Greater than 1200">Greater than 1200</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <label for="oprFranchise" class="form-label">How many company owned outlets do
+                                    you have?</label>
+                                <select class="form-select" id="oprFranchise" autocomplete="off" name="owned_outlets"
+                                    required>
+                                    <option value="" selected hidden>Select</option>
+                                    <option value="No Franchisee">No Outlets</option>
+                                    <option value="Less than 10">Less than 10</option>
+                                    <option value="10 - 20">10 - 20</option>
+                                    <option value="20 - 40">20 - 40</option>
+                                    <option value="40 - 80">40 - 80</option>
+                                    <option value="80 - 160">80 - 160</option>
+                                    <option value="160 - 300">160 - 300</option>
+                                    <option value="300 - 500">300 - 500</option>
+                                    <option value="500 - 800">500 - 800</option>
+                                    <option value="800 - 1200">800 - 1200</option>
+                                    <option value="Greater than 1200">Greater than 1200</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3 mb-4">
+                                <button type="submit" class="btn type-2">Register Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Newsletter Section ====== -->
+<section class="mt-5rem py-5 bg-extra-dark-blue">
+    <div class="container">
+        <div class="row justify-content-between">
+            <!-- First Col -->
+            <div class="col-lg-4">
+                <!-- <p class="text-white">Share your email address to get latest update from the industry</p>
+                        <h2 class="heading-2 text-white">Newsletter Signup</h2> -->
+                <ul class="list-unstyled mb-0">
+                    <li class="text-white mb-2">Mobile: <a href="tel:+91 {{home_details.Phone}}">+91
+                            {{home_details.Phone}}</a></li>
+                    <li class="text-white mb-2">Email: <a
+                            href="mailto:{{home_details.email}}">{{home_details.email}}</a></li>
+                    <li class="text-white"><a href="mailto:{{home_details.email}}">{{home_details.address}}</a></li>
+                </ul>
+            </div>
+            <!-- Second Col -->
+            <div class="col-lg-4 mt-4 mt-lg-0">
+                <p class="text-white">Share your email address to get latest update from the industry</p>
+                <h2 class="heading-2 text-white fs-20">Newsletter Signup</h2>
+                <!-- Newsletter Form -->
+                <div class="mt-3 newsletter-form">
+                    <form  method="post" class="d-flex justify-content-between needs-validation" id="newsletter_form" novalidate>
+                        {% csrf_token %}
+                        <div class="w-100">
+                            <input type="email" class="form-control" name="email" id="newsletter_email" aria-describedby="emailHelp"
+                                placeholder="Email" required>
+                                <div class="invalid-feedback">
+                                    This feild is required.
+                                </div>
+                        </div>
+                        <div class="">
+                            <button type="submit" class="btn">SignUp</button>
+                        </div>
+                        <script>
+                            let newsletter_form = document.getElementById('newsletter_form'); // selecting the form
+                
+                            newsletter_form.addEventListener('submit', function (event) {
+                                event.preventDefault()
+                                let data = new FormData(); // 2                               
+                                
+                                data.append("email", document.getElementById('newsletter_email').value)
+                                data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+                
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '{% url "newsletter_form" %}',
+                                    data: data,
+                                    cache: false,
+                                    processData: false,
+                                    contentType: false,
+                                    enctype: 'multipart/form-data',
+                                    success: function () {
+                                        alert('The post has been created!');
+                                        newsletter_form.reset();
+                                        newsletter_form.classList.remove('was-validated');
+                                    },
+                                    error: function (xhr, errmsg, err) {
+                                        console.log(xhr.status + ":" + xhr.responseText)
+                                    }
+                                })
+                            })
+                        </script>
+                    </form>
+                </div>
+            </div>
+            <!-- Third Col -->
+            <div class="col-lg-4 mt-4 mt-lg-0 text-lg-end">
+                <p class="text-white">Stay tuned &amp; get updates</p>
+                <h2 class="heading-2 text-white fs-20">Follow Franchise Brigade</h2>
+                <!-- Newsletter Form -->
+                <div class="mt-3 newsletter-icons">
+                    <ul class="list-unstyled d-flex justify-content-lg-end mb-0">
+                        <li><a href="{{social_data.facebook}}" target="_blank"><i
+                                    class="fa-brands fa-facebook px-2 fs-24"></i></a></li>
+                        <li><a href="{{social_data.instagram}}" target="_blank"><i
+                                    class="fa-brands fa-instagram px-2 fs-24"></i></a></li>
+                        <li><a href="{{social_data.linkedin}}" target="_blank"><i
+                                    class="fa-brands fa-linkedin px-2 fs-24"></i></a></li>
+                        <li><a href="{{social_data.whatsup}}&amp;" target="_blank"><i
+                                    class="fa-brands fa-whatsapp px-2 fs-24"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Bottom Footer ====== -->
+<footer class="py-3 bg-extra-dark-blue footer-bottom">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4">
+                <p class="fs-14 mb-0 text-white">Copyright © 2022 Franchise Brigade </p>
+            </div>
+            <div class="col-lg-8">
+                <ul class="list-unstyled mt-2 mt-lg-0 mb-0 d-flex justify-content-lg-end flex-wrap">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'about-us' %}">About Us</a></li>
+                    <li><a href="{% url 'index' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                    <!-- <li><a href="{% url 'index' %}">Feedback</a></li> -->
+                    <li><a href="{% url 'terms-condition' %}">Terms</a></li>
+                    <li><a href="{% url 'privacy_policy' %}">Privacy</a></li>
+                    <li><a href="{% url 'refund-and-cancelletion' %}">Refund & Cancellation</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</main>
+
+<!-- Bootstrap JS -->
+<script src="{% static '/js/bootstrap.js' %}"></script>
+
+<!-- Custom JS -->
+<script src="{% static '/js/main.js' %}"></script>
+
+<!-- For country code -->
+<script src="{% static '/js/intlTelInput.js' %}"></script>
+<script>
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        separateDialCode: true,
+        initialCountry: "in",
+        // excludeCountries: ["us"],
+        utilsScript: "build/js/utils.js' %}",
+    });
+</script>
+<script>
+    var input = document.querySelector("#corporatePhone");
+    window.intlTelInput(input, {
+        separateDialCode: true,
+        initialCountry: "in",
+        // excludeCountries: ["us"],
+        utilsScript: "build/js/utils.js' %}",
+    });
+</script>
+
+<!-- For Checkbox hover content -->
+<script>
+    function showContent() {
+        document.getElementById("toggleBrand").style.display = 'block';
+    }
+    function hideContent() {
+        document.getElementById("toggleBrand").style.display = 'none';
+    }
+</script>
+
+
+<!-- Adding axios script tag here-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<!-- newsletter_form Submit JS -->
+<script>
+    let nLetterForm = document.getElementById('newsletter_form'); // selecting the form
+
+    nLetterForm.addEventListener('submit', function (event) { // 1
+        event.preventDefault()
+
+        let data = new FormData(); // 2
+
+        data.append("email", document.getElementById('newsletter_email').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+
+        axios.post('create_note/', data) // 4
+            .then(res = () => {
+                alert("Form Submitted");
+                nLetterForm.reset();
+            }) // 5
+            .catch(errors => console.log(errors)) // 6
+    })
+</script>
+{% include "front-end/scripts.html" %}
+</body>
+
+</html>
+{% endblock %}

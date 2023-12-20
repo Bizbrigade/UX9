@@ -1,0 +1,113 @@
+{% extends 'admin-panel/base.html' %}
+{% load static %}
+{% block content %}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Update & Delete User</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Update & Delete User</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <div class="register-box m-auto">
+                                <div class="card">
+                                    <div class="card-body register-card-body">
+                                        <p class="login-box-msg"><strong>Update User</strong></p>
+                                        <form method="POST" enctype="multipart/form-data">
+                                            {%csrf_token%}
+                                            {% if msg%}
+                                                <h5 style="color:'{{color}}'; display:'flex'; justify-content:'center'; ">{{msg}}</h5>
+                                            {%endif%}
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" name="firstname" value="{{ thisuser.firstname }}" placeholder="First name"
+                                                    required>
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-user"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" name="lastname" value="{{ thisuser.lastname }}" placeholder="Last name"
+                                                    required>
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-user"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <input type="email" class="form-control" name="email" placeholder="Email" value="{{ thisuser.email }}" required>
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-envelope"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <h4 class="fs-20">Access management</h4>
+                                                {% for key, value in all_permissions.items %}
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input class="custom-control-input" type="checkbox"
+                                                            id="{{ key }}" name="access[]" value="{{ key }}" {% if key in user_permissions %} checked{% endif %}>
+                                                        <label for="{{ key }}"
+                                                            class="custom-control-label fw-400">{{ value }} </label>
+                                                    </div>
+                                                {% endfor %}
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="territorialYes">Is active:</label>
+                                                <div class="d-flex">
+                                                    <div class="custom-control custom-radio">
+                                                        <input class="custom-control-input"  type="radio"
+                                                            id="ActiveYes" name="is_active" value="1" {% if thisuser.is_active == 1 %} checked {% endif %}>
+                                                        <label for="ActiveYes"
+                                                            class="custom-control-label">Yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio ml-4">
+                                                        <input class="custom-control-input" type="radio"
+                                                            id="ActiveNo" name="is_active" value="0" {% if thisuser.is_active == 0 %} checked {% endif %}>
+                                                        <label for="ActiveNo"
+                                                            class="custom-control-label">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary btn-block">Create</button>
+                                        </form>
+                                    </div>
+                                    <!-- /.form-box -->
+                                </div><!-- /.card -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+        </div>
+        <!-- /.content-wrapper -->
+
+
+{% endblock content %}

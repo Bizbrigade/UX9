@@ -1,0 +1,248 @@
+{% extends 'admin-panel/base.html' %}
+{% load static %}
+{% block content %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Add Event</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Add Event</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-header p-0 border-bottom-0">
+                                    <ul class="progressbar nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <span class="nav-link active" id="tab-first" step="1">Basic Info</span>
+                                        </li>
+                                        <li class="nav-item">
+                                            <span class="nav-link" id="tab-second" step="2">SEO & Analytics</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-four-tabContent">
+                                        <!-- First -->
+                                        <div class="tab-pane fade active show" id="step-1"
+                                            role="tabpanel" aria-labelledby="tab-first">
+                                            <!-- form start -->
+                                            <form method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                {% if msg %}
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                    <strong>{{msg}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                {% endif %}
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="event-head">Event Title :</label>
+                                                        <input type="text" name="event_title" class="form-control" id="event-head"
+                                                            placeholder="Event title write here" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="event-image">Event image :</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="event_image" class="custom-file-input" id="event-image"
+                                                                    accept="image/*" required>
+                                                                <label class="custom-file-label" for="event-image">Choose
+                                                                    Image</label>
+                                                            </div>
+                                                        </div>
+                                                        <small class="form-text">Upload event image 830*400 px for best view</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="event-url">Event Link</label>
+                                                        <input type="url" name="event_url" class="form-control" id="event-url"
+                                                            placeholder="Event Link">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="event-date">Event date</label>
+                                                        <input type="datetime-local" name="event_date" class="form-control" id="event-date"
+                                                            placeholder="Event date write here" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="event-content">Event content</label>
+                                                        <textarea class="form-control" name="event_content" rows="4" id="event-content"
+                                                            placeholder="Content for the event"></textarea>
+                                                    </div>
+                                                    <!--  -->
+                                                    <div class="form-group flex-end">
+                                                        <label class="form-check-label" for="radio1" onclick="hideContent('toggleBrand')">Is it a upcoming event</label>
+                                                        <div class="form-check ms-2">
+                                                            <input class="form-check-input" name="event_status" type="radio" value="Yes" id="radio1" onclick="hideContent('toggleBrand')" checked>
+                                                            <label class="form-check-label" for="radio1">Yes</label>
+                                                        </div>
+                                                        <div class="form-check ms-2">
+                                                            <input class="form-check-input" type="radio" name="event_status" value="No" id="radio2" onclick="showContent('toggleBrand')">
+                                                            <label class="form-check-label" for="radio2">No</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" id="toggleBrand" style="display: none;">
+                                                        <label for="event-image">Previous event images :</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="pre_event_image[]" class="custom-file-input" id="event-image"
+                                                                    accept="image/*" multiple>
+                                                                <label class="custom-file-label" for="event-image">Choose
+                                                                    Image</label>
+                                                            </div>
+                                                        </div>
+                                                        <small class="form-text">Upload previous event images 540*300 px for best view</small>
+                                                    </div>
+                                                    <!-- /. -->
+                                                </div>
+                                                <!-- /.card-body -->
+            
+                                                <div class="card-footer">
+                                                    <button type="button" class="btn btn-1 btn-js float-right" step_number="2">Next</button>
+                                                </div>
+                                           
+                                        </div>
+                                        <!-- Second -->
+                                        <div class="tab-pane fade" id="step-2" role="tabpanel"
+                                            aria-labelledby="tab-second">
+                                           
+                                                <!-- <form id="form1" runat="server"> -->
+                                                   
+                                                    <div id="TextBoxContainer">
+                                                        <!--Textboxes will be added here -->
+                                                    </div>
+                                                    <br />
+                                                    <asp:Button ID="btnPost" runat="server" Text="Post"
+                                                        OnClick="Post"/>
+                                                        <input class="btn-1" id="btnAdd"  name="event_seo" type="button" value="Add Keyword"
+                                                        onclick="AddTextBox()" />
+                                                <!-- </form> -->
+                                                <!-- /.card-body -->
+
+                                                <div class="card-footer">
+                                                    <button type="button" class="btn btn-1 btn-js float-left" step_number="1">Prev</button>
+                                                    <button type="submit" class="btn btn-1 float-right">Create</button>
+                                                </div>
+                                            
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        
+    </script>
+    <!-- Page specific script -->
+    <script>
+           
+       /**
+        * Define a function to navigate betweens form steps.
+        * It accepts one parameter. That is - step number.
+        */
+        const navigateToFormStep = (stepNumber) => {
+           /**
+            * Hide all form steps.
+            */
+           document.querySelectorAll(".tab-pane").forEach((formStepElement) => {
+               formStepElement.classList.remove("active");
+           });
+           document.querySelectorAll(".tab-pane").forEach((formStepElement) => {
+               formStepElement.classList.remove("show");
+           });
+           /**
+            * Mark all form steps as unfinished.
+            */
+           document.querySelectorAll(".nav-link").forEach((formStepHeader) => {
+               // formStepHeader.classList.add("");
+               formStepHeader.classList.remove("active");
+           });
+           /**
+            * Show the current form step (as passed to the function).
+            */
+           console.log("#step-" + stepNumber);
+           document.querySelector("#step-" + stepNumber).classList.add("active");
+           document.querySelector("#step-" + stepNumber).classList.add("show");
+           /**
+            * Select the form step circle (progress bar).
+            */
+           const formStepCircle = document.querySelector('span[step="' + stepNumber + '"]');
+           /**
+            * Mark the current form step as active.
+            */
+           // formStepCircle.classList.remove("");
+           formStepCircle.classList.add("active");
+           /**
+            * Loop through each form step circles.
+            * This loop will continue up to the current step number.
+            * Example: If the current step is 3,
+            * then the loop will perform operations for step 1 and 2.
+            */
+           for (let index = 0; index < stepNumber; index++) {
+               /**
+                * Select the form step circle (progress bar).
+                */
+               const formStepCircle = document.querySelector('span[step="' + index + '"]');
+               /**
+                * Check if the element exist. If yes, then proceed.
+                */
+               if (formStepCircle) {
+                   console.log(index)
+                   /**
+                    * Mark the form step as completed.
+                    */
+                   formStepCircle.classList.add("active");
+               }
+           }
+       };
+       /**
+        * Select all form navigation buttons, and loop through them.
+        */
+       document.querySelectorAll(".btn-js").forEach((formNavigationBtn) => {
+           /**
+            * Add a click event listener to the button.
+            */
+           formNavigationBtn.addEventListener("click", () => {
+               /**
+                * Get the value of the step.
+                */
+               const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
+               // console.log(stepNumber);
+               /**
+                * Call the function to navigate to the target form step.
+                */
+               navigateToFormStep(stepNumber);
+           });
+       });
+       
+           </script>
+{% endblock %}

@@ -1,0 +1,681 @@
+{% extends "admin-panel/base.html" %}
+
+{% block content %}
+{% load static %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Contact Forms Data</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Contact Forms</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Contact Us Form Table -->
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h3 class="card-title fw-600">Contact Us Form</h3>
+                                    
+                                    
+                                        <div class="card-tools d-flex align-items-center">
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Select Industry</option>
+                                            <option value="all">All</option>
+                                            <option value="Automotive">Automotive</option>
+                                            <option value="Beauty and Health">Beauty and Health</option>
+                                            <option value="Spa and Salons">Spa and Salons</option>
+                                            <option value="Business Services">Business Services</option>
+                                            <option value="Education">Education</option>
+                                            <option value="Entertainment">Entertainment</option>
+                                            <option value="Fashion and Lifestyle">Fashion and Lifestyle</option>
+                                            <option value="Food and Beverages">Food and Beverages</option>
+                                            <option value="Hospitality">Hospitality</option>
+                                            <option value="Manufacturing">Manufacturing</option>
+                                            <option value="Healthcare">Healthcare</option>
+                                            <option value="Electronic Vehicle">Electronic Vehicle</option>
+                                            <option value="Real Estate">Real Estate</option>
+                                            <option value="Investment and Stock Market">Investment and Stock Market
+                                            </option>
+                                            <option value="Modular Kitchen">Modular Kitchen</option>
+                                            <option value="Pets">Pets</option>
+                                            <option value="Fitness">Fitness</option>
+                                        </select>
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Investment Range </option>
+                                            <option value="all">All</option>
+                                            <option value="3-10Lac">3-10Lac</option>
+                                            <option value="10-20Lac">10-20Lac</option>
+                                            <option value="20-30Lac">20-30Lac</option>
+                                            <option value="30-50Lac">30-50Lac</option>
+                                            <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                            <option value="50Lac-1Cr">1Cr-5Cr</option>
+                                            <option value="Above 1Cr">Above 5Cr</option>
+                                        </select>
+                                        <div class="input-group input-group-sm" style="min-width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right"
+                                                placeholder="Search" style="height: calc(2.25rem + 2px);">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                    <button type="button" class="btn btn-1 float-left export-modal-button ml-2" data-toggle="modal"
+                                    data-target="#export-modal" value="Contact Form" id="contact-us-form">Export</button>
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive p-0" style="max-height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr. No</th>
+                                                <th>Full Name</th>
+                                                <th>Category Name</th>
+                                                <th>Investment Range</th>
+                                                <th>See Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for j in user_data %}                                             
+                                            <tr>  
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{j.full_name}}</td>
+                                                <td>{{j.category_id.category_name}}</td>
+                                                <td>{{j.investment}}</td>                                                
+                                                <td><a href="{% url 'contact_us_single_data' pk=j.id %}" class="view-all-btn">View all <i
+                                                    class="fa-solid fa-arrow-right"></i></a></td>                                               
+                                            </tr>                                                                                     
+                                            {% endfor %}    
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- /. Contact Us Form Table -->
+                            <!-- Category Form Table -->
+                            <div class="card table-card mt-5">
+                                <div class="card-header">
+                                    <h3 class="card-title fw-600">Category and Industry Form</h3>
+                                    
+
+                                        <div class="card-tools d-flex align-items-center">
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Select Industry</option>
+                                            <option value="all">All</option>
+                                            <option value="Automotive">Automotive</option>
+                                            <option value="Beauty and Health">Beauty and Health</option>
+                                            <option value="Spa and Salons">Spa and Salons</option>
+                                            <option value="Business Services">Business Services</option>
+                                            <option value="Education">Education</option>
+                                            <option value="Entertainment">Entertainment</option>
+                                            <option value="Fashion and Lifestyle">Fashion and Lifestyle</option>
+                                            <option value="Food and Beverages">Food and Beverages</option>
+                                            <option value="Hospitality">Hospitality</option>
+                                            <option value="Manufacturing">Manufacturing</option>
+                                            <option value="Healthcare">Healthcare</option>
+                                            <option value="Electronic Vehicle">Electronic Vehicle</option>
+                                            <option value="Real Estate">Real Estate</option>
+                                            <option value="Investment and Stock Market">Investment and Stock Market
+                                            </option>
+                                            <option value="Modular Kitchen">Modular Kitchen</option>
+                                            <option value="Pets">Pets</option>
+                                            <option value="Fitness">Fitness</option>
+                                        </select>
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Investment Range </option>
+                                            <option value="all">All</option>
+                                            <option value="3-10Lac">3-10Lac</option>
+                                            <option value="10-20Lac">10-20Lac</option>
+                                            <option value="20-30Lac">20-30Lac</option>
+                                            <option value="30-50Lac">30-50Lac</option>
+                                            <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                            <option value="50Lac-1Cr">1Cr-5Cr</option>
+                                            <option value="Above 1Cr">Above 5Cr</option>
+                                        </select>
+                                        <div class="input-group input-group-sm" style="min-width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right"
+                                                placeholder="Search" style="height: calc(2.25rem + 2px);">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                    <button type="button" class="btn btn-1 float-left export-modal-button ml-2" data-toggle="modal"
+                                    data-target="#export-modal" value="Category Inquery" id="category-inq-form">Export</button>
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive p-0" style="max-height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr. No.</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Investment Range</th>
+                                                <th>See Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for k in cat_inquery_form_data %}                                             
+                                            <tr>  
+                                                <td>{{forloop.counter}}</td>                                            
+                                                <td>{{ k.firstName}} {{ k.lastName}}</td>
+                                                <td>{{ k.phone}}</td>
+                                                <td>{{ k.fCategoryEmail}}</td> 
+                                                <td>{{ k.InvestmentAmount}}</td>                                               
+                                                <td><a href="{% url 'cat_inquery_form_data' ck=k.id %}" class="view-all-btn">View all <i
+                                                    class="fa-solid fa-arrow-right"></i></a></td>                                               
+                                            </tr>                                                                                     
+                                            {% endfor %}                                                                                    
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /. Brand Form Table -->
+                            <!-- Brand Form Table -->
+                            <div class="card table-card mt-5">
+                                <div class="card-header">
+                                    <h3 class="card-title fw-600">Brand and Industry Form</h3>
+                                    
+
+                                    <div class="card-tools d-flex align-items-center">
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Select Industry</option>
+                                            <option value="all">All</option>
+                                            <option value="Automotive">Automotive</option>
+                                            <option value="Beauty and Health">Beauty and Health</option>
+                                            <option value="Spa and Salons">Spa and Salons</option>
+                                            <option value="Business Services">Business Services</option>
+                                            <option value="Education">Education</option>
+                                            <option value="Entertainment">Entertainment</option>
+                                            <option value="Fashion and Lifestyle">Fashion and Lifestyle</option>
+                                            <option value="Food and Beverages">Food and Beverages</option>
+                                            <option value="Hospitality">Hospitality</option>
+                                            <option value="Manufacturing">Manufacturing</option>
+                                            <option value="Healthcare">Healthcare</option>
+                                            <option value="Electronic Vehicle">Electronic Vehicle</option>
+                                            <option value="Real Estate">Real Estate</option>
+                                            <option value="Investment and Stock Market">Investment and Stock Market
+                                            </option>
+                                            <option value="Modular Kitchen">Modular Kitchen</option>
+                                            <option value="Pets">Pets</option>
+                                            <option value="Fitness">Fitness</option>
+                                        </select>
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Investment Range </option>
+                                            <option value="all">All</option>
+                                            <option value="3-10Lac">3-10Lac</option>
+                                            <option value="10-20Lac">10-20Lac</option>
+                                            <option value="20-30Lac">20-30Lac</option>
+                                            <option value="30-50Lac">30-50Lac</option>
+                                            <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                            <option value="50Lac-1Cr">1Cr-5Cr</option>
+                                            <option value="Above 1Cr">Above 5Cr</option>
+                                        </select>
+                                        <div class="input-group input-group-sm" style="min-width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right"
+                                                placeholder="Search" style="height: calc(2.25rem + 2px);">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                    <button type="button" class="btn btn-1 float-left export-modal-button ml-2" data-toggle="modal"
+                                    data-target="#export-modal" value="Brand Inquery" id="brand-inq-form">Export</button>
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive p-0" style="max-height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr. No.</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Investment Range</th>
+                                                <th>See Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for l in brand_inquery_form_data %}                                             
+                                            <tr>  
+                                                <td>{{forloop.counter}}</td>                                              
+                                                <td>{{ l.firstName}} {{ l.lastName}}</td>
+                                                <td>{{ l.phone}}</td>
+                                                <td>{{ l.fBrandEmail}}</td>
+                                                <td>{{ l.InvestmentAmount}}</td>                                                
+                                                <td><a href="{% url 'brand_inquery_form_data' bk=l.id %}" class="view-all-btn">View all <i
+                                                    class="fa-solid fa-arrow-right"></i></a></td>                                               
+                                            </tr>                                                                                     
+                                            {% endfor %}                                                                                   
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /. Brand Form Table -->
+                            <!-- Consultancy Form Table -->
+                            <div class="card table-card mt-5">
+                                <div class="card-header">
+                                    <h3 class="card-title fw-600">Consultancy Form</h3>
+                                    
+
+                                    <div class="card-tools d-flex align-items-center">
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Select Industry</option>
+                                            <option value="all">All</option>
+                                            <option value="Automotive">Automotive</option>
+                                            <option value="Beauty and Health">Beauty and Health</option>
+                                            <option value="Spa and Salons">Spa and Salons</option>
+                                            <option value="Business Services">Business Services</option>
+                                            <option value="Education">Education</option>
+                                            <option value="Entertainment">Entertainment</option>
+                                            <option value="Fashion and Lifestyle">Fashion and Lifestyle</option>
+                                            <option value="Food and Beverages">Food and Beverages</option>
+                                            <option value="Hospitality">Hospitality</option>
+                                            <option value="Manufacturing">Manufacturing</option>
+                                            <option value="Healthcare">Healthcare</option>
+                                            <option value="Electronic Vehicle">Electronic Vehicle</option>
+                                            <option value="Real Estate">Real Estate</option>
+                                            <option value="Investment and Stock Market">Investment and Stock Market
+                                            </option>
+                                            <option value="Modular Kitchen">Modular Kitchen</option>
+                                            <option value="Pets">Pets</option>
+                                            <option value="Fitness">Fitness</option>
+                                        </select>
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Investment Range </option>
+                                            <option value="all">All</option>
+                                            <option value="3-10Lac">3-10Lac</option>
+                                            <option value="10-20Lac">10-20Lac</option>
+                                            <option value="20-30Lac">20-30Lac</option>
+                                            <option value="30-50Lac">30-50Lac</option>
+                                            <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                            <option value="50Lac-1Cr">1Cr-5Cr</option>
+                                            <option value="Above 1Cr">Above 5Cr</option>
+                                        </select>
+                                        <div class="input-group input-group-sm" style="min-width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right"
+                                                placeholder="Search" style="height: calc(2.25rem + 2px);">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-1 float-left export-modal-button ml-2" data-toggle="modal"
+                                    data-target="#export-modal" value="Consultancy" id="consultancy-form">Export</button>
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive p-0" style="max-height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr. No.</th>
+                                                <th>Name</th>
+                                                <th>Mobile Number</th>
+                                                <th>Email</th>
+                                                <th>Pin Code</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for m in consultasy_form_data %}                                             
+                                            <tr>  
+                                                <td>{{forloop.counter}}</td>                                            
+                                                <td>{{ m.name}}</td>
+                                                <td>{{ m.phone}}</td>
+                                                <td>{{ m.email}}</td>
+                                                <td>{{ m.pin}}</td>  
+                                                <td>{{ m.message}}</td>                                  
+                                            </tr>                                                                                     
+                                            {% endfor %}                                                                                   
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /. Consultancy Form Table -->
+                            <!-- Directory Inquiry Form Table -->
+                            <div class="card table-card mt-5">
+                                <div class="card-header">
+                                    <h3 class="card-title fw-600">Directory Inquiry Form</h3>
+                                    
+
+                                    <div class="card-tools d-flex align-items-center">
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Select Industry</option>
+                                            <option value="all">All</option>
+                                            <option value="Automotive">Automotive</option>
+                                            <option value="Beauty and Health">Beauty and Health</option>
+                                            <option value="Spa and Salons">Spa and Salons</option>
+                                            <option value="Business Services">Business Services</option>
+                                            <option value="Education">Education</option>
+                                            <option value="Entertainment">Entertainment</option>
+                                            <option value="Fashion and Lifestyle">Fashion and Lifestyle</option>
+                                            <option value="Food and Beverages">Food and Beverages</option>
+                                            <option value="Hospitality">Hospitality</option>
+                                            <option value="Manufacturing">Manufacturing</option>
+                                            <option value="Healthcare">Healthcare</option>
+                                            <option value="Electronic Vehicle">Electronic Vehicle</option>
+                                            <option value="Real Estate">Real Estate</option>
+                                            <option value="Investment and Stock Market">Investment and Stock Market
+                                            </option>
+                                            <option value="Modular Kitchen">Modular Kitchen</option>
+                                            <option value="Pets">Pets</option>
+                                            <option value="Fitness">Fitness</option>
+                                        </select>
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Investment Range </option>
+                                            <option value="all">All</option>
+                                            <option value="3-10Lac">3-10Lac</option>
+                                            <option value="10-20Lac">10-20Lac</option>
+                                            <option value="20-30Lac">20-30Lac</option>
+                                            <option value="30-50Lac">30-50Lac</option>
+                                            <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                            <option value="50Lac-1Cr">1Cr-5Cr</option>
+                                            <option value="Above 1Cr">Above 5Cr</option>
+                                        </select>
+                                        <div class="input-group input-group-sm" style="min-width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right"
+                                                placeholder="Search" style="height: calc(2.25rem + 2px);">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                    <button type="button" class="btn btn-1 float-left export-modal-button ml-2" data-toggle="modal"
+                                    data-target="#export-modal" value="Directory Inquery" id="directory-inq-form">Export</button>
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive p-0" style="max-height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr. No</th>
+                                                <th>Category</th>
+                                                <th>Brand</th>
+                                                <th>Full Name</th>
+                                                <th>Mobile Number</th>
+                                                <th>Email</th>
+                                                <th>City</th>
+                                                <th>Investment Range</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>  
+                                            {% for inquiry in directory_inquiry %}
+                                                <tr>  
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{ inquiry.category.category_name }}</td>
+                                                    <td>{{ inquiry.brand.brand_name }}</td> 
+                                                    <td>{{ inquiry.fullname }}</td>
+                                                    <td>{{ inquiry.phone }}</td>
+                                                    <td>{{ inquiry.email }}</td>    
+                                                    <td>{{ inquiry.city }}</td>                                                
+                                                    <td>{{ inquiry.InvestmentAmount}}</td>                                               
+                                                </tr> 
+                                            {% endfor %}                                          
+                                            <!-- <tr>  
+                                                <td>1</td>
+                                                <td>Saini</td>
+                                                <td>981738731</td>
+                                                <td>test@demo.com</td>                                                
+                                                <td>3-10Lac</td>                                               
+                                            </tr>            -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- /. Directory Inquiry Table -->
+                            <!-- newsletter-form data -->
+                            <div class="card table-card mt-5">
+                                <div class="card-header">
+                                    <h3 class="card-title fw-600">News Letters Form Data</h3>
+                                    
+                                    <div class="card-tools d-flex align-items-center">
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Select Industry</option>
+                                            <option value="all">All</option>
+                                            <option value="Automotive">Automotive</option>
+                                            <option value="Beauty and Health">Beauty and Health</option>
+                                            <option value="Spa and Salons">Spa and Salons</option>
+                                            <option value="Business Services">Business Services</option>
+                                            <option value="Education">Education</option>
+                                            <option value="Entertainment">Entertainment</option>
+                                            <option value="Fashion and Lifestyle">Fashion and Lifestyle</option>
+                                            <option value="Food and Beverages">Food and Beverages</option>
+                                            <option value="Hospitality">Hospitality</option>
+                                            <option value="Manufacturing">Manufacturing</option>
+                                            <option value="Healthcare">Healthcare</option>
+                                            <option value="Electronic Vehicle">Electronic Vehicle</option>
+                                            <option value="Real Estate">Real Estate</option>
+                                            <option value="Investment and Stock Market">Investment and Stock Market
+                                            </option>
+                                            <option value="Modular Kitchen">Modular Kitchen</option>
+                                            <option value="Pets">Pets</option>
+                                            <option value="Fitness">Fitness</option>
+                                        </select>
+                                        <select class="form-control mr-2" style="max-width: 200px;">
+                                            <option selected disabled>Investment Range </option>
+                                            <option value="all">All</option>
+                                            <option value="3-10Lac">3-10Lac</option>
+                                            <option value="10-20Lac">10-20Lac</option>
+                                            <option value="20-30Lac">20-30Lac</option>
+                                            <option value="30-50Lac">30-50Lac</option>
+                                            <option value="50Lac-1Cr">50Lac-1Cr</option>
+                                            <option value="50Lac-1Cr">1Cr-5Cr</option>
+                                            <option value="Above 1Cr">Above 5Cr</option>
+                                        </select>
+                                        <div class="input-group input-group-sm" style="min-width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right"
+                                                placeholder="Search" style="height: calc(2.25rem + 2px);">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <button type="button" class="btn btn-1 float-left export-modal-button ml-2" data-toggle="modal"
+                                        data-target="#export-modal" value="News Letter" id="news-letter-form">Export</button>
+
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive p-0" style="max-height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr. No.</th>
+                                                
+                                                <th>Email</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for n in newsletters_data %}                                             
+                                            <tr>  
+                                                <td>{{forloop.counter}}</td> 
+                                                <td>{{ n.email}}</td>          
+                                            </tr>                                                                                     
+                                            {% endfor %}                                                                                   
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+
+
+        
+            <!-- delete button modal -->
+            <div class="modal fade" id="export-modal" style="display: none;" aria-modal="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header py-2">
+                            <h4 class="modal-title">Export <span id="modalTitle">formName</span> data to Excel</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body pt-2 pb-0"> 
+                            <form action="{% url 'export_form_to_excel' %}" method="POST" >
+                                {% csrf_token %}
+                                <input type="hidden" name="formname" id="modalId" value="">
+                                <div class="form-check d-flex justify-content-between pr-4 pl-0">
+                                    <label class="form-label" for="oneMonth">
+                                        Last one month
+                                    </label>
+                                    <input class="form-check-input position-static w-18px" type="radio"
+                                        name="selectMonth" id="oneMonth" value="1" checked>
+                                </div>
+                                <div class="form-check d-flex justify-content-between pr-4 pl-0">
+                                    <label class="form-label" for="threeMonth">
+                                        Last three months
+                                    </label>
+                                    <input class="form-check-input position-static w-18px" type="radio"
+                                        name="selectMonth" id="threeMonth" value="3">
+                                </div>
+                                <div class="form-check d-flex justify-content-between pr-4 pl-0">
+                                    <label class="form-label" for="sixMonth">
+                                        Last six months
+                                    </label>
+                                    <input class="form-check-input position-static w-18px" type="radio"
+                                        name="selectMonth" id="sixMonth" value="6">
+                                </div>
+                                <div class="form-check d-flex justify-content-between pr-4 pl-0">
+                                    <label class="form-label" for="customDate">
+                                        Custom Date
+                                    </label>
+                                    <input class="form-check-input position-static w-18px" type="radio"
+                                        name="selectMonth" id="customDate" value="custom">
+                                </div>
+                                <div class="mt-3" id="customDateDiv" style="display: none;">
+                                    <div class="mb-3 d-flex align-items-center px-4">
+                                        <label for="fromDate" class="form-label mb-0 me-3"
+                                            style="width: 70px;">From
+                                            :</label>
+                                        <input type="date" class="form-control" name="from" id="fromDate"
+                                            placeholder="Select start date">
+                                    </div>
+                                    <div class="mb-3 d-flex align-items-center px-4">
+                                        <label for="toDate" class="form-label mb-0 me-3"
+                                            style="width: 70px;">To
+                                            :</label>
+                                        <input type="date" class="form-control" name="to"  id="toDate"
+                                            placeholder="Select end date">
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-end border-0">
+                                    <button type="submit" class="btn btn-1" >Download</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /. delete button modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+        // ===== for export data select date
+        function exportExcelFun() {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0');
+            let yyyy = today.getFullYear();
+            
+            let fromDate = document.getElementById('fromDate');
+            let toDate = document.getElementById('toDate');
+            let customDate = document.getElementById('customDate');
+            let customDateDiv = document.getElementById('customDateDiv');
+            let allRadio = document.querySelectorAll('[name="selectMonth"]');
+
+            today = yyyy + '-' + mm + '-' + dd;
+            fromDate.setAttribute('max', today);
+            toDate.setAttribute('max', today);
+
+            fromDate.addEventListener('change', () =>  {
+                let fromDateVal = fromDate.value;
+                toDate.setAttribute('min', fromDateVal);
+            })
+
+            allRadio.forEach(element => {
+                element.addEventListener('change', () =>  {
+                    if(customDate.checked === true) {
+                        customDateDiv.style.display = 'block';
+                    } else{
+                        customDateDiv.style.display = 'none';
+                    }
+                })
+            });
+
+            
+        }
+        exportExcelFun();
+
+        let formIdw = document.getElementById('formIdw');
+        let exportModalButton = document.querySelectorAll('.export-modal-button');
+        let exportModal = document.getElementById('export-modal');
+        let modalTitle = document.getElementById('modalTitle');
+        let modalId = document.getElementById('modalId');
+        
+        exportModalButton.forEach(element => {
+             element.addEventListener('click', () => {
+                  modalTitle.innerText = element.value;
+                  modalId.value = element.id;
+        
+                  console.log(element.id);
+                  console.log(element.value);
+                  console.log(element);
+                  console.log(element.innerHTML);
+             })
+        });
+
+        </script>
+{% endblock %}
