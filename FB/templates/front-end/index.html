@@ -476,7 +476,7 @@
             {% for m in category_data %}
             <div class="col-6 col-sm-4 col-md-3">
                 <div class="directory-card type-2">
-                    <a href="{% url 'front_category' m.category_slug %}" class="w-100">
+                    <a href="{% url 'front_category' pk=m.category_slug %}" class="w-100">
                         <img src="{{m.category_home_image}}" class="card-img-top" alt="Directory Card Image">
                         <h5 class="fw-600 card-title mt-2 fs-16">{{m.category_name}}</h5>
                     </a>

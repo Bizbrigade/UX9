@@ -31,9 +31,11 @@ load_dotenv(dotenv_path)
 SECRET_KEY = 'django-insecure-^l3*#y&=!mfir^cx4$@q@100mrxv9$hx(_*c5_ox&o6*i7s79v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','www.franchisebrigade.com','3.12.129.240']
+ALLOWED_HOSTS = ["*"]
+                #  ,'127.0.0.1','www.franchisebrigade.com','3.12.129.240']
 
 
 # Application definition
@@ -87,6 +89,16 @@ WSGI_APPLICATION = 'FB.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#      'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME':'ux9',
+#         'HOST':'localhost',
+#         'PORT':5432,
+#         'USER':'postgres',
+#         'PASSWORD':'sunil',
+#         }
+# }
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -97,7 +109,6 @@ DATABASES = {
         'PASSWORD':'UX9postgres',
         }
 }
-
 
 
 

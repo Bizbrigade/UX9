@@ -586,7 +586,7 @@ def add_blog(request):
                 f.write(image)
                 f.close()
                 url=upload_file(path,'franchise-brigade',"media/blog_image/"+str(request.POST['blog_title']).replace(' ','_')+".jpg")
-                os.remove(path)
+                # os.remove(path)
             else:
                 url=""
             data['blog_image']=url
@@ -749,7 +749,7 @@ def add_article(request):
                 f.write(image)
                 f.close()
                 url=upload_file(path,'franchise-brigade',"media/article_image/"+str(request.POST['article_scraped_title']).replace(' ','_')+".jpg")
-                os.remove(path)
+                # os.remove(path)
             else:
                 url=request.POST['article_scraped_img_url']
             article_image=url
@@ -990,8 +990,10 @@ def add_category(request):
             if 'category_banner_image' and 'category_home_image' in request.FILES.keys():
                 image=request.FILES['category_banner_image'].read()
                 image1=request.FILES['category_home_image'].read()
+                print(request.FILES)
                 path="media/images/category/"+str(request.FILES['category_banner_image']).replace(' ','_')
                 path1="media/images/category/"+str(request.FILES['category_home_image']).replace(' ','_')
+                print(path,path1, end = '\n')
                 f=open(path,'wb+')
                 f.write(image)
                 f.close()
@@ -999,9 +1001,9 @@ def add_category(request):
                 f.write(image1)
                 f.close()
                 url=upload_file(path,'franchise-brigade',"media/category_image/"+str(request.POST['category_name']).replace(' ','_')+"_banner.jpg")
-                os.remove(path)
+                # os.remove(path)
                 url1=upload_file(path1,'franchise-brigade',"media/category_image/"+str(request.POST['category_name']).replace(' ','_')+"_home.jpg")
-                os.remove(path1)
+                # os.remove(path1)
             else:
                 url=""
                 url1=""
@@ -1495,7 +1497,7 @@ def add_brand(request):
                     f.write(image)
                     f.close()
                     url=upload_file(path,'franchise-brigade',"media/brand_image/"+str(request.POST['brand_name']).replace(' ','_')+'_'+str(i)+".jpg")
-                    os.remove(path)
+                    # os.remove(path)
                     gallery.append(url)
                     i=int(i)+1
                 # print(gallery)
@@ -1507,7 +1509,7 @@ def add_brand(request):
                 f.write(image1)
                 f.close()
                 url1=upload_file(path1,'franchise-brigade',"media/brand_image/"+str(request.POST['brand_name']).replace(' ','_')+"_logo.jpg")
-                os.remove(path1)
+                # os.remove(path1)
             else:
                 url1=""
             data['brand_logo']=url1
@@ -1553,7 +1555,7 @@ def add_non_exclusive_brand(request):
                 f.write(image1)
                 f.close()
                 url1=upload_file(path1,'franchise-brigade',"media/brand_image/"+str(request.POST['brand_name'])+".jpg")
-                os.remove(path1)
+                # os.remove(path1)
             else:
                 url1=""
             brand_logo=url1
@@ -2434,7 +2436,7 @@ def admin_action_on_blog_request(request,req_id,action):
 #====================================================================================================================
 #                                              SITE / WEBSITE VIEWS  
 #====================================================================================================================
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 #frontend function
 def front_index(request):
     update_upcomming_event_status()
@@ -2509,7 +2511,7 @@ def front_index(request):
     
     return render(request,'front-end/index.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def front_about(request):
     # home_details=Home_Details.objects.get()
     about_data=about_sec.objects.get()
@@ -2529,7 +2531,7 @@ def front_about(request):
     }
     return render(request,'front-end/about-us.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def front_privacy_policy(request):
     # home_details=Home_Details.objects.get()
     social_data=social_link.objects.get()
@@ -2548,7 +2550,7 @@ def front_privacy_policy(request):
     # print(about_data.footer_content)
     return render(request,'front-end/privacy-policy.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def front_term_condition(request):
     # home_details=Home_Details.objects.get()
     # about_data=about_sec.objects.get()
@@ -2567,7 +2569,7 @@ def front_term_condition(request):
     # print(about_data.footer_content)
     return render(request,'front-end/terms-and-conditions.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def front_refund_cancelletion(request):
     # home_details=Home_Details.objects.get()
     # about_data=about_sec.objects.get()
@@ -2588,7 +2590,7 @@ def front_refund_cancelletion(request):
     # print(about_data.footer_content)
     return render(request,'front-end/refund-and-cancellation.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def front_category(request,pk):
     # home_details=Home_Details.objects.get()
     category_data=category.objects.all()
@@ -2629,7 +2631,7 @@ def front_category(request,pk):
     # print(about_data.footer_content)
     return render(request,'front-end/category-automotive.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def front_brand(request,bk):
     # home_details=Home_Details.objects.get()
     category_data=category.objects.all()
@@ -2686,7 +2688,7 @@ def front_brand(request,bk):
     # print(about_data.footer_content)
     return render(request,'front-end/single-exclusive-brands.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def front_upcoming_event(request, id):
     # home_details=Home_Details.objects.get()
     about_data=about_sec.objects.get()
@@ -2716,7 +2718,7 @@ def front_upcoming_event(request, id):
     else:
         return render(request,'front-end/upcoming-event.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def front_single_blog(request,blk):
     # home_details=Home_Details.objects.get()
     about_data=about_sec.objects.get()
@@ -2749,7 +2751,7 @@ def front_single_blog(request,blk):
     }    
     return render(request,'front-end/single-blog-1.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def franchise_directory(request):    
     # home_details=Home_Details.objects.get()   
     category_data=category.objects.all().order_by('id')
@@ -2769,7 +2771,7 @@ def franchise_directory(request):
    
     return render(request,'front-end/franchise-category.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def all_bussiness_opp(request):
     # home_details=Home_Details.objects.get()
     about_data=about_sec.objects.get()
@@ -2798,7 +2800,7 @@ def all_bussiness_opp(request):
     # print(about_data.footer_content)
     return render(request,'front-end/top-business-opp-and-featured-brands.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def all_featured_brands(request):
     # home_details=Home_Details.objects.get()
     about_data=about_sec.objects.get()
@@ -2830,7 +2832,7 @@ def all_featured_brands(request):
     }    
     return render(request,'front-end/top-featured-brands.html',context)
 
-@cache_page(CACHE_TTL)
+#@cache_page(CACHE_TTL)
 def all_food_beverages(request):
     # home_details=Home_Details.objects.get()
     about_data=about_sec.objects.get()
