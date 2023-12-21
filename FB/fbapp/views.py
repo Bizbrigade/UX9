@@ -1021,6 +1021,7 @@ def add_category(request):
                 msg='Category Data Added Successfuly'
                 logs[0].update({"response_by":user_data['firstname']+' '+user_data['lastname'], "response_user_id":user_data['id'], "responsed_at":str(timezone.now()),"update_data":[]})
                 data['logs']=json.dumps(logs)
+                print('\n\n',data,'\n\n')
                 category.objects.create(**data)
                 clearRedisCache()
             else:
