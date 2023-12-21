@@ -990,10 +990,8 @@ def add_category(request):
             if 'category_banner_image' and 'category_home_image' in request.FILES.keys():
                 image=request.FILES['category_banner_image'].read()
                 image1=request.FILES['category_home_image'].read()
-                print(request.FILES)
                 path="media/images/category/"+str(request.FILES['category_banner_image']).replace(' ','_')
                 path1="media/images/category/"+str(request.FILES['category_home_image']).replace(' ','_')
-                print(path,path1, end = '\n')
                 f=open(path,'wb+')
                 f.write(image)
                 f.close()
